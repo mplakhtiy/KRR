@@ -67,6 +67,11 @@
     <Compile Include="Logic\Agent.cs" />
     <Compile Include="Logic\Fluent.cs" />
     <Compile Include="Logic\Rule.cs" />
+    <Compile Include="Logic\Rules\Always.cs" />
+    <Compile Include="Logic\Rules\CausesIf.cs" />
+    <Compile Include="Logic\Rules\Impossible.cs" />
+    <Compile Include="Logic\Rules\Observable.cs" />
+    <Compile Include="Logic\Rules\ReleasesIf.cs" />
     <Compile Include="Logic\State.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

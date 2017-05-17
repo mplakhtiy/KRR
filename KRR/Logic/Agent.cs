@@ -8,9 +8,9 @@ namespace KRR.Logic
 {
     public class Agent
     {
-        private string Name { get; set; }
-        private List<Action> Actions;
-        private Agent(string name)
+        public string Name { get; set; }
+        public List<Action> Actions;
+        public Agent(string name)
         {
             this.Name = name;
             this.Actions = new List<Action>();

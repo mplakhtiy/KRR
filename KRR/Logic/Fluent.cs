@@ -8,13 +8,13 @@ namespace KRR.Logic
 {
     public class Fluent
     {
-        private string Name { get; set; }
-        private bool IsTrue { get; set; }
+        public string Name { get; set; }
+        public bool IsTrue { get; set; }
 
-        public Fluent(string name)
+        public Fluent(string name, bool isTrue)
         {
             this.Name = name;
-            this.IsTrue = true;
+            this.IsTrue = isTrue;
         }
 
         public string toString()

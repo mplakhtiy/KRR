@@ -8,8 +8,8 @@ namespace KRR.Logic
 {
     public class Action
     {
-        private string Name { get; set; }
-        private Action(String Name) {
+        public string Name { get; set; }
+        public Action(String Name) {
             this.Name = Name;
         }
         public bool isEqual (Action action)
