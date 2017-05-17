@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Logic\Action.cs" />
     <Compile Include="Logic\Agent.cs" />
+    <Compile Include="Logic\Agent_Action.cs" />
     <Compile Include="Logic\Fluent.cs" />
     <Compile Include="Logic\Rule.cs" />
     <Compile Include="Logic\Rules\Always.cs" />

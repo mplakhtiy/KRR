@@ -12,14 +12,12 @@ namespace KRR.Logic.Rules
 
         public List<Fluent> change { get; set; }
         public List<Fluent> _if { get; set; }
-        public Agent agent { get; set; }
-        public Action action { get; set; }
-        public CausesIf(Agent agent, Action action, List<Fluent> change, List<Fluent> _if)
+        public Agent_Action agent_action { get; set; }
+        public CausesIf(Agent_Action agent_action, List<Fluent> change, List<Fluent> _if)
         {
             this.change = change;
             this._if = _if;
-            this.agent = agent;
-            this.action = action;
+            this.agent_action = agent_action;
             this.probability = 1;
         }
     }
