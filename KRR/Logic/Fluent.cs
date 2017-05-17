@@ -8,24 +8,20 @@ namespace KRR.Logic
 {
     public class Fluent
     {
-        public string Name;
+        private string Name { get; set; }
+        private bool IsTrue { get; set; }
 
         public Fluent(string name)
         {
             this.Name = name;
-
+            this.IsTrue = true;
         }
 
-
-
-        public bool IsTrue()
+        public string toString()
         {
-            if (true)
-            {
-                return true;
-            }
-            return false;
+            return Name;
         }
+
 
     }
 }
