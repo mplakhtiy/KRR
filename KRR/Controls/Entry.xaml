@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="KRR.Controls.Entry"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KRR.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="220">
+    <Grid>
+        <Label Name="AgentName"  Foreground="White" Height="30" MinWidth="180"  HorizontalAlignment="Stretch" FontFamily="Arial Black" Margin="20,0,50,0"></Label>
+        <Button Name="Remove" Foreground="White" Content="Remove" Background="Transparent" BorderThickness="0" FontSize="10" Height="15" Width="40" HorizontalAlignment="Right" Click="Remove_Click"></Button>
+    </Grid>
+</UserControl>

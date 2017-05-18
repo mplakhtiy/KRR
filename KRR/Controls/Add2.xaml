@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="KRR.Controls.Add2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KRR.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="300">
+    <Grid>
+        <TextBox Name ="Name"  Margin="20,10,150,10" 
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch" 
+          MinHeight="20" MinWidth="120"                  
+          TextWrapping="Wrap"
+          AcceptsReturn="True" FontFamily="Impact" Foreground="White" Background="#FF555555"></TextBox>
+        <ComboBox Name="FluentBool" Margin="160,10,60,10" SelectedIndex="0" FontFamily="Impact" HorizontalAlignment="Center"  VerticalAlignment="Center">
+            <ComboBoxItem>True</ComboBoxItem>
+            <ComboBoxItem>False</ComboBoxItem>
+        </ComboBox>
+        
+        <Button Name="AddButton" Content="ADD" Margin="0,0,20,0" Foreground="White" FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" HorizontalAlignment="Right" Click="Add_Click"></Button>
+    </Grid>
+</UserControl>

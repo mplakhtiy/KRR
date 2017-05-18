@@ -23,6 +23,44 @@ namespace KRR
         public MainWindow()
         {
             InitializeComponent();
+
+            Init();
+            
+            
         }
+
+        public void Init()
+        {
+            Controls.Add add = new Controls.Add();
+            Controls.Add add2 = new Controls.Add();
+            Controls.Add add3 = new Controls.Add();
+            Controls.Add2 add4 = new Controls.Add2();
+
+            add.VerticalAlignment = VerticalAlignment.Bottom;
+            add.AddButton.Name = "Agent";
+            Grid.SetRow(add, 0);
+            Grid.SetColumn(add, 0);
+            MainGrid.Children.Add(add);
+
+            add2.VerticalAlignment = VerticalAlignment.Bottom;
+            add2.AddButton.Name = "Action";
+            Grid.SetRow(add2, 1);
+            Grid.SetColumn(add2, 0);
+            MainGrid.Children.Add(add2);
+
+            add3.VerticalAlignment = VerticalAlignment.Bottom;
+            add3.AddButton.Name = "Statement";
+            Grid.SetRow(add3,0);
+            Grid.SetColumn(add3, 1);
+            MainGrid.Children.Add(add3);
+
+            add4.VerticalAlignment = VerticalAlignment.Bottom;
+            add4.AddButton.Name = "Fluent";
+            Grid.SetRow(add4, 2);
+            Grid.SetColumn(add4, 0);
+            MainGrid.Children.Add(add4);
+        }
+       
+
     }
 }
