@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\MaryanPC\Documents\GitHub\KRR\KRR\obj\Debug\
+C:\Users\Natalia\Documents\Desktop\SEM1\KRR\project\KRR\KRR\obj\Debug\
 KRR
 none
 false
 DEBUG;TRACE
-C:\Users\MaryanPC\Documents\GitHub\KRR\KRR\App.xaml
-51356197673
+C:\Users\Natalia\Documents\Desktop\SEM1\KRR\project\KRR\KRR\App.xaml
+111480398476
 
-25969636817
+30-1402935836
 13738642453
-Controls\Add2.xaml;Controls\Add.xaml;Controls\Entry2.xaml;Controls\Entry.xaml;MainWindow.xaml;
+Controls\ActionControl.xaml;Controls\Add2.xaml;Controls\Add.xaml;Controls\Entry2.xaml;Controls\Entry.xaml;Controls\RuleControls\Always.xaml;Controls\RuleControls\Impossible.xaml;Controls\RuleControls\Releases.xaml;Controls\RuleControls\Causes.xaml;MainWindow.xaml;Windows\RuleWindow.xaml;
 
-False
+True
 
