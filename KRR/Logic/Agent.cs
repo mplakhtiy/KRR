@@ -9,7 +9,7 @@ namespace KRR.Logic
     public class Agent
     {
         public string Name { get; set; }
-        public List<Action> Actions;
+        public List<Action> Actions; //only allowed
         public Agent(string name)
         {
             this.Name = name;
