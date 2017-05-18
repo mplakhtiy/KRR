@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KRR.Logic.Rules
 {
-    class Observable
+    class Observable:IRule
     {
+        public string Name { get; set; }
     }
 }

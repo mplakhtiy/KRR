@@ -1,3 +1,5 @@
 C:\Users\MaryanPC\Documents\GitHub\KRR\KRR\bin\Debug\KRR.exe.config
 C:\Users\Natalia\Documents\Desktop\SEM1\KRR\project\KRR\KRR\bin\Debug\KRR.exe.config
 C:\Users\Andrew\Documents\Custom Office Templates\KRR\KRR\bin\Debug\KRR.exe.config
+C:\Users\MaryanPC\Documents\GitHub\KRR\KRR\obj\Debug\KRR.exe
+C:\Users\MaryanPC\Documents\GitHub\KRR\KRR\obj\Debug\KRR.pdb

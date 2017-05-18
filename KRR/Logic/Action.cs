@@ -9,7 +9,7 @@ namespace KRR.Logic
     public class Action
     {
         public string Name { get; set; }
-        public Action(String Name) {
+        public Action(string Name) {
             this.Name = Name;
         }
         public bool isEqual (Action action)

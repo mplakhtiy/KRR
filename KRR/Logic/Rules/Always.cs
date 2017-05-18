@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KRR.Logic.Rules
 {
-    class Always
+    class Always:IRule
     {
+        public string Name { get; set; }
     }
 }

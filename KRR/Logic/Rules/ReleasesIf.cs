@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace KRR.Logic.Rules
 {
-    class ReleasesIf
+    class ReleasesIf:IRule
     {
         public double probability;
-
+        public string Name { get; set; }
         public List<Fluent> change { get; set; }
         public List<Fluent> _if { get; set; }
         public Agent_Action agent_action { get; set; }

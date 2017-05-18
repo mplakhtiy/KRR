@@ -99,6 +99,7 @@
     <Compile Include="Logic\Rules\Always.cs" />
     <Compile Include="Logic\Rules\CausesIf.cs" />
     <Compile Include="Logic\Rules\Impossible.cs" />
+    <Compile Include="Logic\Rules\IRule.cs" />
     <Compile Include="Logic\Rules\Observable.cs" />
     <Compile Include="Logic\Rules\ReleasesIf.cs" />
     <Compile Include="Logic\State.cs" />

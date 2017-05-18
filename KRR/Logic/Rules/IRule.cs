@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace KRR.Logic.Rules
 {
-    class Impossible:IRule
+    interface IRule
     {
-        public string Name { get; set; }
+         string Name { get; set; }    
     }
 }
