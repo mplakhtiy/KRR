@@ -8,13 +8,19 @@ namespace KRR.Logic
 {
     public class Action
     {
-        public string Name;
-        public Action() { }
-
-
-        public void AddAction()
+        public string Name { get; set; }
+        public Action(String Name) {
+            this.Name = Name;
+        }
+        public bool isEqual (Action action)
         {
-            var list = new List<String>() { "Move", "Hit" };
+            if (action.Name.Equals(this.Name))
+                return true;
+            return false;
+        }
+        public string toString()
+        {
+            return Name;
         }
 
     }
