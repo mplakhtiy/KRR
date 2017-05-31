@@ -19,6 +19,11 @@ namespace KRR.Logic
         {
             return agent.canPerformAction(action);
         }
-
+        public bool isEqual(Agent_Action agentAction)
+        {
+            if (this.agent.Name.Equals(agentAction.agent.Name) && this.action.isEqual(agentAction.action))
+                return true;
+            return false;
+        }
     }
 }

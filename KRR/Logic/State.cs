@@ -8,7 +8,7 @@ namespace KRR.Logic
 {
     class State
     {
-        private List<Fluent> Fluents;
+        public List<Fluent> Fluents;
         public State()
         {
             Fluents = new List<Fluent>();
@@ -30,12 +30,13 @@ namespace KRR.Logic
                 }
             }
         }
-        public void changeList(List<Fluent> list)
+        public State changeList(List<Fluent> list)
         {
             foreach (Fluent fluent in list)
             {
                 changeFluent(fluent);
             }
+            return this;
         }
         public bool check(Fluent fluent)
         {
@@ -50,6 +51,11 @@ namespace KRR.Logic
             }
             return true;
         }
+        /// <summary>
+        /// for "&&" STATEMENT
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public bool checkList(List<Fluent> list)
         {
             foreach (Fluent fluent in list)
@@ -58,6 +64,24 @@ namespace KRR.Logic
                     return false;
             }
             return true;
+        }
+       /// <summary>
+       /// for "||" statement
+       /// </summary>
+       /// <param name="lists"></param>
+       /// <returns></returns>
+        public bool checkOrList(List<List<Fluent>> lists)
+        {
+            foreach (List<Fluent> list in lists)
+            {
+                if (!checkList(list))
+                    return false;
+            }
+            return true;
+        }
+        public bool isEqual(State item)
+        {
+            return this.checkList(item.Fluents);
         }
 
         public string toString()
