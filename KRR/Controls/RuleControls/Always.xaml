@@ -12,7 +12,7 @@
         <Label Name="always" Content="always" FontFamily="Impact" Foreground="Black" Margin="0,0,0,60" FontSize="15"   HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
 
         <Label Name="Fluent" Content="Fluent" FontFamily="Impact" Foreground="Black" Margin="40,0,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-        <ComboBox Name="FluentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center">
+        <ComboBox Name="FluentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center" >
         </ComboBox>
 
     </Grid>

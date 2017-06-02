@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KRR.Windows"
         mc:Ignorable="d"
-        Title="RuleWindow" Height="300" Width="400" WindowStyle="None"
+        Title="RuleWindow" Height="400" Width="400" WindowStyle="None"
         Background="Gray" ResizeMode="NoResize">
     <Grid>
 
@@ -17,9 +17,9 @@
             <ComboBoxItem>CausesIF</ComboBoxItem>
             <ComboBoxItem>ReleasesIF</ComboBoxItem>
             <ComboBoxItem>Always</ComboBoxItem>
-            <ComboBoxItem>Impossible</ComboBoxItem>
+            <ComboBoxItem>Initially</ComboBoxItem>
         </ComboBox>
-        <Grid Name="Rule" Margin="80,80,80,40">
+        <Grid Name="Rule" Margin="40,80,40,40">
             <!-- here control of each rule-->
             
         </Grid>

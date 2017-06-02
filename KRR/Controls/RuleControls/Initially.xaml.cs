@@ -18,9 +18,9 @@ namespace KRR.Controls.RuleControls
     /// <summary>
     /// Interaction logic for Causes.xaml
     /// </summary>
-    public partial class Impossible : UserControl
+    public partial class Initially : UserControl
     {
-        public Impossible()
+        public Initially()
         {
             InitializeComponent();
         }

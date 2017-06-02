@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="220">
     <Grid>
-        <Label Name="AgentName" Foreground="White" Height="30" Width="100" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="20,0,80,0"></Label>
+        <Label Name="FluentName" Foreground="White" Height="30" Width="100" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="20,0,80,0"></Label>
         <Label Name="Boolean" Foreground="White" Height="30" Width="50" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="120,0,40,0"></Label>
         <Button Name="Remove" Foreground="White" Content="Remove" Background="Transparent" BorderThickness="0" FontSize="10" Height="15" Width="40" HorizontalAlignment="Right" Click="Remove_Click"></Button>
     </Grid>

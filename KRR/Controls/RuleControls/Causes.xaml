@@ -8,7 +8,7 @@
              d:DesignHeight="250" d:DesignWidth="300"
              BorderBrush="Black" 
              BorderThickness="3">
-    <Grid>
+    <Grid >
         <Label Name="Agent" Content="Agent" FontFamily="Impact" Margin="40,0,0,100" FontSize="15" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
         <ComboBox Name="AgentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,100" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center">
         </ComboBox>

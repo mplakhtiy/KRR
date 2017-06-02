@@ -27,12 +27,21 @@ namespace KRR.Controls.RuleControls
 
         private void AddFluent_Click(object sender, RoutedEventArgs e)
         {
+            Windows.FluentsWindow fluent = new Windows.FluentsWindow();
+            fluent.ShowDialog();
             //new window
         }
 
         private void AddFluent2_Click(object sender, RoutedEventArgs e)
         {
+            Windows.FluentsWindow fluent = new Windows.FluentsWindow();
+            fluent.ShowDialog();
+        }
 
+
+        private void change()
+        {
+            fluent1.Content = Windows.FluentsWindow.fluents;
         }
     }
 }

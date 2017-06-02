@@ -61,14 +61,17 @@
     <Compile Include="Controls\RuleControls\Always.xaml.cs">
       <DependentUpon>Always.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RuleControls\Impossible.xaml.cs">
-      <DependentUpon>Impossible.xaml</DependentUpon>
+    <Compile Include="Controls\RuleControls\Initially.xaml.cs">
+      <DependentUpon>Initially.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RuleControls\Releases.xaml.cs">
       <DependentUpon>Releases.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RuleControls\Causes.xaml.cs">
       <DependentUpon>Causes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\FluentsWindow.xaml.cs">
+      <DependentUpon>FluentsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\RuleWindow.xaml.cs">
       <DependentUpon>RuleWindow.xaml</DependentUpon>
@@ -97,7 +100,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RuleControls\Impossible.xaml">
+    <Page Include="Controls\RuleControls\Initially.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -145,6 +148,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\FluentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\RuleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

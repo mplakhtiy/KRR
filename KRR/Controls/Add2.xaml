@@ -13,11 +13,7 @@
           MinHeight="20" MinWidth="120"                  
           TextWrapping="Wrap"
           AcceptsReturn="True" FontFamily="Impact" Foreground="White" Background="#FF555555"></TextBox>
-        <ComboBox Name="FluentBool" Margin="160,10,60,10" SelectedIndex="0" FontFamily="Impact" HorizontalAlignment="Center"  VerticalAlignment="Center">
-            <ComboBoxItem>True</ComboBoxItem>
-            <ComboBoxItem>False</ComboBoxItem>
-        </ComboBox>
-        
+
         <Button Name="AddButton" Content="ADD" Margin="0,0,20,0" Foreground="White" FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" HorizontalAlignment="Right" Click="Add_Click"></Button>
     </Grid>
 </UserControl>

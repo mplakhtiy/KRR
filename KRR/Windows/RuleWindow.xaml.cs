@@ -75,8 +75,8 @@ namespace KRR.Windows
                 case 3:
                     if (Rule.Children.Count != 0)
                         Rule.Children.Clear();
-                    Controls.RuleControls.Impossible Impossible = new Controls.RuleControls.Impossible();
-                    Rule.Children.Add(Impossible);
+                    Controls.RuleControls.Initially Initially = new Controls.RuleControls.Initially();
+                    Rule.Children.Add(Initially);
                     break;
             }
              

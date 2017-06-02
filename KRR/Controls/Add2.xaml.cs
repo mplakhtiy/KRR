@@ -32,9 +32,8 @@ namespace KRR.Controls
             Button b = sender as Button;
 
             Entry2 entry2 = new Entry2();
-            entry2.AgentName.Content = Name.Text.ToString();
-            ComboBoxItem cbi = FluentBool.SelectedItem as ComboBoxItem;
-            entry2.Boolean.Content = cbi.Content.ToString();
+            entry2.FluentName.Content = Name.Text.ToString();
+            entry2.Boolean.Content = null;
             RowDefinition rowDefinition = new RowDefinition();
             rowDefinition.Height = GridLength.Auto;
 
@@ -42,6 +41,11 @@ namespace KRR.Controls
             int ble = ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.RowDefinitions.Count;
             Grid.SetRow(entry2, ble - 1);
             ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.Children.Add(entry2);
+
+            Logic.Fluent fluent = new Logic.Fluent(Name.Text.ToString(), false);
+            MainWindow.fleunts.Add(fluent);
+
+
 
             Name.Text = null;
 

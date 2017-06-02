@@ -25,8 +25,8 @@
         <Label x:Name="Actions" Content="Actions" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center"  Foreground="White" Grid.Row="1"/>
         <Label x:Name="Fluents" Content="Fluents" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center"  Foreground="White" Grid.Row="2"/>
         <Label x:Name="Statements" Content="Statements" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center"  Foreground="White" Grid.Row="0" Grid.Column="1"/>
-        <Label x:Name="Scenario" Content="Scenario" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="1" Grid.Column="1"/>
-        <Label x:Name="Query" Content="Query" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="2" Grid.Column="1"/>
+        <Label x:Name="Query" Content="Query" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="1" Grid.Column="1"/>
+        <Label x:Name="Result" Content="Result" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="2" Grid.Column="1"/>
 
         <Rectangle Stroke="Gray" StrokeThickness="2" Grid.RowSpan="3"></Rectangle>
         <Rectangle Stroke="Gray" StrokeThickness="2" Grid.RowSpan="3" Grid.Column="1"></Rectangle>

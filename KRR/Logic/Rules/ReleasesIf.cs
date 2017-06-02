@@ -16,7 +16,7 @@ namespace KRR.Logic.Rules
         public ReleasesIf(Agent agent, Action action, List<Fluent> change, List<Fluent> _if )
         {
             this.change = change;
-            this._if = _if;
+            //this._if = _if;
             this.agent_action = agent_action;
             this.probability = 0.5;
         }
