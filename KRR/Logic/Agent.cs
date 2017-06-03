@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace KRR.Logic
 {
@@ -22,7 +18,8 @@ namespace KRR.Logic
         }
         public bool canPerformAction(Action action)
         {
-            foreach (Action item in Actions){
+            foreach (Action item in Actions)
+            {
                 if (action.isEqual(item))
                     return true;
             }

@@ -73,6 +73,7 @@
     <Compile Include="Controls\RuleControls\TextBoxControl.xaml.cs">
       <DependentUpon>TextBoxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Main.cs" />
     <Compile Include="Windows\FluentsWindow.xaml.cs">
       <DependentUpon>FluentsWindow.xaml</DependentUpon>
     </Compile>

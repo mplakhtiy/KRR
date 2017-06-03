@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KRR.Logic
+﻿namespace KRR.Logic
 {
     class Agent_Action
     {
@@ -21,7 +15,7 @@ namespace KRR.Logic
         }
         public bool isEqual(Agent_Action agentAction)
         {
-            if (this.agent.Name.Equals(agentAction.agent.Name) && this.action.isEqual(agentAction.action))
+            if (this.agent.Name == agentAction.agent.Name && this.action.Name == agentAction.action.Name)
                 return true;
             return false;
         }

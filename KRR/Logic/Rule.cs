@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using KRR.Logic.Rules;
 
 namespace KRR.Logic
@@ -44,26 +40,35 @@ namespace KRR.Logic
             }
         }
 
-        public List<State> checkRules(Agent_Action agentAction ,State currentState,State goal)
+        public List<State> checkRules(Agent_Action agentAction, State currentState)
         {
-           List<State> states = new List<State>();
 
-            foreach(CausesIf causesIfRule in causesIfRules)
+            //Console.WriteLine("CURRENT STATE______________________________________________");
+
+            //Console.WriteLine(currentState);
+
+            //Console.WriteLine(agentAction.agent.Name + "   :    " + agentAction.action.Name);
+            bool causes = false;
+            List<State> states = new List<State>();
+            State changedStateCauses = new State(currentState);
+            foreach (CausesIf causesIfRule in causesIfRules)
             {
                 if (agentAction.isEqual(causesIfRule.agent_action))
                 {
                     if (currentState.checkOrList(causesIfRule._if))
                     {
-                        states.Add(currentState.changeList(causesIfRule.change));
-
-                        return states;
+                        changedStateCauses.changeList(causesIfRule.change);
+                        causes = true;
                     }
                 }
             }
-
-            foreach (ReleasesIf releasesIfRule in releasesIfRules)
+            if (causes)
             {
-
+                //Console.WriteLine("CAUSES____________________________");
+                //Console.WriteLine("Next STATE______________________________________________");
+                //Console.WriteLine(changedStateCauses);
+                states.Add(changedStateCauses);
+                return states;
             }
             foreach (Always alwaysRule in alwaysRules)
             {
@@ -73,6 +78,23 @@ namespace KRR.Logic
             {
 
             }
+            //Console.WriteLine("Releases_________________");
+            foreach (ReleasesIf releasesIfRule in releasesIfRules)
+            {
+                if (agentAction.isEqual(releasesIfRule.agent_action))
+                {
+                    if (currentState.checkOrList(releasesIfRule._if))
+                    {
+                        State changedStateReleases = new State(currentState);
+                        states.Add(changedStateReleases.changeList(releasesIfRule.change));
+                        //Console.WriteLine("Next STATE______________________________________________");
+                        //Console.WriteLine(changedStateReleases);
+                    }
+                }
+            }
+
+
+
             //output should be list of states coz of releasescan produce more than 1 state
             return states;
         }

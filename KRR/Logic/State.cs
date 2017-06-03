@@ -1,19 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace KRR.Logic
 {
     class State
     {
-        public List<Fluent> Fluents;
+        public List<Fluent> Fluents { get; private set; }
         public State()
         {
             Fluents = new List<Fluent>();
         }
 
+
+        public State(State state)
+        {
+            Fluents = new List<Fluent>();
+            if (state != null)
+            {
+                foreach (Fluent fluent in state.Fluents)
+                {
+                    Fluents.Add(new Fluent(fluent));
+                }
+            }
+        }
         public void addFluent(Fluent fluent)
         {
             Fluents.Add(fluent);
@@ -21,9 +29,9 @@ namespace KRR.Logic
 
         public void changeFluent(Fluent fluent)
         {
-            foreach(Fluent item in Fluents)
+            foreach (Fluent item in Fluents)
             {
-                if (item.Name.Equals(fluent.Name))
+                if (item.Name == fluent.Name)
                 {
                     item.IsTrue = fluent.IsTrue;
                     return;
@@ -36,20 +44,20 @@ namespace KRR.Logic
             {
                 changeFluent(fluent);
             }
-            return this;
+            return new State(this);
         }
         public bool check(Fluent fluent)
         {
             foreach (Fluent item in Fluents)
             {
-                if (item.Name.Equals(fluent.Name))
+                if (item.Name == fluent.Name)
                 {
-                    if(item.IsTrue != fluent.IsTrue)
-                        return false;
+                    if (item.IsTrue == fluent.IsTrue)
+                        return true;
                     break;
                 }
             }
-            return true;
+            return false;
         }
         /// <summary>
         /// for "&&" STATEMENT
@@ -65,11 +73,11 @@ namespace KRR.Logic
             }
             return true;
         }
-       /// <summary>
-       /// for "||" statement
-       /// </summary>
-       /// <param name="lists"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// for "||" statement
+        /// </summary>
+        /// <param name="lists"></param>
+        /// <returns></returns>
         public bool checkOrList(List<List<Fluent>> lists)
         {
             foreach (List<Fluent> list in lists)
@@ -84,16 +92,16 @@ namespace KRR.Logic
             return this.checkList(item.Fluents);
         }
 
-        public string toString()
+        public override string ToString()
         {
             string result = "";
-            foreach(Fluent fluent in Fluents)
+            foreach (Fluent fluent in Fluents)
             {
-                result +=" | "+ fluent.Name + " - " + fluent.IsTrue;
+                result += " | " + fluent.Name + " - " + fluent.IsTrue;
             }
             return result;
         }
-      
+
 
     }
 }

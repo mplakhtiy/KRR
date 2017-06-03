@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KRR.Logic
+﻿namespace KRR.Logic
 {
     public class Fluent
     {
@@ -17,6 +11,11 @@ namespace KRR.Logic
             this.IsTrue = isTrue;
         }
 
+        public Fluent(Fluent fluent)
+        {
+            this.Name = fluent.Name;
+            this.IsTrue = fluent.IsTrue;
+        }
         public string toString()
         {
             return Name;
