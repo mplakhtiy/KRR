@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace KRR.Controls.RuleControls
 {
     /// <summary>
-    /// Interaction logic for Causes.xaml
+    /// Interaction logic for TextBoxControl.xaml
     /// </summary>
-    public partial class Always : UserControl
+    public partial class TextBoxControl : UserControl
     {
-        public Always()
+        public TextBoxControl()
         {
             InitializeComponent();
-            foreach (var fl in MainWindow.fleunts)
-            {
-                FluentComboBox.Items.Add(fl.Name.ToString());
-                FluentComboBox2.Items.Add(fl.Name.ToString());
-            }
         }
-
     }
 }

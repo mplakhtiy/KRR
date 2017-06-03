@@ -19,6 +19,8 @@ namespace KRR.Windows
     /// </summary>
     public partial class RuleWindow : Window
     {
+        public static String btnClicked = String.Empty;
+
         public RuleWindow()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;

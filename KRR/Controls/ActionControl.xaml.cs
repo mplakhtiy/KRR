@@ -32,6 +32,8 @@ namespace KRR.Controls
                 ActionsGrid.RowDefinitions.Add(rowDefinition);
 
                 ActionsGrid.Children.Add(entry);
+
+
             }
         }
     }

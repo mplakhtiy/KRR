@@ -19,14 +19,14 @@
 
         <Label Name="releases" Content="releases" FontFamily="Impact" Foreground="Black" Margin="0,20,0,0" FontSize="15"   HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
         <Label Name="Fluent" Content="Fluent" FontFamily="Impact" Foreground="Black" Margin="40,80,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-        <Button Name="AddFluent" Content="Add" FontFamily="Impact" Foreground="Black" Margin="120,80,0,0" FontSize="10"  Click="AddFluent_Click" Height="20" Width="40"></Button>
-        <Label Name="fluent1" Content="" FontFamily="Impact" Foreground="Black" Margin="0,80,20,0" Width="90" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        <Button Name="AddFluent" Content="Add" FontFamily="Impact" Foreground="Black" Margin="180,80,0,0" FontSize="10"  Click="AddFluent_Click" Height="20" Width="40"></Button>
+        <Label Name="fluent1" Content="" FontFamily="Impact" Foreground="Black" Margin="0,80,0,0" Width="110" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
 
         <Label Name="if" Content="if" FontFamily="Impact" Foreground="Black" Margin="0,140,0,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
 
         <Label Name="Fluent2" Content="Fluent" FontFamily="Impact" Foreground="Black" Margin="40,200,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-        <Button Name="AddFluent2" Content="Add" FontFamily="Impact" Foreground="Black" Margin="120,200,0,0" FontSize="10"  Click="AddFluent2_Click" Height="20" Width="40"></Button>
-        <Label Name="fluent2" Content="" FontFamily="Impact" Foreground="Black" Margin="0,200,20,0" Width="90" FontSize="10"   HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        <Button Name="AddFluent2" Content="Add" FontFamily="Impact" Foreground="Black" Margin="180,200,0,0" FontSize="10"  Click="AddFluent2_Click" Height="20" Width="40"></Button>
+        <Label Name="fluent2" Content="" FontFamily="Impact" Foreground="Black" Margin="0,200,0,0" Width="110" FontSize="12"   HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
 
     </Grid>
 </UserControl>

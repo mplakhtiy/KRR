@@ -70,6 +70,9 @@
     <Compile Include="Controls\RuleControls\Causes.xaml.cs">
       <DependentUpon>Causes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RuleControls\TextBoxControl.xaml.cs">
+      <DependentUpon>TextBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FluentsWindow.xaml.cs">
       <DependentUpon>FluentsWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\RuleControls\Causes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RuleControls\TextBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

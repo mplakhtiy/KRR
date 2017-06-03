@@ -15,5 +15,11 @@
         <ComboBox Name="FluentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center" >
         </ComboBox>
 
+        <Label Name="then" Content="then" FontFamily="Impact" Foreground="Black" Margin="0,60,0,0" FontSize="15"   HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+
+        <Label Name="Fluent2" Content="Fluent" FontFamily="Impact" Foreground="Black" Margin="40,120,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <ComboBox Name="FluentComboBox2" Height="20" Width="80"  Foreground="Black"  Margin="120,120,0,0" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center" >
+        </ComboBox>
+
     </Grid>
 </UserControl>

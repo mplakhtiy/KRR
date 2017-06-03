@@ -22,6 +22,7 @@ namespace KRR
     {
         public static List<Logic.Agent> agents = new List<Logic.Agent>();
         public static List<Logic.Fluent> fleunts = new List<Logic.Fluent>();
+        public static List<Logic.Fluent> actions = new List<Logic.Fluent>();
         public static Controls.Add add2;
 
         public MainWindow()
