@@ -13,7 +13,6 @@ namespace KRR.Logic
         public static Rule Rules;
         public static List<Agent_Action> Queries;
 
-
         public static void TheMostImportantMethod(Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
