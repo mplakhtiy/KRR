@@ -72,6 +72,7 @@ namespace KRR.Windows
             FluentsWindow._if.Clear();
             ag = null;
             ac = null;
+            this.Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

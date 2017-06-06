@@ -71,6 +71,9 @@ namespace KRR.Logic
             doRecursion(possibleInitialStates, 0);
 
 
+            System.Windows.Forms.Form frmTree = new TreeForm();
+
+            frmTree.ShowDialog();
         }
 
 
