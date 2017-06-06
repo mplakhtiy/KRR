@@ -5,7 +5,7 @@ namespace KRR.Logic
     public class Agent
     {
         public string Name { get; set; }
-        public List<Action> Actions; //only allowed
+        public List<Action> Actions; //only allowed //adnrew said we need to delete this 
         public Agent(string name)
         {
             this.Name = name;

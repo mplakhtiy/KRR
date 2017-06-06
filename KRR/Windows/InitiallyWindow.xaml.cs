@@ -23,12 +23,15 @@ namespace KRR.Windows
         int col = 0;
         static public String fluents = String.Empty;
         public List<Logic.Fluent> tempfluent = new List<Logic.Fluent>();
+        private String name = null;
 
-        public InitiallyWindow()
+
+        public InitiallyWindow(String _name)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             InitializeComponent();
+            name = _name;
             foreach (var fl in MainWindow.allFluents)
             {
                 FluentComboBox.Items.Add(fl.Name.ToString());
@@ -37,10 +40,32 @@ namespace KRR.Windows
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Logic.Fluent fl in tempfluent)
+            switch (name)
             {
-                MainWindow.initialliazed.Add(fl);
+                case "causes":
+                    foreach (Logic.Fluent fl in tempfluent) //initially
+                    {
+                        MainWindow.temp.Add(fl);
+                    }
+
+                    break;
+                case "releases":
+                    foreach (Logic.Fluent fl in tempfluent) //initially
+                    {
+                        MainWindow.temp.Add(fl);
+                    }
+
+                    break;
+                case "initially":
+                    foreach (Logic.Fluent fl in tempfluent) //initially
+                    {
+                        MainWindow.initialliazed.Add(fl);
+                    }
+
+                    break;
             }
+           
+
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();
             this.Close();

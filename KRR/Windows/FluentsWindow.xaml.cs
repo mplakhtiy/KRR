@@ -21,7 +21,10 @@ namespace KRR.Windows
     public partial class FluentsWindow : Window
     {
         int col = 0;
+        bool notClicked = false;
         static public String fluents = String.Empty;
+        public List<Logic.Fluent> temp = new List<Logic.Fluent>();
+        public static List<List<Logic.Fluent>> _if = new List<List<Logic.Fluent>>();
 
         public FluentsWindow()
         {
@@ -31,7 +34,6 @@ namespace KRR.Windows
             foreach (var fl in MainWindow.allFluents)
             {
                 FluentComboBox.Items.Add(fl.Name.ToString());
-                FluentComboBox2.Items.Add(fl.Name.ToString());
             }
         }
 
@@ -40,6 +42,7 @@ namespace KRR.Windows
 
             //add here new fluents as one to list of fluents or somehow add this for checking later if condition is true or not
             //add to list
+            /*
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(RuleWindow))
@@ -55,10 +58,14 @@ namespace KRR.Windows
                         label = g.Children[11] as Label;
                     label.Content = fluents.ToString();
                 }
-            }
+            }*/
+
+            
+            _if.Add(temp);
 
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();
+            notClicked = false;
             this.Close();
 
 
@@ -72,6 +79,10 @@ namespace KRR.Windows
         private void Not_Click(object sender, RoutedEventArgs e)
         {
             Not.IsEnabled = false;
+            Or.IsEnabled = false;
+            And.IsEnabled = false;
+
+            notClicked = true;
 
             ColumnDefinition colDefinition = new ColumnDefinition();
             colDefinition.Width = GridLength.Auto;
@@ -97,10 +108,7 @@ namespace KRR.Windows
             And.IsEnabled = false;
             Or.IsEnabled = false;
             Not.IsEnabled = true;
-            FluentComboBox.IsEnabled = false;
-            AddFluent1Button.IsEnabled = false;
-            FluentComboBox2.IsEnabled = true;
-            AddFluent2Button.IsEnabled = true;
+
 
             ColumnDefinition colDefinition = new ColumnDefinition();
             colDefinition.Width = GridLength.Auto;
@@ -124,8 +132,9 @@ namespace KRR.Windows
             And.IsEnabled = false;
             Or.IsEnabled = false;
             Not.IsEnabled = true;
-            FluentComboBox2.IsEnabled = true;
-            AddFluent2Button.IsEnabled = true;
+
+            _if.Add(temp);
+            temp.Clear();
 
             ColumnDefinition colDefinition = new ColumnDefinition();
             colDefinition.Width = GridLength.Auto;
@@ -149,10 +158,6 @@ namespace KRR.Windows
             And.IsEnabled = true;
             Or.IsEnabled = true;
             Not.IsEnabled = false;
-            FluentComboBox.IsEnabled = false;
-            AddFluent1Button.IsEnabled = false;
-            FluentComboBox2.IsEnabled = false;
-            AddFluent2Button.IsEnabled = false;
 
             ColumnDefinition colDefinition = new ColumnDefinition();
             colDefinition.Width = GridLength.Auto;
@@ -170,34 +175,16 @@ namespace KRR.Windows
             fluentsTextBlock.Children.Add(text);
             fluents += text.Text;
 
+
+            Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.Text.ToString(),notClicked);
+            temp.Add(fluent);
+
+
+             notClicked = false;
+
         }
 
-        private void AddFluent2_Click(object sender, RoutedEventArgs e)
-        {
-            And.IsEnabled = false;
-            Or.IsEnabled = false;
-            Not.IsEnabled = false;
-            FluentComboBox.IsEnabled = false;
-            AddFluent1Button.IsEnabled = false;
-            FluentComboBox2.IsEnabled = false;
-            AddFluent2Button.IsEnabled = false;
-
-            ColumnDefinition colDefinition = new ColumnDefinition();
-            colDefinition.Width = GridLength.Auto;
-            fluentsTextBlock.ColumnDefinitions.Add(colDefinition);
-            TextBlock text = new TextBlock();
-            text.Text = " " + FluentComboBox2.Text.ToString();
-            text.FontSize = 16;
-            text.FontFamily = new FontFamily("Impact");
-            text.HorizontalAlignment = HorizontalAlignment.Center;
-            text.VerticalAlignment = VerticalAlignment.Center;
-            text.TextWrapping = TextWrapping.Wrap;
-            Grid.SetColumn(text, col);
-            col++;
-            fluentsTextBlock.Children.Add(text);
-            fluents += text.Text;
-        }
-
+       
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             And.IsEnabled = true;
@@ -205,8 +192,6 @@ namespace KRR.Windows
             Not.IsEnabled = true;
             FluentComboBox.IsEnabled = true;
             AddFluent1Button.IsEnabled = true;
-            FluentComboBox2.IsEnabled = true;
-            AddFluent2Button.IsEnabled = true;
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();
         }

@@ -25,15 +25,18 @@ namespace KRR
         public static List<Logic.Action> actions = new List<Logic.Action>();
         public static List<Logic.Agent_Action> queries = new List<Logic.Agent_Action>();
         public static List<Logic.Fluent> initialliazed = new List<Logic.Fluent>(); //initiallywindow
+        public static List<Logic.Fluent> temp = new List<Logic.Fluent>(); //realseswindow causesW
         public static Logic.Rule rules = new Logic.Rule();
 
+        int row = 0;
         public static Controls.Add add2;
 
         public MainWindow()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            Init();                      
+           
+            Init();
         }
 
         public void Init()
@@ -56,7 +59,7 @@ namespace KRR
             Grid.SetColumn(add2, 0);
             MainGrid.Children.Add(add2);
 
-        
+
             /*add3.VerticalAlignment = VerticalAlignment.Bottom;
             add3.AddButton.Name = "Statement";
             Grid.SetRow(add3,0);
@@ -68,6 +71,8 @@ namespace KRR
             Grid.SetRow(add4, 2);
             Grid.SetColumn(add4, 0);
             MainGrid.Children.Add(add4);
+
+            
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -79,8 +84,8 @@ namespace KRR
 
         public static void AddAgent(String agentName)
         {
-                Logic.Agent agent = new Logic.Agent(agentName);
-                agents.Add(agent);
+            Logic.Agent agent = new Logic.Agent(agentName);
+            agents.Add(agent);
         }
 
         public static void AddAction(String actionName)
@@ -93,6 +98,21 @@ namespace KRR
         {
             Logic.Fluent fluent = new Logic.Fluent(fluentName, isTrue);
             allFluents.Add(fluent);
+        }
+
+        private void AddQuery_Click(object sender, RoutedEventArgs e)
+        {
+            ColumnDefinition rowDefinition = new ColumnDefinition();
+            rowDefinition.Width = GridLength.Auto;
+            QueryGrid.ColumnDefinitions.Add(rowDefinition);
+
+            
+            Controls.RuleControls.Query query = new Controls.RuleControls.Query();
+            Grid.SetColumn(query, row);
+            QueryGrid.Children.Add(query);
+            row++;
+            
+            
         }
 
         /*private void AgentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

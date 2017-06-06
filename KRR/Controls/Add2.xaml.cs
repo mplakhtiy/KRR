@@ -31,16 +31,15 @@ namespace KRR.Controls
                 return;
             Button b = sender as Button;
 
-            Entry2 entry2 = new Entry2();
-            entry2.FluentName.Content = Name.Text.ToString();
-            entry2.Boolean.Content = null;
+            Entry entry = new Entry();
+            entry.AgentName.Content = Name.Text.ToString();
             RowDefinition rowDefinition = new RowDefinition();
             rowDefinition.Height = GridLength.Auto;
 
             ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.RowDefinitions.Add(rowDefinition);
             int ble = ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.RowDefinitions.Count;
-            Grid.SetRow(entry2, ble - 1);
-            ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.Children.Add(entry2);
+            Grid.SetRow(entry, ble - 1);
+            ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.Children.Add(entry);
 
             Logic.Fluent fluent = new Logic.Fluent(Name.Text.ToString(), false);
             MainWindow.allFluents.Add(fluent);

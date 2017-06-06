@@ -13,7 +13,7 @@
         <Button Name="CancelButton" Content="CANCEL" Foreground="Black" Margin="20,0,20,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Cancel_Click"></Button>
 
 
-        <ComboBox Height="20" Width="100" VerticalAlignment="Top" Margin="30,30,0,0" HorizontalAlignment="Left" FontFamily="Arial Black" SelectionChanged="ComboBox_SelectionChanged">
+        <ComboBox Name="ruleComboBox" Height="20" Width="100" VerticalAlignment="Top" Margin="30,30,0,0" HorizontalAlignment="Left" FontFamily="Arial Black" SelectionChanged="ComboBox_SelectionChanged">
             <ComboBoxItem>CausesIF</ComboBoxItem>
             <ComboBoxItem>ReleasesIF</ComboBoxItem>
             <ComboBoxItem>Always</ComboBoxItem>

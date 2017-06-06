@@ -29,7 +29,7 @@ namespace KRR.Controls.RuleControls
         {
             Button btn = sender as Button;
             Windows.RuleWindow.btnClicked = btn.Name.ToString();
-            Windows.InitiallyWindow fluent = new Windows.InitiallyWindow();
+            Windows.InitiallyWindow fluent = new Windows.InitiallyWindow("initially");
             fluent.ShowDialog();
         }
     }

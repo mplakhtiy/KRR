@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 namespace KRR.Logic.Rules
 {
-    class CausesIf : IRule
+    public class CausesIf : IRule
     {
-        public double probability;
         public string Name { get; set; }
         public List<Fluent> change { get; set; }
         public List<List<Fluent>> _if { get; set; }
@@ -14,7 +13,6 @@ namespace KRR.Logic.Rules
             this.change = change;
             this._if = _if;
             this.agent_action = agent_action;
-            this.probability = 1;
         }
     }
 }

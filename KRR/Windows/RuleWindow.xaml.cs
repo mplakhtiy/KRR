@@ -20,6 +20,8 @@ namespace KRR.Windows
     public partial class RuleWindow : Window
     {
         public static String btnClicked = String.Empty;
+        public static Logic.Agent ag = new Logic.Agent(null);
+        public static Logic.Action ac = new Logic.Action(null);
 
         public RuleWindow()
         {
@@ -29,6 +31,7 @@ namespace KRR.Windows
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+
             int row = 0;
             int col = 1;
 
@@ -37,18 +40,51 @@ namespace KRR.Windows
 
             Controls.Entry entry = new Controls.Entry();
 
-            // HERE WE WRITE THE CONCATENATION OF THE RULE AS TEXT
-            //entry.AgentName.Content
-
             ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Add(rowDefinition);
             int ble2 = ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Count;
             Grid.SetRow(entry, ble2 - 1);
             ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.Children.Add(entry);
+
+            //add a specific rule
+            
+            switch (ruleComboBox.SelectedIndex)
+            {
+                case 0: //causes
+                    if (ag != null && ac != null)
+                    {
+                        Logic.Agent_Action agAc = new Logic.Agent_Action(ag, ac);
+                        Logic.Rules.CausesIf rule = new Logic.Rules.CausesIf(agAc, MainWindow.temp, FluentsWindow._if);
+
+                        MainWindow.rules.AddRule(rule);
+                    }
+                    break;
+                case 1: //realalssesesese
+                    if (ag != null && ac != null)
+                    {
+                        Logic.Agent_Action agAc2 = new Logic.Agent_Action(ag, ac);
+                        Logic.Rules.ReleasesIf rule2 = new Logic.Rules.ReleasesIf(agAc2, MainWindow.temp, FluentsWindow._if);
+                        MainWindow.rules.AddRule(rule2);
+                    }
+                        break;
+                case 3: //initilly
+                        //
+                        break;
+                    
+                }
+
+            //clear
+            MainWindow.temp.Clear();
+            FluentsWindow._if.Clear();
+            ag = null;
+            ac = null;
+
+
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -2,7 +2,7 @@
 
 namespace KRR.Logic.Rules
 {
-    class ReleasesIf : IRule
+    public class ReleasesIf : IRule
     {
         public double probability;
         public string Name { get; set; }
