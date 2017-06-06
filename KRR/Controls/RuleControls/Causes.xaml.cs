@@ -30,6 +30,7 @@ namespace KRR.Controls.RuleControls
             foreach (var a in MainWindow.actions)
             {
                 ActionComboBox.Items.Add(a.Name.ToString());
+                
             }
         }
 

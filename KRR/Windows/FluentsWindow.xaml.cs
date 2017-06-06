@@ -40,6 +40,8 @@ namespace KRR.Windows
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             _if.Add(temp);
+            MainWindow.statement2 = fluents;
+
 
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();

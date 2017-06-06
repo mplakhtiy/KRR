@@ -48,5 +48,7 @@ namespace KRR.Controls.RuleControls
             Windows.FluentsWindow fluent = new Windows.FluentsWindow();
             fluent.ShowDialog();
         }
+
+
     }
 }

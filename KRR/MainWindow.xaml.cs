@@ -27,6 +27,9 @@ namespace KRR
         public static List<Logic.Fluent> initialliazed = new List<Logic.Fluent>(); //initiallywindow
         public static List<Logic.Fluent> temp = new List<Logic.Fluent>(); //realseswindow causesW
         public static Logic.Rule rules = new Logic.Rule();
+        public static String statement = null;
+        public static String statement2 = null;
+        public static String statement3 = null;
 
         int row = 0;
         public static Controls.Add add2;
@@ -106,14 +109,14 @@ namespace KRR
                 {
                     foreach (Logic.Action ac in actions)
                     {
-                        if (temp.AgentComboBox.Name.Equals(a.Name) && temp.ActionComboBox.Name.Equals(ac.Name))
+                        if (temp.AgentComboBox.SelectedItem.Equals(a.Name) && temp.ActionComboBox.SelectedItem.Equals(ac.Name))
                         {
                             agAc = new Logic.Agent_Action(a, ac);
                             queries.Add(agAc);
                         }
                     }
 
-            }
+                }
             }
 
 

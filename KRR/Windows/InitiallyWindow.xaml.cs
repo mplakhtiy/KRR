@@ -65,7 +65,8 @@ namespace KRR.Windows
                     }
                     break;
             }
-           
+
+            MainWindow.statement3 = fluents;
 
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();

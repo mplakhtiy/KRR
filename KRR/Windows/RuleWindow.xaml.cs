@@ -37,13 +37,7 @@ namespace KRR.Windows
 
             RowDefinition rowDefinition = new RowDefinition();
             rowDefinition.Height = GridLength.Auto;
-            Controls.Entry entry = new Controls.Entry();
-
-            ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Add(rowDefinition);
-            int ble2 = ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Count;
-            Grid.SetRow(entry, ble2 - 1);
-            ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.Children.Add(entry);
-
+            
             switch (ruleComboBox.SelectedIndex)
             {
                 case 0: //causes
@@ -52,6 +46,7 @@ namespace KRR.Windows
                         Logic.Agent_Action agAc = new Logic.Agent_Action(ag, ac);
                         Logic.Rules.CausesIf rule = new Logic.Rules.CausesIf(agAc, MainWindow.temp, FluentsWindow._if);
 
+                        MainWindow.statement = rule.ToString();
                         MainWindow.rules.AddRule(rule);
                     }
                     break;
@@ -60,6 +55,8 @@ namespace KRR.Windows
                     {
                         Logic.Agent_Action agAc2 = new Logic.Agent_Action(ag, ac);
                         Logic.Rules.ReleasesIf rule2 = new Logic.Rules.ReleasesIf(agAc2, MainWindow.temp, FluentsWindow._if);
+
+                        MainWindow.statement = rule2.ToString();
                         MainWindow.rules.AddRule(rule2);
                     }
                         break;
@@ -72,6 +69,15 @@ namespace KRR.Windows
             FluentsWindow._if.Clear();
             ag = null;
             ac = null;
+
+            Controls.EntryStatement entry = new Controls.EntryStatement();
+            entry.AgentName.Content = MainWindow.statement + MainWindow.statement3 + " if " + MainWindow.statement2;
+
+            ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Add(rowDefinition);
+            int ble2 = ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Count;
+            Grid.SetRow(entry, ble2 - 1);
+            ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.Children.Add(entry);
+
             this.Close();
         }
 
