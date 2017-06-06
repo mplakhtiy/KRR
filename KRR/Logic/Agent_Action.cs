@@ -19,5 +19,9 @@
                 return true;
             return false;
         }
+        public override string ToString()
+        {
+            return agent.Name + "( " + action.Name + " )";
+        }
     }
 }

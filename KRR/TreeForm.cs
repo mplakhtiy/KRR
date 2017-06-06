@@ -13,14 +13,16 @@ namespace KRR
 {
     public partial class TreeForm : Form
     {
-        public TreeForm()
+        public TreeData.TreeDataTableDataTable TreeBuilder;
+        public TreeForm(TreeData.TreeDataTableDataTable tree)
         {
+            TreeBuilder = tree;
             InitializeComponent();
         }
 
         private void TreeForm_Load(object sender, EventArgs e)
         {
-            myTree = new TreeBuilder(GetTreeData());
+            myTree = new TreeBuilder(TreeBuilder);
 
             ShowTree();
         }
@@ -34,10 +36,10 @@ namespace KRR
         {
             TreeData.TreeDataTableDataTable dt = new TreeData.TreeDataTableDataTable();
             dt.AddTreeDataTableRow("1", "", "Localhost", "This is your Local Server");
-            dt.AddTreeDataTableRow("2", "1", "Child 1", "This is the first child.");
+            dt.AddTreeDataTableRow("2-2", "1", "Child 1", "This is the first child.");
             dt.AddTreeDataTableRow("3", "1", "Child 2", "This is the second child.");
             dt.AddTreeDataTableRow("4", "1", "Child 3", "This is the third child.");
-            dt.AddTreeDataTableRow("5", "2", "GrandChild 1", "This is the only Grandchild.");
+            dt.AddTreeDataTableRow("5", "2-2", "GrandChild 1", "This is the only Grandchild.");
             for (int i = 6; i < 5; i++)
             {
                 Random rand = new Random();
