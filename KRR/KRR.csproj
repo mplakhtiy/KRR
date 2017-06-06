@@ -58,6 +58,9 @@
     <Compile Include="Controls\ActionControl.xaml.cs">
       <DependentUpon>ActionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EntryStatement.xaml.cs">
+      <DependentUpon>EntryStatement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RuleControls\Always.xaml.cs">
       <DependentUpon>Always.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
     <Page Include="Controls\Add.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EntryStatement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Entry.xaml">
       <SubType>Designer</SubType>

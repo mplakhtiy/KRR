@@ -17,6 +17,20 @@ namespace KRR.Logic.Rules
             this.agent_action = agent_action;
             this.probability = 0.5;
         }
-
+        public override string ToString()
+        {
+            string text = this.agent_action.agent.Name + "(" + agent_action.action.Name + ")" + " " + Name + " ";
+           /* foreach (var v in change)
+            {
+                text += v.Name.ToString() + " " + v.IsTrue.ToString() + ", ";
+            }
+            /*text += " if ";
+            foreach (List<Fluent> v in _if)
+            {
+                foreach
+            }
+            */
+            return text;
+        }
     }
 }

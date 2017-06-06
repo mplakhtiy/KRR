@@ -40,19 +40,16 @@ namespace KRR.Controls
             }
             else if (name.Equals("Action"))
             {
-                //if (((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.SelectedIndex <= -1)
-                //{
-                //    return;
-                //}
+
                 row = 1;
                 col = 0;
             }
-           /* else if (name.Equals("Statement"))
+            else if (name.Equals("Statement"))
             {
                 row = 0;
                 col = 1;
             }
-            */
+            
             else if (name.Equals("Fluent"))
             {
                 row = 2;
@@ -80,14 +77,11 @@ namespace KRR.Controls
                            // ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
                         
                     }
-                    /*
+                    
                     else
                     {
-                        ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Add(rowDefinition);
-                        int ble2 = ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Count;
-                        Grid.SetRow(entry, ble2 - 1);
-                        ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.Children.Add(entry);
-                    }*/
+                       
+                    }
                     break;
             
                 case 1:
