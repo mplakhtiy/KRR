@@ -40,6 +40,10 @@ namespace KRR.Controls
             }
             else if (name.Equals("Action"))
             {
+                if (((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.SelectedIndex <= -1)
+                {
+                    return;
+                }
                 row = 1;
                 col = 0;
             }
@@ -68,11 +72,13 @@ namespace KRR.Controls
                     {
                         ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.RowDefinitions.Add(rowDefinition);
                         int ble = ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.RowDefinitions.Count;
-                        Grid.SetRow(entry, ble-1);
+                        Grid.SetRow(entry, ble - 1);
                         ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.Children.Add(entry);
 
-                        MainWindow.AddAgent(entry.AgentName.Content.ToString());
-                        ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
+                       
+                            MainWindow.AddAgent(entry.AgentName.Content.ToString());
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
+                        
                     }
                     /*
                     else
@@ -85,21 +91,22 @@ namespace KRR.Controls
                     break;
             
                 case 1:
-
+                    //actions
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.Children.Clear();
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.RowDefinitions.Clear();
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.RowDefinitions.Add(rowDefinition);
                     Logic.Action ac = new Logic.Action(entry.AgentName.Content.ToString());
                     //to the agent
-                    Logic.Agent correct = new Logic.Agent(null);
+                    Logic.Agent temp = new Logic.Agent(null);
                     foreach (var ag in MainWindow.agents)
                     {
                         if (ag.Name.Equals(((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.SelectedValue))
                         {
                             ag.Actions.Add(ac);
-                            correct = ag;
+                            temp = ag;
                         }
                     }
-                    Controls.ActionControl actioncontrol = new ActionControl(correct);
+                    Controls.ActionControl actioncontrol = new ActionControl(temp);
                     
 
                     //here wrong

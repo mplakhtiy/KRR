@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:KRR.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
-    <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewe2r" Grid.Row="1" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
-                          Margin="0,0,0,0">
-        <Grid Name="ActionsGrid" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0"/>
-    </ScrollViewer>
+    <!--ScrollViewer Background="Transparent" x:Name="BrowserScrollViewe2r"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
+                          Margin="0,0,0,0"-->
+        <Grid Name="ActionsGrid"  Margin="0,0,0,0"/>
+    <!--/ScrollViewer-->
 </UserControl>

@@ -75,8 +75,11 @@ namespace KRR
 
         public static void AddAgent(String agentName)
         {
-            Logic.Agent agent = new Logic.Agent(agentName);
-            agents.Add(agent);
+            
+
+                Logic.Agent agent = new Logic.Agent(agentName);
+                agents.Add(agent);
+
 
             
         }
@@ -84,13 +87,14 @@ namespace KRR
         private void AgentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ActionsGrid.Children.Clear();
+            ActionsGrid.RowDefinitions.Clear();
             foreach (var ag in MainWindow.agents)
             {
                 if (ag.Name.Equals(AgentsComboBox.SelectedValue.ToString()))
                 {
                     RowDefinition rowDefinition = new RowDefinition();
                     rowDefinition.Height = GridLength.Auto;
-                    AgentsGrid.RowDefinitions.Add(rowDefinition);
+                    ActionsGrid.RowDefinitions.Add(rowDefinition);
 
                    // if (add2.Name.Name.Equals(null))
                    // {

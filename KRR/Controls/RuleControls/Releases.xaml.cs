@@ -23,6 +23,10 @@ namespace KRR.Controls.RuleControls
         public Releases()
         {
             InitializeComponent();
+            foreach (var fl in MainWindow.agents)
+            {
+                AgentComboBox.Items.Add(fl.Name.ToString());
+            }
         }
 
         private void AddFluent_Click(object sender, RoutedEventArgs e)
@@ -39,6 +43,20 @@ namespace KRR.Controls.RuleControls
             Windows.RuleWindow.btnClicked = btn.Name.ToString();
             Windows.FluentsWindow fluent = new Windows.FluentsWindow();
             fluent.ShowDialog();
+        }
+
+        private void AgentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ActionComboBox.Items.Clear();
+            ComboBox combobox = sender as ComboBox;
+            foreach (var fl in MainWindow.agents)
+            {
+                if (fl.Name.ToString().Equals(combobox.SelectedItem.ToString()))
+                {
+                    foreach (var ac in fl.Actions)
+                        ActionComboBox.Items.Add(ac.Name.ToString());
+                }
+            }
         }
     }
 }

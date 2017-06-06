@@ -23,15 +23,20 @@ namespace KRR.Controls
         public ActionControl(Logic.Agent ag)
         {
             InitializeComponent();
+            int row = 0;
             foreach (var action in ag.Actions)
             {
                 Entry entry = new Entry();
                 entry.AgentName.Content = action.Name;
+                
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = GridLength.Auto;
+
                 ActionsGrid.RowDefinitions.Add(rowDefinition);
 
+                Grid.SetRow(entry,row); 
                 ActionsGrid.Children.Add(entry);
+                row++;
 
 
             }
