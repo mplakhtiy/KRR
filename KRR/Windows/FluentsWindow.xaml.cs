@@ -39,36 +39,12 @@ namespace KRR.Windows
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
-            //add here new fluents as one to list of fluents or somehow add this for checking later if condition is true or not
-            //add to list
-            /*
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(RuleWindow))
-                {
-                    Grid maingrid = window.Content as Grid;
-                    Grid grid = maingrid.Children[3] as Grid;
-                    UserControl control = grid.Children[0] as UserControl;
-                    Grid g = control.Content as Grid;
-                    Label label =null;
-                    if (Windows.RuleWindow.btnClicked.Equals("AddFluent"))
-                        label = g.Children[7] as Label; //fluent1
-                    else
-                        label = g.Children[11] as Label;
-                    label.Content = fluents.ToString();
-                }
-            }*/
-
-            
             _if.Add(temp);
 
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();
             notClicked = false;
             this.Close();
-
-
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -99,7 +75,6 @@ namespace KRR.Windows
             col++;
             fluentsTextBlock.Children.Add(text);
             fluents += text.Text;
-
         }
 
         private void And_Click(object sender, RoutedEventArgs e)
@@ -108,7 +83,6 @@ namespace KRR.Windows
             And.IsEnabled = false;
             Or.IsEnabled = false;
             Not.IsEnabled = true;
-
 
             ColumnDefinition colDefinition = new ColumnDefinition();
             colDefinition.Width = GridLength.Auto;
@@ -175,16 +149,12 @@ namespace KRR.Windows
             fluentsTextBlock.Children.Add(text);
             fluents += text.Text;
 
-
-            Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.Text.ToString(),notClicked);
+            Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.Text.ToString(), notClicked);
             temp.Add(fluent);
 
-
-             notClicked = false;
-
+            notClicked = false;
         }
 
-       
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             And.IsEnabled = true;

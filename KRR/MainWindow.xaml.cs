@@ -35,7 +35,6 @@ namespace KRR
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
-           
             Init();
         }
 
@@ -54,17 +53,9 @@ namespace KRR
 
             add2.VerticalAlignment = VerticalAlignment.Bottom;
             add2.AddButton.Name = "Action";
-            //add2.Name.Name = "Action";
             Grid.SetRow(add2, 1);
             Grid.SetColumn(add2, 0);
             MainGrid.Children.Add(add2);
-
-
-            /*add3.VerticalAlignment = VerticalAlignment.Bottom;
-            add3.AddButton.Name = "Statement";
-            Grid.SetRow(add3,0);
-            Grid.SetColumn(add3, 1);
-            MainGrid.Children.Add(add3);*/
 
             add4.VerticalAlignment = VerticalAlignment.Bottom;
             add4.AddButton.Name = "Fluent";
@@ -72,12 +63,10 @@ namespace KRR
             Grid.SetColumn(add4, 0);
             MainGrid.Children.Add(add4);
 
-            
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            //new window
             Windows.RuleWindow ruleWindow = new Windows.RuleWindow();
             ruleWindow.ShowDialog();
         }
@@ -102,39 +91,64 @@ namespace KRR
 
         private void AddQuery_Click(object sender, RoutedEventArgs e)
         {
+            //.IsEnabled = false;
+
+            Controls.RuleControls.Query temp;
+            if (row > 0)
+            {
+                temp = QueryGrid.Children[row - 1] as Controls.RuleControls.Query;
+                temp.ActionComboBox.IsEnabled = false;
+                temp.AgentComboBox.IsEnabled = false;
+
+                Logic.Agent_Action agAc;
+
+                foreach (Logic.Agent a in agents)
+                {
+                    foreach (Logic.Action ac in actions)
+                    {
+                        if (temp.AgentComboBox.Name.Equals(a.Name) && temp.ActionComboBox.Name.Equals(ac.Name))
+                        {
+                            agAc = new Logic.Agent_Action(a, ac);
+                            queries.Add(agAc);
+                        }
+                    }
+
+            }
+            }
+
+
+
             ColumnDefinition rowDefinition = new ColumnDefinition();
             rowDefinition.Width = GridLength.Auto;
             QueryGrid.ColumnDefinitions.Add(rowDefinition);
-
             
             Controls.RuleControls.Query query = new Controls.RuleControls.Query();
             Grid.SetColumn(query, row);
             QueryGrid.Children.Add(query);
             row++;
             
-            
         }
 
-        /*private void AgentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Perform_Click(object sender, RoutedEventArgs e)
         {
-            ActionsGrid.Children.Clear();
-            ActionsGrid.RowDefinitions.Clear();
-            foreach (var ag in MainWindow.agents)
-            {
-                if (ag.Name.Equals(AgentsComboBox.SelectedValue.ToString()))
-                {
-                    RowDefinition rowDefinition = new RowDefinition();
-                    rowDefinition.Height = GridLength.Auto;
-                    ActionsGrid.RowDefinitions.Add(rowDefinition);
-
-                   // if (add2.Name.Name.Equals(null))
-                   // {
-                        Controls.ActionControl actioncontrol = new Controls.ActionControl(ag);
-                        ActionsGrid.Children.Add(actioncontrol);
-                  //  }
-                }
-            }
+            Logic.Main.TheMostImportantMethod(rules, initialliazed, allFluents, queries);
         }
-        */
+
+        private void ClearQuery_Click(object sender, RoutedEventArgs e)
+        {
+            QueryGrid.Children.Clear();
+            QueryGrid.ColumnDefinitions.Clear();
+            queries.Clear();
+            row = 0;
+
+            ColumnDefinition rowDefinition = new ColumnDefinition();
+            rowDefinition.Width = GridLength.Auto;
+            QueryGrid.ColumnDefinitions.Add(rowDefinition);
+
+            Controls.RuleControls.Query query = new Controls.RuleControls.Query();
+            Grid.SetColumn(query, row);
+            QueryGrid.Children.Add(query);
+            row++;
+        }
     }
 }

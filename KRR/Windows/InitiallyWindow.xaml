@@ -23,22 +23,14 @@
         <Button Name="AddButton" Content="OK" Foreground="Black" Grid.Row="2" Grid.Column="4" Margin="0,0,20,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Ok_Click"></Button>
         <Button Name="CancelButton" Content="CANCEL" Foreground="Black" Grid.Row="2" Grid.Column="0" Margin="20,0,20,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Cancel_Click"></Button>
         <Button Name="ClearButton" Content="CLEAR" Foreground="Black" Grid.Row="2" Grid.Column="3" Margin="30,20,0,0"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Clear_Click"></Button>
-
         <CheckBox Name="isTrue" Content="isTrue" Height="20" Width="60" Grid.Row="1" Grid.Column="0"  FontWeight="Bold" Margin="14,32,12,64" ></CheckBox>
-
-        <ComboBox Name="FluentComboBox" Height="20" Width="80" Foreground="Black" SelectedIndex="0" FontWeight="Bold" Grid.Row="1" Grid.Column="1"  Margin="22,32,19,64" FontSize="12"  HorizontalAlignment="Center" VerticalAlignment="Center">
-        </ComboBox>
-
+        <ComboBox Name="FluentComboBox" Height="20" Width="80" Foreground="Black" SelectedIndex="0" FontWeight="Bold" Grid.Row="1" Grid.Column="1"  Margin="22,32,19,64" FontSize="12"  HorizontalAlignment="Center" VerticalAlignment="Center"></ComboBox>
         <Button Name="AddFluent1Button" Content="ADD" Foreground="Black" Grid.Row="1" Grid.Column="1" Margin="42,0,39,26"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="AddFluent1_Click"></Button>
-
         <Border Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Column="2"  Background="Gray" VerticalAlignment="Stretch" Height="200"  Margin="60,0,60,0" BorderThickness="2" BorderBrush="Black">
-            <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer" Grid.Row="1" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
-                          >
+            <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer" Grid.Row="1" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5">
                 <Grid Name="fluentsTextBlock" >
                 </Grid>
             </ScrollViewer>
         </Border>
-
-
     </Grid>
 </Window>

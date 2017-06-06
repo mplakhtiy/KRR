@@ -31,8 +31,6 @@ namespace KRR.Controls.RuleControls
             {
                 ActionComboBox.Items.Add(a.Name.ToString());
             }
-
         }
-        
     }
 }

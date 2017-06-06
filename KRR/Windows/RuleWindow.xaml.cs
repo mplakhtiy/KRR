@@ -37,7 +37,6 @@ namespace KRR.Windows
 
             RowDefinition rowDefinition = new RowDefinition();
             rowDefinition.Height = GridLength.Auto;
-
             Controls.Entry entry = new Controls.Entry();
 
             ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Add(rowDefinition);
@@ -45,8 +44,6 @@ namespace KRR.Windows
             Grid.SetRow(entry, ble2 - 1);
             ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.Children.Add(entry);
 
-            //add a specific rule
-            
             switch (ruleComboBox.SelectedIndex)
             {
                 case 0: //causes
@@ -67,24 +64,19 @@ namespace KRR.Windows
                     }
                         break;
                 case 3: //initilly
-                        //
                         break;
                     
                 }
 
-            //clear
             MainWindow.temp.Clear();
             FluentsWindow._if.Clear();
             ag = null;
             ac = null;
-
-
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -117,7 +109,6 @@ namespace KRR.Windows
                     Rule.Children.Add(Initially);
                     break;
             }
-             
         }
     }
 }

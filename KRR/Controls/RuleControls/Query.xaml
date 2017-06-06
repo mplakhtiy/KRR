@@ -9,13 +9,7 @@
              BorderBrush="Black" 
              BorderThickness="3">
     <Grid >
-        <Label Name="Agent" Content="Agent" FontFamily="Impact" Margin="0,0,0,0" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
-        <ComboBox Name="AgentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="80,5,0,0" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Top"  >
-        </ComboBox>
-
-        <Label Name="Action" Content="Action" FontFamily="Impact"  Margin="0,40,0,0" FontSize="15"  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
-        <ComboBox Name="ActionComboBox" Height="20" Width="80"  Foreground="Black"  Margin="80,45,0,0" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Top">
-        </ComboBox>
-        
+        <ComboBox Name="AgentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="20,5,0,0" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Top"  ></ComboBox>
+        <ComboBox Name="ActionComboBox" Height="20" Width="80"  Foreground="Black"  Margin="20,45,0,0" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Top"></ComboBox>
     </Grid>
 </UserControl>

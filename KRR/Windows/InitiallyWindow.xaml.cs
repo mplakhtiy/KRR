@@ -25,7 +25,6 @@ namespace KRR.Windows
         public List<Logic.Fluent> tempfluent = new List<Logic.Fluent>();
         private String name = null;
 
-
         public InitiallyWindow(String _name)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -43,25 +42,27 @@ namespace KRR.Windows
             switch (name)
             {
                 case "causes":
+
                     foreach (Logic.Fluent fl in tempfluent) //initially
                     {
                         MainWindow.temp.Add(fl);
                     }
-
                     break;
+
                 case "releases":
+
                     foreach (Logic.Fluent fl in tempfluent) //initially
                     {
                         MainWindow.temp.Add(fl);
                     }
-
                     break;
+
                 case "initially":
+
                     foreach (Logic.Fluent fl in tempfluent) //initially
                     {
                         MainWindow.initialliazed.Add(fl);
                     }
-
                     break;
             }
            
@@ -105,10 +106,7 @@ namespace KRR.Windows
                 check = true;
             Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.Text.ToString(), check);
             tempfluent.Add(fluent);
-
         }
-
-        
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {

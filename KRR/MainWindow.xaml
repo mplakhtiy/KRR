@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:KRR"
         mc:Ignorable="d"
         Title="KRR Project" Height="550" Width="825"
-        Background="Black" ResizeMode="NoResize"
-        >
+        Background="Black" ResizeMode="NoResize">
    
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
@@ -19,7 +18,6 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        
 
         <Label x:Name="Agents" Content="Agents" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="0"/>
         <Label x:Name="Actions" Content="Actions" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center"  Foreground="White" Grid.Row="1"/>
@@ -32,35 +30,28 @@
         <Rectangle Stroke="Gray" StrokeThickness="2" Grid.RowSpan="3" Grid.Column="1"></Rectangle>
         <Rectangle Stroke="Gray" StrokeThickness="2" Grid.ColumnSpan="2" Grid.Row="1"></Rectangle>
 
-        <!--ComboBox Name="AgentsComboBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="25" Width="100" Margin="8,8,1,1" FontFamily="Impact" FontSize="15" SelectionChanged="AgentsComboBox_SelectionChanged" >
-            
-        </-->
-        
-        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer" Grid.Row="0" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
-                          Margin="0,40,0,30">
+        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer" Grid.Row="0" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5" Margin="0,40,0,30">
             <Grid Name="AgentsGrid" Grid.Row="1" Grid.Column="0" Margin="20,0,20,0"/>
         </ScrollViewer>
-        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewe2r" Grid.Row="1" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
-                          Margin="0,40,0,30">
+        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewe2r" Grid.Row="1" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5" Margin="0,40,0,30">
             <Grid Name="ActionsGrid" Grid.Row="1" Grid.Column="0" Margin="20,0,20,0"/>
         </ScrollViewer>
-        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer3" Grid.Row="2" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
-                          Margin="0,40,0,30">
+        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer3" Grid.Row="2" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5" Margin="0,40,0,30">
             <Grid Name="FluentsGrid" Grid.Row="1" Grid.Column="0" Margin="20,0,20,0"/>
         </ScrollViewer>
-        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer4" Grid.Row="0" Grid.Column="1"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
-                          Margin="0,40,0,30">
+        <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer4" Grid.Row="0" Grid.Column="1"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5" Margin="0,40,0,30">
             <Grid Name="StatementsGrid" Grid.Row="0" Grid.Column="1" Margin="20,0,20,0"/>
         </ScrollViewer>
+        <Label Name="AgentLabel" Content="Agent" Grid.Row="1" Grid.Column="1" FontFamily="Impact" Margin="25,0,0,50" FontSize="17" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <Label Name="ActionLabel" Content="Action" Grid.Row="1" Grid.Column="1"  FontFamily="Impact"  Margin="25,30,0,5" FontSize="17"  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+
         <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer5" Grid.Row="1" Grid.Column="1"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
-                          Margin="40,40,40,30">
-            <Grid Name="QueryGrid" Grid.Row="1" Grid.Column="0" Margin="20,0,20,0"/>
-            
+                          Margin="80,40,40,30">
+            <Grid Name="QueryGrid" Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
         </ScrollViewer>
-        <Button Name="AddQueryButton" Content="ADD" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="0,0,20,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="AddQuery_Click"></Button>
-
+        <Button Name="AddQueryButton" Content="ADD" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="40,0,0,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="AddQuery_Click"></Button>
+        <Button Name="ClearQueryButton" Content="CLEAR" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="0,0,80,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="ClearQuery_Click"></Button>
         <Button Name="AddButton" Content="ADD" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="0,0,20,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Add_Click"></Button>
-
-
+        <Button Name="PerformButton" Content="PERFORM" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,0,20,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Perform_Click"></Button>
     </Grid>
 </Window>

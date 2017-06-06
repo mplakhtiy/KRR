@@ -27,7 +27,7 @@ namespace KRR.Controls
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            ///add question if user want to delete
+            //add question if user want to delete
             String grid = null;
             //we assume that there is no the same name of fluent as agents etc
             foreach (Logic.Agent ag in MainWindow.agents)
@@ -57,7 +57,6 @@ namespace KRR.Controls
                     break;
                 }
             }
-            //update of a grid after deletion
             Update(grid);
         }
         public void Update(String grid)
@@ -68,7 +67,6 @@ namespace KRR.Controls
                 case "AgentsGrid":
                     ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.RowDefinitions.Clear();
                     ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.Children.Clear();
-                   // ((MainWindow)System.Windows.Application.Current.MainWindow).AgentComboBox.Rem
                     foreach (Logic.Agent ag in MainWindow.agents)
                     {
                         Entry entry = new Entry();
@@ -81,6 +79,7 @@ namespace KRR.Controls
                         row1++;
                     }
                     break;
+
                 case "ActionsGrid":
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.RowDefinitions.Clear();
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.Children.Clear();
@@ -97,6 +96,7 @@ namespace KRR.Controls
 
                     }
                     break;
+
                 case "FluentsGrid":
                     ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.RowDefinitions.Clear();
                     ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.Children.Clear();
@@ -110,10 +110,8 @@ namespace KRR.Controls
                         Grid.SetRow(entry, row1);
                         ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.Children.Add(entry);
                         row1++;
-
                     }
                     break;
-
             }
         }
     }
