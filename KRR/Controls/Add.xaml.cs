@@ -40,10 +40,10 @@ namespace KRR.Controls
             }
             else if (name.Equals("Action"))
             {
-                if (((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.SelectedIndex <= -1)
-                {
-                    return;
-                }
+                //if (((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.SelectedIndex <= -1)
+                //{
+                //    return;
+                //}
                 row = 1;
                 col = 0;
             }
@@ -68,16 +68,16 @@ namespace KRR.Controls
             {
                 case 0:
 
-                    if (col == 0)
+                    if (col == 0) //agents
                     {
                         ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.RowDefinitions.Add(rowDefinition);
-                        int ble = ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.RowDefinitions.Count;
-                        Grid.SetRow(entry, ble - 1);
+                        int row1 = ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.RowDefinitions.Count;
+                        Grid.SetRow(entry, row1 - 1);
                         ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.Children.Add(entry);
 
                        
                             MainWindow.AddAgent(entry.AgentName.Content.ToString());
-                            ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
+                           // ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
                         
                     }
                     /*
@@ -92,6 +92,18 @@ namespace KRR.Controls
             
                 case 1:
                     //actions
+
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.RowDefinitions.Add(rowDefinition);
+                    int row2 = ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.RowDefinitions.Count;
+                    Grid.SetRow(entry, row2 - 1);
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.Children.Add(entry);
+
+
+                    MainWindow.AddAction(entry.AgentName.Content.ToString());
+                    //((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
+
+
+                    /*
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.Children.Clear();
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.RowDefinitions.Clear();
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.RowDefinitions.Add(rowDefinition);
@@ -111,14 +123,16 @@ namespace KRR.Controls
 
                     //here wrong
                     ((MainWindow)System.Windows.Application.Current.MainWindow).ActionsGrid.Children.Add(actioncontrol);
-                    
+                    */
                     break;
 
-                case 2:
+                case 2: //fleunt
                     ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.RowDefinitions.Add(rowDefinition);
                     int ble4 = ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.RowDefinitions.Count;
                     Grid.SetRow(entry, ble4 - 1);
                     ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.Children.Add(entry);
+
+                    MainWindow.AddFluent(entry.AgentName.Content.ToString(),false); //as default false
                     break;
                    
             }

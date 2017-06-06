@@ -10,11 +10,11 @@
              BorderThickness="3">
     <Grid>
         <Label Name="Agent" Content="Agent" FontFamily="Impact" Margin="40,0,0,100" FontSize="15" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-        <ComboBox Name="AgentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,100" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="AgentComboBox_SelectionChanged"  >
+        <ComboBox Name="AgentComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,100" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Center"  >
         </ComboBox>
 
         <Label Name="Action" Content="Action" FontFamily="Impact"  Margin="40,0,0,40" FontSize="15"  Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
-        <ComboBox Name="ActionComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,40" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Center">
+        <ComboBox Name="ActionComboBox" Height="20" Width="80"  Foreground="Black"  Margin="120,0,0,40" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Center">
         </ComboBox>
 
         <Label Name="releases" Content="releases" FontFamily="Impact" Foreground="Black" Margin="0,20,0,0" FontSize="15"   HorizontalAlignment="Center" VerticalAlignment="Center"></Label>

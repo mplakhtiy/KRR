@@ -28,7 +28,7 @@ namespace KRR.Windows
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             InitializeComponent();
-            foreach (var fl in MainWindow.fleunts)
+            foreach (var fl in MainWindow.allFluents)
             {
                 FluentComboBox.Items.Add(fl.Name.ToString());
                 FluentComboBox2.Items.Add(fl.Name.ToString());
@@ -39,7 +39,7 @@ namespace KRR.Windows
         {
 
             //add here new fluents as one to list of fluents or somehow add this for checking later if condition is true or not
-
+            //add to list
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(RuleWindow))

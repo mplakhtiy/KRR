@@ -18,17 +18,21 @@ namespace KRR.Controls.RuleControls
     /// <summary>
     /// Interaction logic for Causes.xaml
     /// </summary>
-    public partial class Always : UserControl
+    public partial class Query : UserControl
     {
-        public Always()
+        public Query()
         {
             InitializeComponent();
-            foreach (var fl in MainWindow.allFluents)
+            foreach (var a in MainWindow.agents)
             {
-                FluentComboBox.Items.Add(fl.Name.ToString());
-                FluentComboBox2.Items.Add(fl.Name.ToString());
+                AgentComboBox.Items.Add(a.Name.ToString());
             }
-        }
+            foreach (var a in MainWindow.actions)
+            {
+                ActionComboBox.Items.Add(a.Name.ToString());
+            }
 
+        }
+        
     }
 }

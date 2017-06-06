@@ -61,6 +61,9 @@
     <Compile Include="Controls\RuleControls\Always.xaml.cs">
       <DependentUpon>Always.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RuleControls\Query.xaml.cs">
+      <DependentUpon>Query.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RuleControls\Initially.xaml.cs">
       <DependentUpon>Initially.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,9 @@
       <DependentUpon>TextBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\Main.cs" />
+    <Compile Include="Windows\InitiallyWindow.xaml.cs">
+      <DependentUpon>InitiallyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FluentsWindow.xaml.cs">
       <DependentUpon>FluentsWindow.xaml</DependentUpon>
     </Compile>
@@ -101,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RuleControls\Always.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RuleControls\Query.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -156,6 +166,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\InitiallyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\FluentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

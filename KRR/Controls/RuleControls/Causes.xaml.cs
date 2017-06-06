@@ -23,9 +23,13 @@ namespace KRR.Controls.RuleControls
         public Causes()
         {
             InitializeComponent();
-            foreach (var fl in MainWindow.agents)
+            foreach (var a in MainWindow.agents)
             {
-                AgentComboBox.Items.Add(fl.Name.ToString());
+                AgentComboBox.Items.Add(a.Name.ToString());
+            }
+            foreach (var a in MainWindow.actions)
+            {
+                ActionComboBox.Items.Add(a.Name.ToString());
             }
 
         }
@@ -34,7 +38,7 @@ namespace KRR.Controls.RuleControls
         {
             Button btn = sender as Button;
             Windows.RuleWindow.btnClicked = btn.Name.ToString();
-            Windows.FluentsWindow fluent = new Windows.FluentsWindow();
+            Windows.InitiallyWindow fluent = new Windows.InitiallyWindow();
             fluent.ShowDialog();
         }
 
@@ -53,18 +57,18 @@ namespace KRR.Controls.RuleControls
 
         }
 
-        private void AgentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ActionComboBox.Items.Clear();
-            ComboBox combobox = sender as ComboBox;
-            foreach (var fl in MainWindow.agents)
-            {
-                if (fl.Name.ToString().Equals(combobox.SelectedItem.ToString()))
-                {
-                    foreach (var ac in fl.Actions)
-                        ActionComboBox.Items.Add(ac.Name.ToString());
-                }
-            }
-        }
+        //private void AgentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ActionComboBox.Items.Clear();
+        //    ComboBox combobox = sender as ComboBox;
+        //    foreach (var fl in MainWindow.agents)
+        //    {
+        //        if (fl.Name.ToString().Equals(combobox.SelectedItem.ToString()))
+        //        {
+        //            foreach (var ac in fl.Actions)
+        //                ActionComboBox.Items.Add(ac.Name.ToString());
+        //        }
+        //    }
+        //}
     }
 }

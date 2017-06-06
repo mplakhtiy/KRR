@@ -21,8 +21,12 @@ namespace KRR
     public partial class MainWindow : Window
     {
         public static List<Logic.Agent> agents = new List<Logic.Agent>();
-        public static List<Logic.Fluent> fleunts = new List<Logic.Fluent>();
-        public static List<Logic.Fluent> actions = new List<Logic.Fluent>();
+        public static List<Logic.Fluent> allFluents = new List<Logic.Fluent>(); // typed onces
+        public static List<Logic.Action> actions = new List<Logic.Action>();
+        public static List<Logic.Agent_Action> queries = new List<Logic.Agent_Action>();
+        public static List<Logic.Fluent> initialliazed = new List<Logic.Fluent>(); //initiallywindow
+        public static Logic.Rule rules = new Logic.Rule();
+
         public static Controls.Add add2;
 
         public MainWindow()
@@ -75,16 +79,23 @@ namespace KRR
 
         public static void AddAgent(String agentName)
         {
-            
-
                 Logic.Agent agent = new Logic.Agent(agentName);
                 agents.Add(agent);
-
-
-            
         }
 
-        private void AgentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public static void AddAction(String actionName)
+        {
+            Logic.Action action = new Logic.Action(actionName);
+            actions.Add(action);
+        }
+
+        public static void AddFluent(String fluentName, bool isTrue)
+        {
+            Logic.Fluent fluent = new Logic.Fluent(fluentName, isTrue);
+            allFluents.Add(fluent);
+        }
+
+        /*private void AgentsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ActionsGrid.Children.Clear();
             ActionsGrid.RowDefinitions.Clear();
@@ -104,5 +115,6 @@ namespace KRR
                 }
             }
         }
+        */
     }
 }

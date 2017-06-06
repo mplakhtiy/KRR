@@ -2,7 +2,7 @@
 
 namespace KRR.Logic
 {
-    class State
+    public class State
     {
         public List<Fluent> Fluents { get; private set; }
         public State()

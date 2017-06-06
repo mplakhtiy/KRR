@@ -1,6 +1,6 @@
 ﻿namespace KRR.Logic
 {
-    class Agent_Action
+    public class Agent_Action
     {
         public Agent agent { get; set; }
         public Action action { get; set; }

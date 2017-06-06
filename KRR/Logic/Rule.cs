@@ -3,7 +3,7 @@ using KRR.Logic.Rules;
 
 namespace KRR.Logic
 {
-    class Rule
+   public class Rule
     {
         private List<CausesIf> causesIfRules;
         private List<ReleasesIf> releasesIfRules;

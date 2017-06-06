@@ -32,9 +32,9 @@
         <Rectangle Stroke="Gray" StrokeThickness="2" Grid.RowSpan="3" Grid.Column="1"></Rectangle>
         <Rectangle Stroke="Gray" StrokeThickness="2" Grid.ColumnSpan="2" Grid.Row="1"></Rectangle>
 
-        <ComboBox Name="AgentsComboBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="25" Width="100" Margin="8,8,1,1" FontFamily="Impact" FontSize="15" SelectionChanged="AgentsComboBox_SelectionChanged" >
+        <!--ComboBox Name="AgentsComboBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="25" Width="100" Margin="8,8,1,1" FontFamily="Impact" FontSize="15" SelectionChanged="AgentsComboBox_SelectionChanged" >
             
-        </ComboBox>
+        </-->
         
         <ScrollViewer Background="Transparent" x:Name="BrowserScrollViewer" Grid.Row="0" Grid.Column="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  RenderTransformOrigin="0,0.5"
                           Margin="0,40,0,30">

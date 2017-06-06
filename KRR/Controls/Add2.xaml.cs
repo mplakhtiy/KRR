@@ -43,7 +43,7 @@ namespace KRR.Controls
             ((MainWindow)System.Windows.Application.Current.MainWindow).FluentsGrid.Children.Add(entry2);
 
             Logic.Fluent fluent = new Logic.Fluent(Name.Text.ToString(), false);
-            MainWindow.fleunts.Add(fluent);
+            MainWindow.allFluents.Add(fluent);
 
 
 

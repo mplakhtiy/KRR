@@ -27,13 +27,17 @@ namespace KRR.Controls.RuleControls
             {
                 AgentComboBox.Items.Add(fl.Name.ToString());
             }
+            foreach (var a in MainWindow.actions)
+            {
+                ActionComboBox.Items.Add(a.Name.ToString());
+            }
         }
 
         private void AddFluent_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             Windows.RuleWindow.btnClicked = btn.Name.ToString();
-            Windows.FluentsWindow fluent = new Windows.FluentsWindow();
+            Windows.InitiallyWindow fluent = new Windows.InitiallyWindow();
             fluent.ShowDialog();
         }
 
@@ -45,18 +49,18 @@ namespace KRR.Controls.RuleControls
             fluent.ShowDialog();
         }
 
-        private void AgentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ActionComboBox.Items.Clear();
-            ComboBox combobox = sender as ComboBox;
-            foreach (var fl in MainWindow.agents)
-            {
-                if (fl.Name.ToString().Equals(combobox.SelectedItem.ToString()))
-                {
-                    foreach (var ac in fl.Actions)
-                        ActionComboBox.Items.Add(ac.Name.ToString());
-                }
-            }
-        }
+        //private void AgentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ActionComboBox.Items.Clear();
+        //    ComboBox combobox = sender as ComboBox;
+        //    foreach (var fl in MainWindow.agents)
+        //    {
+        //        if (fl.Name.ToString().Equals(combobox.SelectedItem.ToString()))
+        //        {
+        //            foreach (var ac in fl.Actions)
+        //                ActionComboBox.Items.Add(ac.Name.ToString());
+        //        }
+        //    }
+        //}
     }
 }

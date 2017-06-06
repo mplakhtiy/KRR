@@ -1,6 +1,6 @@
 ﻿namespace KRR.Logic.Rules
 {
-    interface IRule
+    public interface IRule
     {
          string Name { get; set; }    
     }
