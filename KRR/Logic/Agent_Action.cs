@@ -21,7 +21,7 @@
         }
         public override string ToString()
         {
-            return agent.Name + "( " + action.Name + " )";
+            return agent.Name + "(" + action.Name + ")";
         }
     }
 }

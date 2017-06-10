@@ -25,7 +25,31 @@ namespace KRR.Controls
             InitializeComponent();
         }
 
-       
-        
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            String grid = null;
+            //we assume that there is no the same name of fluent as agents etc
+            foreach (var rule in Logic.Rule.causesIfRules)
+            {
+                //this should be change its shity
+                if (AgentName.Content.ToString().Contains(rule.agent_action.ToString()) &&
+                    AgentName.Content.ToString().Contains("causes") 
+                    //AgentName.Content.ToString().Contains(rule.change[0].Name.ToString()) &&
+                   // AgentName.Content.ToString().Contains(rule.change[0].IsTrue.ToString())
+                    // AgentName.Content.ToString().Contains(rule._if.) &&
+                    )
+                {
+                    Logic.Rule.causesIfRules.Remove(rule);
+
+                    break;
+                }
+            }
+
+            Update();
+        }
+        public void Update()
+        {
+            AgentName.Content = "removed";
+        }
     }
 }

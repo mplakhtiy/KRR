@@ -34,17 +34,22 @@ namespace KRR.Windows
 
             int row = 0;
             int col = 1;
+            bool ifClicked = false;
 
             RowDefinition rowDefinition = new RowDefinition();
             rowDefinition.Height = GridLength.Auto;
-            
+
             switch (ruleComboBox.SelectedIndex)
             {
                 case 0: //causes
                     if (ag != null && ac != null)
                     {
                         Logic.Agent_Action agAc = new Logic.Agent_Action(ag, ac);
-                        Logic.Rules.CausesIf rule = new Logic.Rules.CausesIf(agAc, MainWindow.temp, FluentsWindow._if);
+                        List<Logic.Fluent> tempp = MainWindow.temp.ToList();
+                        List<List<Logic.Fluent>> _iff = FluentsWindow._if.ToList();
+                        if (_iff.Count > 0)
+                            ifClicked = true;
+                        Logic.Rules.CausesIf rule = new Logic.Rules.CausesIf(agAc, tempp, _iff);
 
                         MainWindow.statement = rule.ToString();
                         MainWindow.rules.AddRule(rule);
@@ -54,16 +59,20 @@ namespace KRR.Windows
                     if (ag != null && ac != null)
                     {
                         Logic.Agent_Action agAc2 = new Logic.Agent_Action(ag, ac);
-                        Logic.Rules.ReleasesIf rule2 = new Logic.Rules.ReleasesIf(agAc2, MainWindow.temp, FluentsWindow._if);
+                        List<Logic.Fluent> tempp = MainWindow.temp.ToList();
+                        List<List<Logic.Fluent>> _iff = FluentsWindow._if.ToList();
+                        if (_iff.Count > 0)
+                            ifClicked = true;
+                        Logic.Rules.ReleasesIf rule2 = new Logic.Rules.ReleasesIf(agAc2, tempp, _iff);
 
                         MainWindow.statement = rule2.ToString();
                         MainWindow.rules.AddRule(rule2);
                     }
-                        break;
+                    break;
                 case 3: //initilly
-                        break;
-                    
-                }
+                    break;
+
+            }
 
             MainWindow.temp.Clear();
             FluentsWindow._if.Clear();
@@ -71,13 +80,19 @@ namespace KRR.Windows
             ac = null;
 
             Controls.EntryStatement entry = new Controls.EntryStatement();
-            entry.AgentName.Content = MainWindow.statement + MainWindow.statement3 + " if " + MainWindow.statement2;
-
+            if (ifClicked)
+                entry.AgentName.Content = MainWindow.statement + MainWindow.statement3 + " if " + MainWindow.statement2;
+            else
+                entry.AgentName.Content = MainWindow.statement + MainWindow.statement3;
             ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Add(rowDefinition);
             int ble2 = ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.RowDefinitions.Count;
             Grid.SetRow(entry, ble2 - 1);
             ((MainWindow)System.Windows.Application.Current.MainWindow).StatementsGrid.Children.Add(entry);
 
+
+            MainWindow.statement = null;
+            MainWindow.statement2 = null;
+            MainWindow.statement3 = null;
             this.Close();
         }
 
@@ -90,9 +105,9 @@ namespace KRR.Windows
         {
             ComboBox i = sender as ComboBox;
             switch (i.SelectedIndex)
-             {
+            {
                 case 0:
-                    if(Rule.Children.Count!=0)
+                    if (Rule.Children.Count != 0)
                         Rule.Children.Clear();
                     Controls.RuleControls.Causes causes = new Controls.RuleControls.Causes();
                     Rule.Children.Add(causes);

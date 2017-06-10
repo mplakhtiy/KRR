@@ -24,6 +24,7 @@ namespace KRR.Controls
         public FormulaWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,6 +49,12 @@ namespace KRR.Controls
                 if (Query.Text.Length == 0) { MessageBox.Show("No Query in the Text Box", "No Query"); }
                 else { MessageBox.Show("Warning: Unbalanced Symbols found in the Stack", "Error in Query"); }
             }
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.statement3 = Query.Text;
+            this.Close();
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

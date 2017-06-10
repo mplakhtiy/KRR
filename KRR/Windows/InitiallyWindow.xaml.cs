@@ -93,7 +93,7 @@ namespace KRR.Windows
             text.VerticalAlignment = VerticalAlignment.Center;
             text.TextWrapping = TextWrapping.Wrap;
 
-            FluentComboBox.Items.Remove(FluentComboBox.SelectedItem);
+           
 
             Grid.SetRow(text, col);
             col++;
@@ -105,8 +105,10 @@ namespace KRR.Windows
                 check = false;
             else
                 check = true;
-            Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.Text.ToString(), check);
+            Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.SelectedItem.ToString(), check);
             tempfluent.Add(fluent);
+
+            FluentComboBox.Items.Remove(FluentComboBox.SelectedItem);
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
