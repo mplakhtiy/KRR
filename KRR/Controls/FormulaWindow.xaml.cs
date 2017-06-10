@@ -33,14 +33,17 @@ namespace KRR.Controls
             try
             {
                 //Format the input text to change the operators
-                Query.Text = FormatInput(Query.Text);
+                Query.Text = FormatInput(Query.Text.Trim());
+
+                Dictionary<string, char> dict = ConvertFluentsToChar(Query.Text);
+                String convertedText = ReplaceFluentsWithChar(dict, Query.Text);
 
                 //Create an instance of the evaluator class
-                 this.evaluator = new Evaluator(Query.Text);
+                Evaluator evaluator = new Evaluator(convertedText);
 
                 //Update the truth Table, tree view and the plan textbox
-                TruthTable.ItemsSource = evaluator.EvaluateQuery();
-           
+                TruthTable.ItemsSource = evaluator.EvaluateQuery(dict);
+
 
             }
             catch
@@ -60,6 +63,51 @@ namespace KRR.Controls
 
             this.Close();
         }
+
+        private String ReplaceFluentsWithChar(Dictionary<string, char> dict, string query)
+        {
+
+            foreach (KeyValuePair<string, char> pair in dict)
+            {
+                query = query.Replace(pair.Key.ToString(), pair.Value.ToString());
+            }
+
+            return query;
+        }
+
+        private Dictionary<string, char> ConvertFluentsToChar(string inputText)
+        {
+
+            Dictionary<string, char> dict = new Dictionary<string, char>();
+
+            List<char> lstChar = new List<char>()
+            {'a','b','c','d','e','f', 'g','h', 'i','j','k','l','m','n','o'};
+
+            string fluent = "";
+
+            for (int i = 0; i < inputText.Length; i++)
+            {
+                if (Char.IsLetter(inputText[i]) == true && i != inputText.Length - 1)
+                {
+                    fluent += inputText[i];
+                }
+                else if (fluent != "" && (Evaluator.prec.Contains(inputText[i]) == true || inputText[i] == ' '))
+                {
+                    dict.Add(fluent, lstChar[0]);
+                    fluent = "";
+                    lstChar.RemoveAt(0);
+                }
+                else if (i == inputText.Length - 1)
+                {
+                    fluent += inputText[i];
+                    dict.Add(fluent, lstChar[0]);
+                }
+            }
+
+            return dict;
+
+        }
+
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {

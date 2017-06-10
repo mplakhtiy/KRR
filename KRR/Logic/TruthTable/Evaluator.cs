@@ -215,6 +215,29 @@ namespace KRR.Logic.TruthTable
             //Return them to the calling function as a DataView
             return GenerateTable();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <returns></returns>
+        public DataView EvaluateQuery(Dictionary<string, char> dict)
+        {
+            //Get the evaluation plan
+            EvalPlan = FindEvalPlan();
+
+            //If a new variable is to be added use addVar()
+            //Otherwise, execute the operation
+            int varCount = 0;
+            foreach (var field in EvalPlan)
+            {
+                if (field.Key.Length == 1) { varCount = AddVar(field.Key, varCount); }  //For unary operators, the LHS is left free as NULL
+                else { field.Value.fieldResult = ExecOp(field.Value.fieldOpr != '¬' ? EvalPlan[field.Value.leftOpd].fieldResult : null, EvalPlan[field.Value.rightOpd].fieldResult, field.Value.fieldOpr); }
+            }
+
+            //Generate the table based on the results of the evaluation 
+            //Return them to the calling function as a DataView
+            return GenerateTable(dict);
+        }
 
         /// <summary>
         /// Uses the Query to generate an evaluation plan for manual operations y humans
@@ -273,6 +296,55 @@ namespace KRR.Logic.TruthTable
             }
             tableView.Sort = tableViewSort.Remove(tableViewSort.Length - 3, 3);
 
+            return tableView;
+        }
+
+
+
+        DataView GenerateTable(Dictionary<string, char> _dict)
+        {
+            DataTable truthTable = new DataTable();
+
+            //Create empty columns as place holders for the table
+            //Use the key as the Row heading
+
+            foreach (var column in EvalPlan)
+            {
+                string header = "";
+                foreach (KeyValuePair<string, char> pair in _dict)
+                {
+                    if (column.Key.ToString().Contains(pair.Value.ToString()) == true)
+                    {
+                        if (header == "")
+                        {
+                            header = column.Key.ToString().Replace(pair.Value.ToString(), pair.Key);
+                        }
+                        else
+                        {
+                            header = header.Replace(pair.Value.ToString(), pair.Key);
+                        }
+
+                    }
+
+                }
+                truthTable.Columns.Add(header + "\b");
+            }
+
+            //foreach row in the results column add each column to the truthTable
+            //Map true: T and false: F
+            for (int i = 0; i < EvalPlan.ElementAt(0).Value.fieldResult.Count; i++)
+            {
+                DataRow tableRow = truthTable.NewRow();
+
+                for (int j = 0; j < EvalPlan.Count; j++)
+                {
+                    tableRow[j] = EvalPlan.ElementAt(j).Value.fieldResult[i] ? 'T' : 'F';
+                }
+
+                truthTable.Rows.Add(tableRow);
+            }
+
+            DataView tableView = truthTable.DefaultView;
             return tableView;
         }
 
