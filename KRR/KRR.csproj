@@ -63,6 +63,9 @@
     <Compile Include="Controls\EntryStatement.xaml.cs">
       <DependentUpon>EntryStatement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaWindow.xaml.cs">
+      <DependentUpon>FormulaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RuleControls\Always.xaml.cs">
       <DependentUpon>Always.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,7 @@
       <DependentUpon>TextBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\Main.cs" />
+    <Compile Include="Logic\TruthTable\Evaluator.cs" />
     <Compile Include="Windows\InitiallyWindow.xaml.cs">
       <DependentUpon>InitiallyWindow.xaml</DependentUpon>
     </Compile>
@@ -108,6 +112,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Entry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FormulaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
