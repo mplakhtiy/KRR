@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KRR.Logic.Rules;
-using TreeGenerator;
 
 namespace KRR.Logic
 {
@@ -31,8 +30,11 @@ namespace KRR.Logic
                     }
                 }
             }
-
+            if (intializedFluents.Count > 0)
+            {
             allFluents = temp;
+            }
+
 
 
             int n = allFluents.Count;
@@ -54,6 +56,8 @@ namespace KRR.Logic
                 {
                     a.addFluent(intializedFluent);
                 }
+
+                //if all fluents size > 0
                 for (int j = 0; j < matrix[0].Length; j++)
                 {
                     a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
@@ -71,13 +75,11 @@ namespace KRR.Logic
             doRecursion(possibleInitialStates, 0,"");
 
 
-            System.Windows.Forms.Form frmTree = new TreeForm(tree);
 
-            frmTree.ShowDialog();
+
 
         }
-        public static TreeData.TreeDataTableDataTable tree = new TreeData.TreeDataTableDataTable();
-
+      
         public static void doRecursion(List<State> StateList, int queryNumber,string parent)
         {
             if (queryNumber < Logic.Main.Queries.Count)
@@ -86,11 +88,11 @@ namespace KRR.Logic
                 foreach (State state in StateList)
                 {
                     string nodeId =parent+"-"+queryNumber+"-"+ node;
-                    tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
+                   // tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
 
                     node++;
-                    //Console.WriteLine(state);
-                    //Console.WriteLine("-------------------------------------");
+                    Console.WriteLine(state);
+                    Console.WriteLine("-------------------------------------");
                     doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId);
 
 
