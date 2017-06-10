@@ -1,0 +1,19 @@
+﻿<Window x:Class="KRR.Controls.FormulaWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="650" Width="575" Title="Boolean Expression Evaluator" SizeChanged="Window_SizeChanged">
+    <Grid>
+        <TextBox Name="Query" HorizontalAlignment="Left" Height="23" Margin="10,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" TextChanged="Query_TextChanged" PreviewKeyDown="Query_PreviewKeyDown"/>
+        <Label Content="Enter the query" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Name="Go" Content="Go" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="485,32,0,0" Height="23" Click="Button_Click"/>
+        <TabControl Name="TabContainer" HorizontalAlignment="Left" Margin="10,75,10,10" VerticalAlignment="Top" MinWidth="535" MinHeight="500">
+            <TabItem Header="Truth Table" ToolTip="The truth table of the above expression">
+                <Grid Background="#FFE5E5E5">
+                    <Label Name="TableLabel" Content="Truth Table" HorizontalAlignment="Left" FontSize="15" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                    <DataGrid Name="TruthTable" HorizontalAlignment="Left" VerticalAlignment="Top" AreRowDetailsFrozen="True" Margin="10, 50" HeadersVisibility="Column" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible" IsReadOnly="True" ClipboardCopyMode="IncludeHeader" FontWeight="Bold" FontSize="15"/>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
