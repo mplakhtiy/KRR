@@ -49,7 +49,7 @@ namespace KRR.Windows
                         List<List<Logic.Fluent>> _iff = FluentsWindow._if.ToList();
                         if (_iff.Count > 0)
                             ifClicked = true;
-                        Logic.Rules.CausesIf rule = new Logic.Rules.CausesIf(agAc, tempp, _iff);
+                        Logic.Rules.CausesIf rule = new Logic.Rules.CausesIf(MainWindow.evaluator, agAc, tempp, _iff);
 
                         MainWindow.statement = rule.ToString();
                         MainWindow.rules.AddRule(rule);

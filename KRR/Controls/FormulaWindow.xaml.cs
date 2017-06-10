@@ -21,6 +21,7 @@ namespace KRR.Controls
     /// </summary>
     public partial class FormulaWindow : Window
     {
+        public Evaluator evaluator;
         public FormulaWindow()
         {
             InitializeComponent();
@@ -35,10 +36,11 @@ namespace KRR.Controls
                 Query.Text = FormatInput(Query.Text);
 
                 //Create an instance of the evaluator class
-                Evaluator evaluator = new Evaluator(Query.Text);
+                 this.evaluator = new Evaluator(Query.Text);
 
                 //Update the truth Table, tree view and the plan textbox
                 TruthTable.ItemsSource = evaluator.EvaluateQuery();
+           
 
             }
             catch
@@ -54,6 +56,8 @@ namespace KRR.Controls
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.statement3 = Query.Text;
+            MainWindow.evaluator = this.evaluator;
+
             this.Close();
         }
 

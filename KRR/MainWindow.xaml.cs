@@ -1,4 +1,5 @@
 ﻿using KRR.Controls;
+using KRR.Logic.TruthTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace KRR
         public static String statement = null;
         public static String statement2 = null;
         public static String statement3 = null;
+
+        public static Evaluator evaluator;
 
         int row = 0;
         public static Controls.Add add2;

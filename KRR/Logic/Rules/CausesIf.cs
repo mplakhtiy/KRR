@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using KRR.Logic.TruthTable;
+using System.Collections.Generic;
 namespace KRR.Logic.Rules
 {
     public class CausesIf : IRule
     {
         public string Name { get; set; }
+        public Evaluator evaluator { get; set; }
         public List<Fluent> change { get; set; }
         public List<List<Fluent>> _if { get; set; }
         public Agent_Action agent_action { get; set; }
-        public CausesIf(Agent_Action agent_action, List<Fluent> change_, List<List<Fluent>> _if_)
+        public CausesIf(Evaluator eval , Agent_Action agent_action, List<Fluent> change_, List<List<Fluent>> _if_)
         {
+            this.evaluator = eval;
             this.change = new List<Fluent>();
             this._if = new List<List<Fluent>>();
             foreach (Fluent fluent in change_)
