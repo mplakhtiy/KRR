@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KRR.Logic.Rules;
-using TreeGenerator;
 
 namespace KRR.Logic
 {
@@ -70,13 +69,7 @@ namespace KRR.Logic
             Logic.Main.Rules = rules;
             doRecursion(possibleInitialStates, 0,"");
 
-
-            System.Windows.Forms.Form frmTree = new TreeForm(tree);
-
-            frmTree.ShowDialog();
-
         }
-        public static TreeData.TreeDataTableDataTable tree = new TreeData.TreeDataTableDataTable();
 
         public static void doRecursion(List<State> StateList, int queryNumber,string parent)
         {
@@ -86,7 +79,7 @@ namespace KRR.Logic
                 foreach (State state in StateList)
                 {
                     string nodeId =parent+"-"+queryNumber+"-"+ node;
-                    tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
+                    //tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
 
                     node++;
                     //Console.WriteLine(state);
