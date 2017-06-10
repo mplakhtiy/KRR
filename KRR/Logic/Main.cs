@@ -82,8 +82,7 @@ namespace KRR.Logic
       
         public static void doRecursion(List<State> StateList, int queryNumber,string parent)
         {
-            if (queryNumber < Logic.Main.Queries.Count)
-            {
+           
                 int node = 0;
                 foreach (State state in StateList)
                 {
@@ -93,10 +92,12 @@ namespace KRR.Logic
                     node++;
                     Console.WriteLine(state);
                     Console.WriteLine("-------------------------------------");
+                if (queryNumber < Logic.Main.Queries.Count)
+                {
                     doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId);
-
-
                 }
+
+                
             }
         }
 
