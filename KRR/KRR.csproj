@@ -50,7 +50,7 @@
     </Reference>
     <Reference Include="TreeGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\TreeGenerator.dll</HintPath>
+      <HintPath>bin\Debug\TreeGenerator\TreeGenerator.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

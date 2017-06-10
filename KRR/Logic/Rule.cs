@@ -5,10 +5,10 @@ namespace KRR.Logic
 {
    public class Rule
     {
-        private List<CausesIf> causesIfRules;
-        private List<ReleasesIf> releasesIfRules;
-        private List<Always> alwaysRules;
-        private List<Observable> observableRules;
+        public static List<CausesIf> causesIfRules;
+        public static List<ReleasesIf> releasesIfRules;
+        public static List<Always> alwaysRules;
+        public static List<Observable> observableRules;
 
         public Rule()
         {

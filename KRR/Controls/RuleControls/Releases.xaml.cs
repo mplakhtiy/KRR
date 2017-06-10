@@ -49,6 +49,22 @@ namespace KRR.Controls.RuleControls
             fluent.ShowDialog();
         }
 
+        private void AgentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var a in MainWindow.agents)
+                if (a.Name.Equals(AgentComboBox.SelectedItem.ToString()))
+                {
+                    Windows.RuleWindow.ag = a;
+                }
+        }
 
+        private void ActionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var a in MainWindow.actions)
+                if (a.Name.Equals(ActionComboBox.SelectedItem.ToString()))
+                {
+                    Windows.RuleWindow.ac = a;
+                }
+        }
     }
 }

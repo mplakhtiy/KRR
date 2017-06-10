@@ -65,7 +65,7 @@ namespace KRR
             Grid.SetRow(add4, 2);
             Grid.SetColumn(add4, 0);
             MainGrid.Children.Add(add4);
-
+            
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
