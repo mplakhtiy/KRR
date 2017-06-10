@@ -33,9 +33,9 @@ namespace KRR.Controls
             {
                 //this should be change its shity
                 if (AgentName.Content.ToString().Contains(rule.agent_action.ToString()) &&
-                    AgentName.Content.ToString().Contains("causes") &&
-                    AgentName.Content.ToString().Contains(rule.change[0].Name.ToString()) &&
-                    AgentName.Content.ToString().Contains(rule.change[0].IsTrue.ToString())
+                    AgentName.Content.ToString().Contains("causes") 
+                    //AgentName.Content.ToString().Contains(rule.change[0].Name.ToString()) &&
+                   // AgentName.Content.ToString().Contains(rule.change[0].IsTrue.ToString())
                     // AgentName.Content.ToString().Contains(rule._if.) &&
                     )
                 {

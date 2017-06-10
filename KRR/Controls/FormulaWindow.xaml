@@ -6,14 +6,18 @@
         <TextBox Name="Query" HorizontalAlignment="Left" Height="23" Margin="10,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="470" TextChanged="Query_TextChanged" PreviewKeyDown="Query_PreviewKeyDown"/>
         <Label Content="Enter the query" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" Width="100"/>
         <Button Name="Go" Content="Go" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="485,32,0,0" Height="23" Click="Button_Click"/>
-        <TabControl Name="TabContainer" HorizontalAlignment="Left" Margin="10,75,10,10" VerticalAlignment="Top" MinWidth="535" MinHeight="500">
+        <Button Name="Save" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="60" Margin="0,0,50,15" Height="23" Click="ButtonSave_Click"/>
+        
+        <TabControl Name="TabContainer" HorizontalAlignment="Left" Margin="10,75,10,50" VerticalAlignment="Top" MinWidth="535" MinHeight="460">
             <TabItem Header="Truth Table" ToolTip="The truth table of the above expression">
                 <Grid Background="#FFE5E5E5">
                     <Label Name="TableLabel" Content="Truth Table" HorizontalAlignment="Left" FontSize="15" Margin="0,10,0,0" VerticalAlignment="Top"/>
                     <DataGrid Name="TruthTable" HorizontalAlignment="Left" VerticalAlignment="Top" AreRowDetailsFrozen="True" Margin="10, 50" HeadersVisibility="Column" CanUserResizeRows="False" RowDetailsVisibilityMode="Visible" IsReadOnly="True" ClipboardCopyMode="IncludeHeader" FontWeight="Bold" FontSize="15"/>
                 </Grid>
             </TabItem>
-
         </TabControl>
-    </Grid>
-</Window>
+      
+    <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,25"><TextBlock xml:space="preserve">Type:    ~        |       &amp;       -       &gt; </TextBlock></Label>
+    <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,5"><TextBlock xml:space="preserve">To have:    ¬       ∨      ∧      ↔      → </TextBlock></Label>
+    </Grid>  
+</Window>    

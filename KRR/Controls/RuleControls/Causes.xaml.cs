@@ -38,7 +38,7 @@ namespace KRR.Controls.RuleControls
         {
             Button btn = sender as Button;
             Windows.RuleWindow.btnClicked = btn.Name.ToString();
-            Windows.InitiallyWindow fluent = new Windows.InitiallyWindow("causes");
+            Controls.FormulaWindow fluent = new Controls.FormulaWindow();
             fluent.ShowDialog();
         }
 
@@ -49,7 +49,7 @@ namespace KRR.Controls.RuleControls
             Windows.FluentsWindow fluent = new Windows.FluentsWindow();
             fluent.ShowDialog();
         }
-
+        
         private void AgentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (var a in MainWindow.agents)
