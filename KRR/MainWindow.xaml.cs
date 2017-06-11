@@ -24,6 +24,7 @@ namespace KRR
         public static List<Logic.Fluent> temp = new List<Logic.Fluent>(); //realseswindow causesW
         public static Logic.Rule rules = new Logic.Rule();
         public static List<Logic.Fluent> goal = new List<Logic.Fluent>(); //goal
+        public static Logic.Agent agentPerform = new Logic.Agent(null);
         public static String statement = null;
         public static String statement2 = null;
         public static String statement3 = null;
@@ -43,6 +44,8 @@ namespace KRR
 
         public void Init()
         {
+            
+
             Controls.Add add = new Controls.Add();
             add2 = new Controls.Add();
             Controls.Add add3 = new Controls.Add();
@@ -157,6 +160,16 @@ namespace KRR
         {
             Windows.InitiallyWindow window = new Windows.InitiallyWindow("goal");
             window.ShowDialog();
+        }
+
+        private void AgentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var a in MainWindow.agents)
+            {
+                if (AgentComboBox.SelectedItem.ToString().Equals(a.Name.ToString()))
+                    agentPerform = a;
+            }
+            
         }
     }
 }

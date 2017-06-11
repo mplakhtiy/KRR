@@ -151,7 +151,7 @@ namespace KRR.Windows
             fluentsTextBlock.Children.Add(text);
             fluents += text.Text;
 
-            Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.Text.ToString(), notClicked);
+            Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.Text.ToString(), !notClicked);
             temp.Add(fluent);
 
             notClicked = false;

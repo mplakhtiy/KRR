@@ -73,9 +73,9 @@ namespace KRR.Controls
                         ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsGrid.Children.Add(entry);
 
                        
-                            MainWindow.AddAgent(entry.AgentName.Content.ToString());
-                           // ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
-                        
+                        MainWindow.AddAgent(entry.AgentName.Content.ToString());
+                        // ((MainWindow)System.Windows.Application.Current.MainWindow).AgentsComboBox.Items.Add(entry.AgentName.Content.ToString());
+                        ((MainWindow)System.Windows.Application.Current.MainWindow).AgentComboBox.Items.Add(entry.AgentName.Content.ToString());
                     }
                     
                     else
