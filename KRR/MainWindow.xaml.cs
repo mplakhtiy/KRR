@@ -23,6 +23,7 @@ namespace KRR
         public static List<Logic.Fluent> initialliazed = new List<Logic.Fluent>(); //initiallywindow
         public static List<Logic.Fluent> temp = new List<Logic.Fluent>(); //realseswindow causesW
         public static Logic.Rule rules = new Logic.Rule();
+        public static List<Logic.Fluent> goal = new List<Logic.Fluent>(); //goal
         public static String statement = null;
         public static String statement2 = null;
         public static String statement3 = null;
@@ -151,6 +152,11 @@ namespace KRR
             Grid.SetColumn(query, row);
             QueryGrid.Children.Add(query);
             row++;
+        }
+        private void AddGoal_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.InitiallyWindow window = new Windows.InitiallyWindow("goal");
+            window.ShowDialog();
         }
     }
 }
