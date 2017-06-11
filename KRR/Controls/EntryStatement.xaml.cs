@@ -25,7 +25,7 @@ namespace KRR.Controls
             InitializeComponent();
         }
 
-        private void Remove_Click(object sender, RoutedEventArgs e)
+       /* private void Remove_Click(object sender, RoutedEventArgs e)
         {
             String grid = null;
             //we assume that there is no the same name of fluent as agents etc
@@ -50,6 +50,6 @@ namespace KRR.Controls
         public void Update()
         {
             AgentName.Content = "removed";
-        }
+        }*/
     }
 }

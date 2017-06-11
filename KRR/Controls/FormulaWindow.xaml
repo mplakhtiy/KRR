@@ -21,7 +21,7 @@
             <TextBlock xml:space="preserve">Type:    ~        |       &amp;       -       &gt;</TextBlock>
         </Label>
         <Label Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,5">
-            <TextBlock xml:space="preserve">To have:    ¬       ?      ?      -      ›</TextBlock>
+            <TextBlock xml:space="preserve">To have:    ¬       ∨      ∧      ↔      →</TextBlock>
         </Label>
     </Grid>
 </Window>    

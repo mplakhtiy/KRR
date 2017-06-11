@@ -51,12 +51,15 @@
         </ScrollViewer>
         <Button Name="AddQueryButton" Content="ADD" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="40,0,0,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="AddQuery_Click"></Button>
         <Button Name="ClearQueryButton" Content="CLEAR" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="0,0,80,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="ClearQuery_Click"></Button>
-        <Button Name="AddButton" Content="ADD" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="0,0,20,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Add_Click"></Button>
+        <Button Name="AddButton" Content="ADD" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="40,0,0,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Add_Click"></Button>
+        <Button Name="ClearStatementButton" Content="CLEAR" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="0,0,80,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="ClearStatement_Click"></Button>
+
         <Button Name="PerformButton" Content="PERFORM" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Perform_Click"></Button>
         <Button Name="AddGoalButton" Content="ADD GOAL" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="10,0,0,105"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="AddGoal_Click"></Button>
-        <TextBlock Name="Goal" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,0,0,100"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="30" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Name="Goal" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="80,0,0,100"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="30" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
         <TextBlock Name="AgentResult" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="15,0,0,70"  FontFamily="Impact" Background="Transparent" FontSize="16" Height="30" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left">Agent</TextBlock>
         <ComboBox Name="AgentComboBox" Grid.Row="2" Grid.Column="1" Height="20" Width="80"  Foreground="Black"  Margin="75,73,0,81" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Center"  SelectionChanged="AgentComboBox_SelectionChanged" />
+        <TextBlock Name="Output" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,40,0,0"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="100" Width="260" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
 
     </Grid>
 </Window>

@@ -138,6 +138,7 @@ namespace KRR
         private void Perform_Click(object sender, RoutedEventArgs e)
         {
             Logic.Main.TheMostImportantMethod(goal,rules, initialliazed, allFluents, queries);
+            Output.Text = Logic.Main.result.ToString();
         }
 
         private void ClearQuery_Click(object sender, RoutedEventArgs e)
@@ -170,6 +171,16 @@ namespace KRR
                     agentPerform = a;
             }
             
+        }
+
+        private void ClearStatement_Click(object sender, RoutedEventArgs e)
+        {
+            StatementsGrid.Children.Clear();
+            StatementsGrid.ColumnDefinitions.Clear();
+            temp.Clear();
+            initialliazed.Clear();
+            rules = null;
+            rules = new Logic.Rule();
         }
     }
 }
