@@ -12,9 +12,24 @@ namespace KRR.Logic
         public static Rule Rules;
         public static List<Agent_Action> Queries;
 
+        //check if states always not null
+        public static bool always;
+        public static string result="";
+
+        //number of last executable query
+        public static int lastQuery;
+
         public static void TheMostImportantMethod(Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
+
+            lastQuery = -1;
+            always = true;
+            result = "";
+            Rule.never = null;
+            Rule.always = true;
+            
+            
 
             List<State> possibleInitialStates = new List<State>();
             List<Fluent> temp = new List<Fluent>();
@@ -95,8 +110,31 @@ namespace KRR.Logic
             Logic.Main.Rules = rules;
             doRecursion(possibleInitialStates, 0,"");
 
+            if (Logic.Main.Queries.Count > lastQuery + 1)
+            {
+                result += "Program is never executable!!! \n";
 
+                for(int i= 0;i<Logic.Main.Queries.Count;i++)
+                {
+                    if (i > lastQuery)
+                    {
+                        result+="Q"+i+" "+ Logic.Main.Queries[i].ToString()+" - not executable \n";
+                    }
+                }
+            }
+            else
+            {
+                if (always)
+                {
+                    result += "Program is always executable";
+                }
+                else
+                {
+                    result += "Program is not alsways executable , only sometimes";
+                }
+            }
 
+            Console.WriteLine(result);
 
 
         }
@@ -105,6 +143,16 @@ namespace KRR.Logic
         {
            
                 int node = 0;
+            if (StateList.Count == 0)
+            {
+                always = false;
+            }
+            else {
+                if (lastQuery < queryNumber)
+                {
+                    lastQuery = queryNumber;
+                }
+            }
                 foreach (State state in StateList)
                 {
                     string nodeId =parent+"-"+queryNumber+"-";
@@ -113,13 +161,11 @@ namespace KRR.Logic
                     node++;
                     Console.WriteLine(state);
                     Console.WriteLine("-------------------------------------");
-                if (queryNumber < Logic.Main.Queries.Count)
-                {
-                    doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId);
+                    if (queryNumber < Logic.Main.Queries.Count)
+                    {
+                        doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId);
+                    }                
                 }
-
-                
-            }
         }
 
         //private static void Main(string[] args)

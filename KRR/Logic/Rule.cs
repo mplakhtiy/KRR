@@ -6,6 +6,11 @@ namespace KRR.Logic
 {
    public class Rule
     {
+        public static bool always;
+        public static CausesIf never;
+
+        public bool neverBool;
+
         public static List<CausesIf> causesIfRules;
         public static List<ReleasesIf> releasesIfRules;
         public static List<Always> alwaysRules;
@@ -13,6 +18,12 @@ namespace KRR.Logic
 
         public Rule()
         {
+            //for result
+            //check for OrList
+            always = true;
+            //check if causes ever executable
+            never = null;
+
             causesIfRules = new List<CausesIf>();
             releasesIfRules = new List<ReleasesIf>();
             alwaysRules = new List<Always>();
@@ -54,17 +65,32 @@ namespace KRR.Logic
             State changedStateCauses = new State(currentState);
             foreach (CausesIf causesIfRule in causesIfRules)
             {
+                
                 if (agentAction.isEqual(causesIfRule.agent_action))
                 {
-                    if (currentState.checkOrList(causesIfRule._if))
+                     if (currentState.checkOrList(causesIfRule._if))
                     {
                         // State changedStateReleases = new State(currentState);
                         // states.Add(changedStateReleases.changeList(causesIfRule.change));
 
                         bool[] formulaResult = causesIfRule.evaluator.GetResultData();
 
-
-                       for (int i = 0; i < formulaResult.Length; i++)
+                        // check if causes ever executable
+                        neverBool = true;
+                        for (int i = 0; i < formulaResult.Length; i++)
+                        {
+                            if (formulaResult[i])
+                            {
+                                neverBool = false;
+                            }
+                        }
+                        if (neverBool)
+                        {
+                            never = causesIfRule;
+                        }
+                        //-------
+                        
+                                for (int i = 0; i < formulaResult.Length; i++)
                         {
                             if (formulaResult[i])
                             {
@@ -84,6 +110,10 @@ namespace KRR.Logic
 
                         //changedStateCauses.changeList(causesIfRule.change);
                         causes = true;
+                    }
+                    else
+                    {
+                        always = false;
                     }
                 }
             }
@@ -119,6 +149,10 @@ namespace KRR.Logic
                         states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false)));
                         //Console.WriteLine("Next STATE______________________________________________");
                         //Console.WriteLine(changedStateReleases);
+                    }
+                    else
+                    {
+                        always = false;
                     }
                 }
             }
