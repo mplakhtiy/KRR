@@ -39,7 +39,7 @@ namespace KRR.Controls
                 String convertedText = ReplaceFluentsWithChar(dict, Query.Text);
 
                 //Create an instance of the evaluator class
-                Evaluator evaluator = new Evaluator(convertedText);
+                evaluator = new Evaluator(convertedText);
 
                 //Update the truth Table, tree view and the plan textbox
                 TruthTable.ItemsSource = evaluator.EvaluateQuery(dict);
@@ -93,14 +93,35 @@ namespace KRR.Controls
                 }
                 else if (fluent != "" && (Evaluator.prec.Contains(inputText[i]) == true || inputText[i] == ' '))
                 {
-                    dict.Add(fluent, lstChar[0]);
-                    fluent = "";
-                    lstChar.RemoveAt(0);
+                    if (!dict.ContainsKey(fluent))
+                    {
+                        dict.Add(fluent, lstChar[0]);
+                        fluent = "";
+                        lstChar.RemoveAt(0);
+                    }
+                    else
+                    {
+                        fluent = "";
+                    }
+
                 }
-                else if (i == inputText.Length - 1)
+
+                else if (Char.IsLetter(inputText[i]) == true && i == inputText.Length - 1)
                 {
                     fluent += inputText[i];
-                    dict.Add(fluent, lstChar[0]);
+                    if (!dict.ContainsKey(fluent))
+                    {
+                        dict.Add(fluent, lstChar[0]);
+                    }
+                }
+
+                else if (i == inputText.Length - 1)
+                {
+                    if (!dict.ContainsKey(fluent))
+                    {
+                        fluent += inputText[i];
+                        dict.Add(fluent, lstChar[0]);
+                    }
                 }
             }
 

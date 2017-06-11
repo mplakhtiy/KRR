@@ -18,22 +18,26 @@ namespace KRR.Logic
 
             List<State> possibleInitialStates = new List<State>();
             List<Fluent> temp = new List<Fluent>();
-
-            //Create temp list with not setted Fluents
             foreach (Fluent fluent in allFluents)
+            {
+                temp.Add(fluent);
+            }
+                //Create temp list with not setted Fluents
+            foreach (Fluent fluent in temp)
             {
                 foreach (Fluent intializedFluent in intializedFluents)
                 {
-                    if (intializedFluent.Name != fluent.Name)
+                    if (intializedFluent.Name == fluent.Name)
                     {
-                        temp.Add(fluent);
+                        allFluents.Remove(fluent);
+                        break;
                     }
                 }
             }
-            if (intializedFluents.Count > 0)
-            {
-            allFluents = temp;
-            }
+            //if (intializedFluents.Count > 0)
+            //{
+            //allFluents = temp;
+            //}
 
 
 
@@ -41,6 +45,12 @@ namespace KRR.Logic
             //Create all possible combinations
             List<bool[]> matrix = new List<bool[]>();
             double count = Math.Pow(2, n);
+            //if all fluents.count == 0 then matrix also should be 0 elemetns but not 2^0=1
+            if (n == 0)
+            {
+                count = 0;
+            }
+            
             for (int i = 0; i < count; i++)
             {
                 string str = Convert.ToString(i, 2).PadLeft(n, '0');
@@ -48,27 +58,38 @@ namespace KRR.Logic
 
                 matrix.Add(boolArr);
             }
-
-            for (int i = 0; i < matrix.Count; i++)
+            //if all fluents were initiallized then just add initially fluents
+            if (matrix.Count == 0)
             {
                 var a = new State();
                 foreach (Fluent intializedFluent in intializedFluents)
                 {
                     a.addFluent(intializedFluent);
                 }
-
-                //if all fluents size > 0
-                for (int j = 0; j < matrix[0].Length; j++)
-                {
-                    a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
-                }
                 possibleInitialStates.Add(a);
-
             }
-            //foreach (State possibleInitialState in possibleInitialStates)
-            //{
-            //    Console.WriteLine(possibleInitialState);
-            //}
+            else {
+                for (int i = 0; i < matrix.Count; i++)
+                {
+                    var a = new State();
+                    foreach (Fluent intializedFluent in intializedFluents)
+                    {
+                        a.addFluent(intializedFluent);
+                    }
+
+                    //if all fluents size > 
+                    for (int j = 0; j < matrix[0].Length; j++)
+                    {
+                        a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
+                    }
+                    possibleInitialStates.Add(a);
+
+                }
+            }
+            foreach (State possibleInitialState in possibleInitialStates)
+            {
+                Console.WriteLine(possibleInitialState);
+            }
 
             Logic.Main.Queries = queries;
             Logic.Main.Rules = rules;
@@ -86,7 +107,7 @@ namespace KRR.Logic
                 int node = 0;
                 foreach (State state in StateList)
                 {
-                    string nodeId =parent+"-"+queryNumber+"-"+ node;
+                    string nodeId =parent+"-"+queryNumber+"-";
                    // tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
 
                     node++;

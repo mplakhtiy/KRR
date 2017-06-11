@@ -307,7 +307,8 @@ namespace KRR.Logic.TruthTable
 
             //Create empty columns as place holders for the table
             //Use the key as the Row heading
-
+            var a = new Dictionary<string, Field>();
+          
             foreach (var column in EvalPlan)
             {
                 string header = "";
@@ -327,9 +328,10 @@ namespace KRR.Logic.TruthTable
                     }
 
                 }
+                a.Add( header,column.Value);
                 truthTable.Columns.Add(header + "\b");
             }
-
+            EvalPlan = a;
             //foreach row in the results column add each column to the truthTable
             //Map true: T and false: F
             for (int i = 0; i < EvalPlan.ElementAt(0).Value.fieldResult.Count; i++)

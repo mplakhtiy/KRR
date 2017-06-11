@@ -27,16 +27,17 @@ namespace KRR.Logic
             Fluents.Add(fluent);
         }
 
-        public void changeFluent(Fluent fluent)
+        public State changeFluent(Fluent fluent)
         {
             foreach (Fluent item in Fluents)
             {
                 if (item.Name == fluent.Name)
                 {
                     item.IsTrue = fluent.IsTrue;
-                    return;
+                    return new State(this);
                 }
             }
+            return new State(this);
         }
         public State changeList(List<Fluent> list)
         {

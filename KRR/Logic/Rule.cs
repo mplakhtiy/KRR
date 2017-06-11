@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using KRR.Logic.Rules;
+using KRR.Logic.TruthTable;
 
 namespace KRR.Logic
 {
@@ -57,7 +58,31 @@ namespace KRR.Logic
                 {
                     if (currentState.checkOrList(causesIfRule._if))
                     {
-                        changedStateCauses.changeList(causesIfRule.change);
+                        // State changedStateReleases = new State(currentState);
+                        // states.Add(changedStateReleases.changeList(causesIfRule.change));
+
+                        bool[] formulaResult = causesIfRule.evaluator.GetResultData();
+
+
+                       for (int i = 0; i < formulaResult.Length; i++)
+                        {
+                            if (formulaResult[i])
+                            {
+                                State changed = new State(currentState);
+                                List<Fluent> toChange = new List<Fluent>();
+                                foreach (Fluent fluent in currentState.Fluents)
+                                {
+                                    if (causesIfRule.evaluator.EvalPlan.ContainsKey(fluent.Name))
+                                    {
+                                        toChange.Add(new Fluent(fluent.Name,causesIfRule.evaluator.EvalPlan[fluent.Name].fieldResult[i]));
+                                    }
+                                }
+                                changed.changeList(toChange);
+                                states.Add(changed);
+                            }
+                        }
+
+                        //changedStateCauses.changeList(causesIfRule.change);
                         causes = true;
                     }
                 }
@@ -67,7 +92,7 @@ namespace KRR.Logic
                 //Console.WriteLine("CAUSES____________________________");
                 //Console.WriteLine("Next STATE______________________________________________");
                 //Console.WriteLine(changedStateCauses);
-                states.Add(changedStateCauses);
+                //states.Add(changedStateCauses);
                 return states;
             }
             foreach (Always alwaysRule in alwaysRules)
@@ -86,7 +111,12 @@ namespace KRR.Logic
                     if (currentState.checkOrList(releasesIfRule._if))
                     {
                         State changedStateReleases = new State(currentState);
-                        states.Add(changedStateReleases.changeList(releasesIfRule.change));
+                        
+                        states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name,true)));
+
+                        changedStateReleases = new State(currentState);
+
+                        states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false)));
                         //Console.WriteLine("Next STATE______________________________________________");
                         //Console.WriteLine(changedStateReleases);
                     }
