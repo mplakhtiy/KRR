@@ -11,18 +11,24 @@ namespace KRR.Logic
     {
         public static Rule Rules;
         public static List<Agent_Action> Queries;
-
+        public static  List<Fluent> Goal;
         //check if states always not null
         public static bool always;
         public static string result="";
 
+        //check if goal condition is always satisfied
+        public static bool goalAlways;//for always 
+        public static bool goalNever;//for ever
+
         //number of last executable query
         public static int lastQuery;
 
-        public static void TheMostImportantMethod(Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
+        public static void TheMostImportantMethod(List<Fluent> _goal,Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
-
+            goalNever = true;
+            goalAlways = true;
+            Goal = _goal;
             lastQuery = -1;
             always = true;
             result = "";
@@ -110,15 +116,16 @@ namespace KRR.Logic
             Logic.Main.Rules = rules;
             doRecursion(possibleInitialStates, 0,"");
 
-            if (Logic.Main.Queries.Count > lastQuery + 1)
+            //result output
+            if (Logic.Main.Queries.Count != lastQuery)
             {
                 result += "Program is never executable!!! \n";
 
                 for(int i= 0;i<Logic.Main.Queries.Count;i++)
                 {
-                    if (i > lastQuery)
+                    if (i > lastQuery-1)
                     {
-                        result+="Q"+i+" "+ Logic.Main.Queries[i].ToString()+" - not executable \n";
+                        result+="Q"+(i+1)+" "+ Logic.Main.Queries[i].ToString()+" - not executable \n";
                     }
                 }
             }
@@ -126,46 +133,82 @@ namespace KRR.Logic
             {
                 if (always)
                 {
-                    result += "Program is always executable";
+                    result += "Program is always executable \n";
                 }
                 else
                 {
-                    result += "Program is not alsways executable , only sometimes";
+                    result += "Program is not alsways executable , only sometimes \n";
                 }
             }
+            if (Goal != null)
+            {
+                if (Goal.Count > 0)
+                {
 
+                    if (goalNever)
+                    {
+                        result += "Goal is never satisfied! \n";
+                    }
+                    else
+                    {
+                        if (!goalAlways)
+                        {
+                            result += "Goal is sometimes satisfied! \n";
+                        }
+                        else
+                        {
+                            result += "Goal is always satisfied \n";
+                        }
+                    }
+                }
+            }
             Console.WriteLine(result);
-
-
+            
         }
-      
-        public static void doRecursion(List<State> StateList, int queryNumber,string parent)
+
+        public static void doRecursion(List<State> StateList, int queryNumber, string parent)
         {
-           
-                int node = 0;
+
+
+            int node = 0;
+            //check for executable always/ever/never
             if (StateList.Count == 0)
             {
                 always = false;
             }
             else {
-                if (lastQuery < queryNumber)
+                if (lastQuery < queryNumber && queryNumber < Logic.Main.Queries.Count)
                 {
                     lastQuery = queryNumber;
                 }
             }
-                foreach (State state in StateList)
-                {
-                    string nodeId =parent+"-"+queryNumber+"-";
-                   // tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
 
-                    node++;
-                    Console.WriteLine(state);
-                    Console.WriteLine("-------------------------------------");
-                    if (queryNumber < Logic.Main.Queries.Count)
+
+            foreach (State state in StateList)
+            {
+                //check for goal always/ever/never
+                if (Goal != null && queryNumber!=0)
+                {
+                    if (state.checkList(Goal))
                     {
-                        doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId);
-                    }                
+                        goalNever = false;
+                    }
+                    else
+                    {
+                        goalAlways = false;
+                    }
                 }
+                string nodeId = parent + "-" + queryNumber + "-";
+                // tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
+
+                node++;
+                Console.WriteLine(state);
+                Console.WriteLine("-------------------------------------");
+                if (queryNumber < Logic.Main.Queries.Count)
+                {
+                    doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId);
+                }
+            }
         }
 
         //private static void Main(string[] args)
