@@ -96,6 +96,9 @@
     <Compile Include="Windows\FluentsWindow.xaml.cs">
       <DependentUpon>FluentsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ReleasesWindow.xaml.cs">
+      <DependentUpon>ReleasesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RuleWindow.xaml.cs">
       <DependentUpon>RuleWindow.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\FluentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ReleasesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,19 +18,19 @@ namespace KRR.Windows
     /// <summary>
     /// Interaction logic for FluentsWindow.xaml
     /// </summary>
-    public partial class InitiallyWindow : Window
+    public partial class ReleasesWindow : Window
     {
         int col = 0;
         static public String fluents = String.Empty;
-        public List<Logic.Fluent> tempfluent = new List<Logic.Fluent>();
+        public Logic.Fluent fluent = null;
         private String name = null;
 
-        public InitiallyWindow(String _name)
+        public ReleasesWindow()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             InitializeComponent();
-            name = _name;
+           
             foreach (var fl in MainWindow.allFluents)
             {
                 FluentComboBox.Items.Add(fl.Name.ToString());
@@ -39,30 +39,12 @@ namespace KRR.Windows
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            switch (name)
-            {
-                case "initially":
-
-                    foreach (Logic.Fluent fl in tempfluent) //initially
-                    {
-                        MainWindow.initialliazed.Add(fl);
-
-                    }
-                    MainWindow.statement3 = fluents;
-                    break;
-                case "goal":    //GOAL
-
-                    ((MainWindow)System.Windows.Application.Current.MainWindow).Goal.Text = "Goal: ";
-                    foreach (Logic.Fluent fl in tempfluent) //initially
-                    {
-                        MainWindow.goal.Add(fl);
-                        ((MainWindow)System.Windows.Application.Current.MainWindow).Goal.Text += fl.Name.ToString() + " " + fl.IsTrue.ToString() + "    ";
-                    }
-                    
-                    break;
-            }
 
             
+            MainWindow.temp.Add(fluent);
+               
+
+            MainWindow.statement3 = fluents;
 
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();
@@ -78,13 +60,14 @@ namespace KRR.Windows
         {
             if (FluentComboBox.SelectedIndex >= 0)
             {
-
+                if (fluent != null)
+                    return;
                 RowDefinition colDefinition = new RowDefinition();
                 colDefinition.Height = GridLength.Auto;
                 fluentsTextBlock.RowDefinitions.Add(colDefinition);
 
                 TextBlock text = new TextBlock();
-                text.Text = FluentComboBox.Text.ToString() + " " + isTrue.IsChecked.ToString();
+                text.Text = FluentComboBox.Text.ToString();
                 text.FontSize = 15;
                 text.FontFamily = new FontFamily("Impact");
                 text.HorizontalAlignment = HorizontalAlignment.Center;
@@ -98,14 +81,8 @@ namespace KRR.Windows
                 fluentsTextBlock.Children.Add(text);
                 fluents += text.Text;
 
-                bool check;
-                if (isTrue.IsChecked == false)
-                    check = false;
-                else
-                    check = true;
+                fluent = new Logic.Fluent(FluentComboBox.SelectedItem.ToString(), false); //false because must pass sth
 
-                Logic.Fluent fluent = new Logic.Fluent(FluentComboBox.SelectedItem.ToString(), check);
-                tempfluent.Add(fluent);
 
                 FluentComboBox.Items.Remove(FluentComboBox.SelectedItem);
             }
@@ -115,8 +92,7 @@ namespace KRR.Windows
         {
             fluents = String.Empty;
             fluentsTextBlock.Children.Clear();
-            tempfluent.Clear();
-
+            fluent = null;
             FluentComboBox.Items.Clear();
 
             foreach (var fl in MainWindow.allFluents)

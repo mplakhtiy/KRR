@@ -37,7 +37,7 @@ namespace KRR.Controls.RuleControls
         {
             Button btn = sender as Button;
             Windows.RuleWindow.btnClicked = btn.Name.ToString();
-            Windows.InitiallyWindow fluent = new Windows.InitiallyWindow("releases");
+            Windows.ReleasesWindow fluent = new Windows.ReleasesWindow();
             fluent.ShowDialog();
         }
 
