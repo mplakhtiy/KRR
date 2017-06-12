@@ -9,6 +9,7 @@ namespace KRR.Logic
 {
     internal class Main
     {
+
         public static Rule Rules;
         public static List<Agent_Action> Queries;
         public static  List<Fluent> Goal;
@@ -23,12 +24,22 @@ namespace KRR.Logic
         //number of last executable query
         public static int lastQuery;
 
-        public static void TheMostImportantMethod(List<Fluent> _goal,Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
+        //check if an agent was involved always / ever never
+        public static bool alwaysAgent;
+        public static bool neverAgent;
+        public static Agent agentToCheck;
+
+        public static void TheMostImportantMethod(Agent agent,List<Fluent> _goal,Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
+            alwaysAgent = true;
+            neverAgent = true;
+            agentToCheck = agent;
+
             goalNever = true;
             goalAlways = true;
             Goal = _goal;
+
             lastQuery = -1;
             always = true;
             result = "";
@@ -162,28 +173,59 @@ namespace KRR.Logic
                     }
                 }
             }
+            if (agentToCheck.Name != null)
+            {
+
+                if (neverAgent)
+                {
+                    result += " Agent " + agentToCheck.Name + " is never involved to Program! \n";
+                }
+                else
+                {
+                    if (!alwaysAgent)
+                    {
+                        result += " Agent " + agentToCheck.Name + " is sometimes involved to Program! \n";
+                    }
+                    else
+                    {
+                        result += " Agent " + agentToCheck.Name + " is always involved to Program! \n";
+                    }
+                }
+            }
             Console.WriteLine(result);
             
         }
 
         public static void doRecursion(List<State> StateList, int queryNumber, string parent)
         {
-
-
             int node = 0;
             //check for executable always/ever/never
             if (StateList.Count == 0)
             {
                 always = false;
+                if (queryNumber != 0)
+                {
+                    
+                    if (Queries[queryNumber - 1].agent.Name == agentToCheck.Name)
+                    {
+                        alwaysAgent = false;
+                    }
+                }
             }
             else {
-                if (lastQuery < queryNumber && queryNumber < Logic.Main.Queries.Count)
+                if (queryNumber != 0)
+                {
+                    if (Queries[queryNumber - 1].agent.Name == agentToCheck.Name)
+                    {
+                        neverAgent = false;
+                    }
+                }
+                if (lastQuery < queryNumber )
                 {
                     lastQuery = queryNumber;
                 }
             }
-
-
+           
             foreach (State state in StateList)
             {
                 //check for goal always/ever/never

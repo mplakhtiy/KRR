@@ -137,8 +137,9 @@ namespace KRR
 
         private void Perform_Click(object sender, RoutedEventArgs e)
         {
-            Logic.Main.TheMostImportantMethod(goal,rules, initialliazed, allFluents, queries);
+            Logic.Main.TheMostImportantMethod(agentPerform,goal,rules, initialliazed, allFluents, queries);
             Output.Text = Logic.Main.result.ToString();
+           
         }
 
         private void ClearQuery_Click(object sender, RoutedEventArgs e)

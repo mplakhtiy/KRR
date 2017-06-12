@@ -51,7 +51,7 @@ namespace KRR.Windows
                     MainWindow.statement3 = fluents;
                     break;
                 case "goal":    //GOAL
-
+                    MainWindow.goal.Clear();
                     ((MainWindow)System.Windows.Application.Current.MainWindow).Goal.Text = "Goal: ";
                     foreach (Logic.Fluent fl in tempfluent) //initially
                     {
