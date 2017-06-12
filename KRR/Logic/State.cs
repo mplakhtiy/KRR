@@ -49,6 +49,9 @@ namespace KRR.Logic
         }
         public bool check(Fluent fluent)
         {
+            if (fluent.Name == "-")
+                return false;
+
             foreach (Fluent item in Fluents)
             {
                 if (item.Name == fluent.Name)
@@ -81,12 +84,16 @@ namespace KRR.Logic
         /// <returns></returns>
         public bool checkOrList(List<List<Fluent>> lists)
         {
+            if (lists.Count == 0)
+            {
+                return true;
+            }
             foreach (List<Fluent> list in lists)
             {
-                if (!checkList(list))
-                    return false;
+                if (checkList(list))
+                    return true;
             }
-            return true;
+            return false;
         }
         public bool isEqual(State item)
         {

@@ -90,7 +90,7 @@ namespace KRR.Logic
                         }
                         //-------
                         
-                                for (int i = 0; i < formulaResult.Length; i++)
+                         for (int i = 0; i < formulaResult.Length; i++)
                         {
                             if (formulaResult[i])
                             {

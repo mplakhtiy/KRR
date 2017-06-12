@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KRR.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,46 @@ namespace KRR.Windows
             RowDefinition rowDefinition = new RowDefinition();
             rowDefinition.Height = GridLength.Auto;
 
+            List<List<Logic.Fluent>> orList = new List<List<Logic.Fluent>>();
+
+            if (MainWindow.ifListEval!= null)
+            {
+                bool[] formulaResult = MainWindow.ifListEval.GetResultData();
+                bool neverBool = true;
+                for (int i = 0; i < formulaResult.Length; i++)
+                {
+                    if (formulaResult[i])
+                    {
+                        neverBool = false;
+                    }
+                }
+                if (neverBool)
+                {
+                    orList.Add(new List<Fluent> { new Fluent("-", false) });
+
+                }
+                else {
+
+                    for (int i = 0; i < formulaResult.Length; i++)
+                    {
+                        if (formulaResult[i])
+                        {
+
+                            List<Fluent> andList = new List<Fluent>();
+                            foreach (Fluent fluent in MainWindow.allFluents)
+                            {
+                                if (MainWindow.ifListEval.EvalPlan.ContainsKey(fluent.Name))
+                                {
+                                    andList.Add(new Fluent(fluent.Name, MainWindow.ifListEval.EvalPlan[fluent.Name].fieldResult[i]));
+                                }
+                            }
+
+                            orList.Add(andList);
+                        }
+                    }
+                }
+            }
+
             switch (ruleComboBox.SelectedIndex)
             {
                 case 0: //causes
@@ -46,7 +87,7 @@ namespace KRR.Windows
                     {
                         Logic.Agent_Action agAc = new Logic.Agent_Action(ag, ac);
                         List<Logic.Fluent> tempp = MainWindow.temp.ToList();
-                        List<List<Logic.Fluent>> _iff = FluentsWindow._if.ToList();
+                        List<List<Logic.Fluent>> _iff = orList.ToList();
                         if (_iff.Count > 0)
                             ifClicked = true;
                         Logic.Rules.CausesIf rule = new Logic.Rules.CausesIf(MainWindow.evaluator, agAc, tempp, _iff);
@@ -60,7 +101,7 @@ namespace KRR.Windows
                     {
                         Logic.Agent_Action agAc2 = new Logic.Agent_Action(ag, ac);
                         List<Logic.Fluent> tempp = MainWindow.temp.ToList();
-                        List<List<Logic.Fluent>> _iff = FluentsWindow._if.ToList();
+                        List<List<Logic.Fluent>> _iff = orList.ToList();
                         if (_iff.Count > 0)
                             ifClicked = true;
                         Logic.Rules.ReleasesIf rule2 = new Logic.Rules.ReleasesIf(agAc2, tempp, _iff);
@@ -74,6 +115,7 @@ namespace KRR.Windows
 
             }
 
+            MainWindow.ifListEval = null;
             MainWindow.temp.Clear();
             FluentsWindow._if.Clear();
             ag = null;

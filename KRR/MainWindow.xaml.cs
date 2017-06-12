@@ -16,6 +16,7 @@ namespace KRR
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Evaluator ifListEval;
         public static List<Logic.Agent> agents = new List<Logic.Agent>();
         public static List<Logic.Fluent> allFluents = new List<Logic.Fluent>(); // typed onces
         public static List<Logic.Action> actions = new List<Logic.Action>();
@@ -112,10 +113,17 @@ namespace KRR
                 {
                     foreach (Logic.Action ac in actions)
                     {
-                        if (temp.AgentComboBox.SelectedItem.Equals(a.Name) && temp.ActionComboBox.SelectedItem.Equals(ac.Name))
+                        if (temp.AgentComboBox.SelectedIndex >= 0 && temp.ActionComboBox.SelectedIndex >= 0)
                         {
-                            agAc = new Logic.Agent_Action(a, ac);
-                            queries.Add(agAc);
+                            if (temp.AgentComboBox.SelectedItem.Equals(a.Name) && temp.ActionComboBox.SelectedItem.Equals(ac.Name))
+                            {
+                                agAc = new Logic.Agent_Action(a, ac);
+                                queries.Add(agAc);
+                            }
+                        }
+                        else
+                        {
+                            return;
                         }
                     }
 

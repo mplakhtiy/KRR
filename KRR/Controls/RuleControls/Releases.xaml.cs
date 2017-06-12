@@ -45,7 +45,7 @@ namespace KRR.Controls.RuleControls
         {
             Button btn = sender as Button;
             Windows.RuleWindow.btnClicked = btn.Name.ToString();
-            Windows.FluentsWindow fluent = new Windows.FluentsWindow();
+            Controls.FormulaWindow fluent = new Controls.FormulaWindow("if_list");
             fluent.ShowDialog();
         }
 

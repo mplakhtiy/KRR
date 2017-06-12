@@ -21,9 +21,11 @@ namespace KRR.Controls
     /// </summary>
     public partial class FormulaWindow : Window
     {
+        public string checkIfOrCauses;
         public Evaluator evaluator;
-        public FormulaWindow()
+        public FormulaWindow(string check)
         {
+            checkIfOrCauses = check;
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
@@ -58,8 +60,20 @@ namespace KRR.Controls
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.statement3 = Query.Text;
-            MainWindow.evaluator = this.evaluator;
+           
+            switch (checkIfOrCauses)
+            {
+                case "causes":
+                    MainWindow.evaluator = this.evaluator;
+                    MainWindow.statement3 = Query.Text;
+                    break;
+                case "if_list":
+                    MainWindow.ifListEval = this.evaluator;
+                    break;
+                default:
+                    break;
+            }
+            
 
             this.Close();
         }
