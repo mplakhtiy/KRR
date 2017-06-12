@@ -15,6 +15,7 @@ namespace KRR.Logic
         public static List<ReleasesIf> releasesIfRules;
         public static List<Always> alwaysRules;
         public static List<Observable> observableRules;
+        public static bool agentActionOrList = false;
 
         public Rule()
         {
@@ -54,7 +55,7 @@ namespace KRR.Logic
 
         public List<State> checkRules(Agent_Action agentAction, State currentState)
         {
-
+            agentActionOrList = false;
             //Console.WriteLine("CURRENT STATE______________________________________________");
 
             //Console.WriteLine(currentState);
@@ -114,6 +115,7 @@ namespace KRR.Logic
                     else
                     {
                         always = false;
+                        agentActionOrList = true;
                     }
                 }
             }
@@ -153,6 +155,7 @@ namespace KRR.Logic
                     else
                     {
                         always = false;
+                        agentActionOrList = false;
                     }
                 }
             }

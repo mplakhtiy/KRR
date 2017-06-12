@@ -125,7 +125,7 @@ namespace KRR.Logic
 
             Logic.Main.Queries = queries;
             Logic.Main.Rules = rules;
-            doRecursion(possibleInitialStates, 0,"");
+            doRecursion(possibleInitialStates, 0,"",null);
 
             //result output
             if (Logic.Main.Queries.Count != lastQuery)
@@ -196,8 +196,14 @@ namespace KRR.Logic
             
         }
 
-        public static void doRecursion(List<State> StateList, int queryNumber, string parent)
+        public static void doRecursion(List<State> StateList, int queryNumber, string parent, State parentState)
         {
+            // if _if condition does not hold then empty effect
+            if (StateList.Count==0 && Rule.agentActionOrList)
+            {
+                StateList.Add(parentState);
+            }
+
             int node = 0;
             //check for executable always/ever/never
             if (StateList.Count == 0)
@@ -248,7 +254,7 @@ namespace KRR.Logic
                 Console.WriteLine("-------------------------------------");
                 if (queryNumber < Logic.Main.Queries.Count)
                 {
-                    doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId);
+                    doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId,state);
                 }
             }
         }
