@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KRR.Logic.Rules;
+using KRR.Logic.TruthTable;
 
 namespace KRR.Logic
 {
@@ -35,10 +36,20 @@ namespace KRR.Logic
         public static  Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
         public static Microsoft.Msagl.Drawing.Graph graph;
         public static string tree ="";
+        public static Evaluator evaluator;
 
         public static void TheMostImportantMethod(Agent agent,List<Fluent> _goal,Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
+
+            foreach (Always alwaysEvaluator in Rule.alwaysRules)
+            {
+                foreach(CausesIf causesEvaluator in Rule.causesIfRules)
+                {
+                    causesEvaluator.checngeCauses(alwaysEvaluator.evaluator);
+                }
+
+            }
 
             //create a form
             form = new System.Windows.Forms.Form();
@@ -264,19 +275,21 @@ namespace KRR.Logic
            
             foreach (State state in StateList)
             {
-                //check for goal always/ever/never
-                if (Goal != null && queryNumber!=0)
+                if (queryNumber == Queries.Count)
                 {
-                    if (state.checkList(Goal))
+                    //check for goal always/ever/never
+                    if (Goal != null && queryNumber != 0)
                     {
-                        goalNever = false;
-                    }
-                    else
-                    {
-                        goalAlways = false;
+                        if (state.checkList(Goal))
+                        {
+                            goalNever = false;
+                        }
+                        else
+                        {
+                            goalAlways = false;
+                        }
                     }
                 }
-             
 
                 string nodeId = parent+node;
 

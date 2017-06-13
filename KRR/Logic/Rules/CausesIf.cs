@@ -9,7 +9,7 @@ namespace KRR.Logic.Rules
         public List<Fluent> change { get; set; }
         public List<List<Fluent>> _if { get; set; }
         public Agent_Action agent_action { get; set; }
-        public CausesIf(Evaluator eval , Agent_Action agent_action, List<Fluent> change_, List<List<Fluent>> _if_)
+        public CausesIf(Evaluator eval, Agent_Action agent_action, List<Fluent> change_, List<List<Fluent>> _if_)
         {
             this.evaluator = eval;
             this.change = new List<Fluent>();
@@ -18,15 +18,22 @@ namespace KRR.Logic.Rules
             {
                 this.change.Add(fluent);
             }
- 
+
             foreach (List<Fluent> list in _if_)
             {
-               
-                    _if.Add(list);
-             
+
+                _if.Add(list);
+
             }
             this.Name = "causes";
             this.agent_action = agent_action;
+
+
+        }
+        public void checngeCauses(Evaluator eval)
+        {
+            this.evaluator.Query += "∧(" + eval.Query + ")";
+            this.evaluator.FindEvalPlan();
         }
         public override string ToString()
         {
