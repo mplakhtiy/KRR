@@ -29,9 +29,25 @@ namespace KRR.Logic
         public static bool neverAgent;
         public static Agent agentToCheck;
 
+        //create a form
+        public static System.Windows.Forms.Form form;
+        //create a viewer object
+        public static  Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
+        public static Microsoft.Msagl.Drawing.Graph graph;
+        public static string tree ="";
+
         public static void TheMostImportantMethod(Agent agent,List<Fluent> _goal,Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
+
+            //create a form
+            form = new System.Windows.Forms.Form();
+            //create a viewer object
+            viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            //create a graph object
+           graph = new Microsoft.Msagl.Drawing.Graph("graph");
+
+
             alwaysAgent = true;
             neverAgent = true;
             agentToCheck = agent;
@@ -193,7 +209,21 @@ namespace KRR.Logic
                 }
             }
             Console.WriteLine(result);
-            
+
+            //bind the graph to the viewer 
+            viewer.Graph =
+            graph;
+
+            //associate the viewer with the form
+            form.SuspendLayout();
+            viewer.Dock =
+             System.Windows.Forms.DockStyle.Fill;
+            form.Controls.Add(viewer);
+            form.ResumeLayout();
+            ///show the form
+            form.ShowDialog();
+            Console.WriteLine("8---------------------------------------8");
+            Console.WriteLine(tree);
         }
 
         public static void doRecursion(List<State> StateList, int queryNumber, string parent, State parentState)
@@ -246,7 +276,18 @@ namespace KRR.Logic
                         goalAlways = false;
                     }
                 }
-                string nodeId = parent + "-" + queryNumber + "-";
+             
+
+                string nodeId = parent+node;
+
+                if (parent != "")
+                {
+                    graph.AddEdge(parent + parentState.ToString(), nodeId + state.ToString()).LabelText= Queries[queryNumber-1].ToString();
+                    graph.FindNode(nodeId + state.ToString()).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Ellipse;
+                }
+
+                tree += "parent : " + parent + " , node : " + nodeId + " ; \n";
+              
                 // tree.AddTreeDataTableRow(nodeId, parent, Queries[queryNumber].ToString(), "State: "+ state.ToString());
 
                 node++;
@@ -254,6 +295,7 @@ namespace KRR.Logic
                 Console.WriteLine("-------------------------------------");
                 if (queryNumber < Logic.Main.Queries.Count)
                 {
+                   
                     doRecursion(Rules.checkRules(Queries[queryNumber], state), queryNumber + 1, nodeId,state);
                 }
             }
