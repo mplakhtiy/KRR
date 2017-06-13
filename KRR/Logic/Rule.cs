@@ -142,15 +142,56 @@ namespace KRR.Logic
                 {
                     if (currentState.checkOrList(releasesIfRule._if))
                     {
-                        State changedStateReleases = new State(currentState);
-                        
-                        states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name,true)));
+                        if (MainWindow.evaluator != null)
+                        {
+                            bool[] formulaResult = MainWindow.evaluator.GetResultData();
 
-                        changedStateReleases = new State(currentState);
+                            State changedStateReleases = new State(currentState);
+                            State chengendFluentToTrue = changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, true));
+                            State chengendFluentToFalse = changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false));
 
-                        states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false)));
-                        //Console.WriteLine("Next STATE______________________________________________");
-                        //Console.WriteLine(changedStateReleases);
+                            bool trueAdded = false;
+                            bool falseAdded = false;
+
+                            for (int i = 0; i < formulaResult.Length; i++)
+                            {
+                                if (formulaResult[i])
+                                {
+                                    if (MainWindow.evaluator.EvalPlan.ContainsKey(releasesIfRule.change[0].Name))
+                                    {
+
+                                        if (MainWindow.evaluator.EvalPlan[releasesIfRule.change[0].Name].fieldResult[i])
+                                        {
+                                            if (!trueAdded)
+                                            {
+                                                states.Add(chengendFluentToTrue);
+                                                trueAdded = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!falseAdded)
+                                            {
+                                                states.Add(chengendFluentToFalse);
+                                                falseAdded = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else {
+
+                            State changedStateReleases = new State(currentState);
+
+                            states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, true)));
+
+                            changedStateReleases = new State(currentState);
+
+                            states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false)));
+                            //Console.WriteLine("Next STATE______________________________________________");
+                            //Console.WriteLine(changedStateReleases);
+                        }
                     }
                     else
                     {
