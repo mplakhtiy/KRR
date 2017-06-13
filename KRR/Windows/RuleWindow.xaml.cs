@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using KRR.Controls;
 
 namespace KRR.Windows
 {
@@ -112,6 +113,11 @@ namespace KRR.Windows
                     break;
                 case 3: //initilly
                     break;
+                case 2:
+                    if(MainWindow.AlwaysEvaluator!=null)
+                    MainWindow.statement = "always " + MainWindow.AlwaysEvaluator.EvalPlan.Last().Key;
+                    break;
+                
 
             }
 
@@ -163,8 +169,8 @@ namespace KRR.Windows
                 case 2:
                     if (Rule.Children.Count != 0)
                         Rule.Children.Clear();
-                    Controls.RuleControls.Always Always = new Controls.RuleControls.Always();
-                    Rule.Children.Add(Always);
+                    Controls.FormulaWindow Always = new Controls.FormulaWindow("always");
+                    Always.Show();
                     break;
                 case 3:
                     if (Rule.Children.Count != 0)
@@ -172,6 +178,7 @@ namespace KRR.Windows
                     Controls.RuleControls.Initially Initially = new Controls.RuleControls.Initially();
                     Rule.Children.Add(Initially);
                     break;
+                
             }
         }
     }
