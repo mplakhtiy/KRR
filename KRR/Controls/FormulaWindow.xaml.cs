@@ -70,6 +70,9 @@ namespace KRR.Controls
                 case "if_list":
                     MainWindow.ifListEval = this.evaluator;
                     break;
+                case "always":
+                    MainWindow.AlwaysEvaluator = this.evaluator;
+                    break;
                 default:
                     break;
             }
