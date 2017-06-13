@@ -29,6 +29,7 @@ namespace KRR
         public static String statement = null;
         public static String statement2 = null;
         public static String statement3 = null;
+        public static Evaluator AlwaysEvaluator;
 
         public static Evaluator evaluator;
 
