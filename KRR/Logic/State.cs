@@ -4,15 +4,19 @@ namespace KRR.Logic
 {
     public class State
     {
+        public Agent_Action agentAction { get; set; }
         public List<Fluent> Fluents { get; private set; }
+        public string name { get; set; }
         public State()
         {
             Fluents = new List<Fluent>();
+            name = "";
         }
 
 
         public State(State state)
         {
+            name = state.name;
             Fluents = new List<Fluent>();
             if (state != null)
             {

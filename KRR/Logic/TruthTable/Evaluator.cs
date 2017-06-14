@@ -23,6 +23,7 @@ namespace KRR.Logic.TruthTable
     {
         public Dictionary<string, Field> EvalPlan { get; set; }
         public string Query { get; set; }
+        public string Original { get; set; }
 
         /// <summary>
         /// Finds the precedance
@@ -40,7 +41,7 @@ namespace KRR.Logic.TruthTable
         /// Constructor which initializes the Query
         /// </summary>
         /// <param name="Query">The Query which is to be run</param>
-        public Evaluator(string Query) { this.Query = "(" + Query + ")"; }
+        public Evaluator(string Query,string Original) { this.Query = "(" + Query + ")"; this.Original =  Original; }
 
         /// <summary>
         /// This function is used to find the evaluation plan for the Query

@@ -37,11 +37,13 @@ namespace KRR.Controls
                 //Format the input text to change the operators
                 Query.Text = FormatInput(Query.Text.Trim());
 
+                String original = Query.Text;
+
                 Dictionary<string, char> dict = ConvertFluentsToChar(Query.Text);
                 String convertedText = ReplaceFluentsWithChar(dict, Query.Text);
 
                 //Create an instance of the evaluator class
-                evaluator = new Evaluator(convertedText);
+                evaluator = new Evaluator(convertedText, original);
 
                 //Update the truth Table, tree view and the plan textbox
                 TruthTable.ItemsSource = evaluator.EvaluateQuery(dict);
@@ -71,7 +73,9 @@ namespace KRR.Controls
                     MainWindow.ifListEval = this.evaluator;
                     break;
                 case "always":
-                    MainWindow.AlwaysEvaluator = this.evaluator;
+                    MainWindow.AlwaysHeader = this.evaluator.Original;
+                    MainWindow.alwaysEvaluator = this.evaluator;
+                    
                     break;
                 default:
                     break;
@@ -81,7 +85,7 @@ namespace KRR.Controls
             this.Close();
         }
 
-        private String ReplaceFluentsWithChar(Dictionary<string, char> dict, string query)
+        public String ReplaceFluentsWithChar(Dictionary<string, char> dict, string query)
         {
 
             foreach (KeyValuePair<string, char> pair in dict)
@@ -91,14 +95,16 @@ namespace KRR.Controls
 
             return query;
         }
-
-        private Dictionary<string, char> ConvertFluentsToChar(string inputText)
+   
+        public Dictionary<string, char> ConvertFluentsToChar(string inputText)
         {
 
             Dictionary<string, char> dict = new Dictionary<string, char>();
 
             List<char> lstChar = new List<char>()
-            {'a','b','c','d','e','f', 'g','h', 'i','j','k','l','m','n','o'};
+                        //{'a','b','c','d','e','f', 'g','h', 'i','j','k','l','m','n','o'};
+            { 'α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ', 'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω'};
+
 
             string fluent = "";
 

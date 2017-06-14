@@ -111,12 +111,12 @@ namespace KRR.Windows
                         MainWindow.rules.AddRule(rule2);
                     }
                     break;
-                case 3: //initilly
+                case 2: //initilly
                     break;
-                case 2:
-                    if(MainWindow.AlwaysEvaluator!=null)
-                    MainWindow.statement = "always " + MainWindow.AlwaysEvaluator.EvalPlan.Last().Key;
-                    break;
+                //case 2:
+                //    if(MainWindow.alwaysEvaluator!=null)
+                //    MainWindow.statement = "always " + MainWindow.alwaysEvaluator.EvalPlan.Last().Key;
+                //    break;
                 
 
             }
@@ -166,13 +166,13 @@ namespace KRR.Windows
                     Controls.RuleControls.Releases Releases = new Controls.RuleControls.Releases();
                     Rule.Children.Add(Releases);
                     break;
+                //case 2:
+                //    if (Rule.Children.Count != 0)
+                //        Rule.Children.Clear();
+                //    Controls.FormulaWindow Always = new Controls.FormulaWindow("always");
+                //    Always.Show();
+                //    break;
                 case 2:
-                    if (Rule.Children.Count != 0)
-                        Rule.Children.Clear();
-                    Controls.FormulaWindow Always = new Controls.FormulaWindow("always");
-                    Always.Show();
-                    break;
-                case 3:
                     if (Rule.Children.Count != 0)
                         Rule.Children.Clear();
                     Controls.RuleControls.Initially Initially = new Controls.RuleControls.Initially();

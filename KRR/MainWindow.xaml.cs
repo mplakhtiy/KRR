@@ -29,7 +29,8 @@ namespace KRR
         public static String statement = null;
         public static String statement2 = null;
         public static String statement3 = null;
-        public static Evaluator AlwaysEvaluator;
+        public static string AlwaysHeader;
+        public static Evaluator alwaysEvaluator;
 
         public static Evaluator evaluator;
 
@@ -145,10 +146,16 @@ namespace KRR
         }
 
         private void Perform_Click(object sender, RoutedEventArgs e)
+
         {
+            Logic.Main.drawGraph(initialliazed, goal, allFluents, rules);
             Logic.Main.TheMostImportantMethod(agentPerform,goal,rules, initialliazed, allFluents, queries);
+
             Output.Text = Logic.Main.result.ToString();
-           
+            Logic.Main.form1.ShowDialog();
+            Logic.Main.form.ShowDialog();
+          
+
         }
 
         private void ClearQuery_Click(object sender, RoutedEventArgs e)
@@ -156,6 +163,8 @@ namespace KRR
             QueryGrid.Children.Clear();
             QueryGrid.ColumnDefinitions.Clear();
             queries.Clear();
+            MainWindow.AlwaysHeader = "";
+            MainWindow.alwaysEvaluator = null;
             row = 0;
 
             ColumnDefinition rowDefinition = new ColumnDefinition();

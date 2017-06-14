@@ -36,20 +36,156 @@ namespace KRR.Logic
         public static  Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
         public static Microsoft.Msagl.Drawing.Graph graph;
         public static string tree ="";
-        public static Evaluator evaluator;
+        //create a form
+        public static System.Windows.Forms.Form form1;
+        //create a viewer object
+        public static Microsoft.Msagl.GraphViewerGdi.GViewer viewer1;
+        public static Microsoft.Msagl.Drawing.Graph graph1;
+
+
+
+        public static void drawGraph(List<Fluent> init, List<Fluent> goal, List<Fluent> allFluents, Rule rules)
+        {
+            //create a form
+            form1 = new System.Windows.Forms.Form();
+            //create a viewer object
+            viewer1 = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            //create a graph object
+            graph1= new Microsoft.Msagl.Drawing.Graph("graph");
+
+
+            List<Fluent> allFluentsCopy = new List<Fluent>();
+            foreach (Fluent item in allFluents)
+            {
+                allFluentsCopy.Add(item);
+            }
+            List<State> allPossibleStates = new List<State>();
+
+
+
+            int n = allFluents.Count;
+            //Create all possible combinations
+            List<bool[]> matrix = new List<bool[]>();
+            double count = Math.Pow(2, n);
+            //if all fluents.count == 0 then matrix also should be 0 elemetns but not 2^0=1
+            if (n == 0)
+            {
+                count = 0;
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                string str = Convert.ToString(i, 2).PadLeft(n, '0');
+                bool[] boolArr = str.Select((x) => x == '1').ToArray();
+
+                matrix.Add(boolArr);
+            }
+            //if all fluents were initiallized then just add initially fluents
+           
+                for (int i = 0; i < matrix.Count; i++)
+                {
+                    var a = new State();
+                    //if all fluents size > 
+                    for (int j = 0; j < matrix[0].Length; j++)
+                    {
+                        a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
+                    }
+                allPossibleStates.Add(a);
+                
+            }
+            int k = 0;
+            foreach (State state in allPossibleStates)
+            {
+                k++;
+                state.name = "S-" + k;
+            }
+            foreach (State state in allPossibleStates)
+            {
+                graph1.AddNode(state.ToString()).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Ellipse;
+
+                if (goal != null)
+                {
+                    if(goal.Count>0)
+                    if (state.checkList(goal))
+                    {
+                        graph1.FindNode(state.ToString()).Attr.FillColor = Microsoft.Msagl.Drawing.Color.LightPink;
+                    }
+                }
+                if (init != null)
+                {
+                    if(init.Count>0)
+                    if (state.checkList(init))
+                    {
+                        graph1.FindNode(state.ToString()).Attr.FillColor = Microsoft.Msagl.Drawing.Color.LightSkyBlue;
+                    }
+                }
+                foreach (State drawState in rules.drawGraph(state))
+                {
+                    foreach(State check in allPossibleStates)
+                    {
+                        if (check.isEqual(drawState))
+                        {
+                            drawState.name = check.name;
+                            break;
+                        }
+                    }
+                    bool draw = true;
+                    foreach(var a in graph1.Edges.ToList())
+                    {
+                        if(a.Attr.Id== state.name + drawState.name+drawState.agentAction.ToString())
+                        {
+                            draw = false;
+                            break;
+                        }
+                    }
+
+                    if (draw)
+                    {
+                        graph1.AddEdge(state.ToString(), drawState.agentAction.ToString(), drawState.ToString()).Attr.Id = state.name + drawState.name+ drawState.agentAction.ToString();
+                    }
+
+                }
+             
+               
+
+               
+            }
+            //bind the graph to the viewer 
+            viewer1.Graph =
+            graph1;
+
+            //associate the viewer with the form
+            form1.SuspendLayout();
+            viewer1.Dock =
+             System.Windows.Forms.DockStyle.Fill;
+            form1.Controls.Add(viewer1);
+            form1.ResumeLayout();
+            ///show the form
+           // form1.ShowDialog();
+
+
+        }
+
 
         public static void TheMostImportantMethod(Agent agent,List<Fluent> _goal,Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
 
-            foreach (Always alwaysEvaluator in Rule.alwaysRules)
-            {
-                foreach(CausesIf causesEvaluator in Rule.causesIfRules)
-                {
-                    causesEvaluator.checngeCauses(alwaysEvaluator.evaluator);
-                }
 
+
+
+
+
+
+
+            if (MainWindow.alwaysEvaluator != null)
+            {
+                foreach (CausesIf causesEvaluator in Rule.causesIfRules)
+                {
+                    causesEvaluator.checngeCauses(MainWindow.AlwaysHeader);
+                }
             }
+            MainWindow.AlwaysHeader = "";
 
             //create a form
             form = new System.Windows.Forms.Form();
@@ -232,7 +368,7 @@ namespace KRR.Logic
             form.Controls.Add(viewer);
             form.ResumeLayout();
             ///show the form
-            form.ShowDialog();
+            //form.ShowDialog();
             Console.WriteLine("8---------------------------------------8");
             Console.WriteLine(tree);
         }
@@ -280,6 +416,7 @@ namespace KRR.Logic
                     //check for goal always/ever/never
                     if (Goal != null && queryNumber != 0)
                     {
+
                         if (state.checkList(Goal))
                         {
                             goalNever = false;
@@ -292,11 +429,32 @@ namespace KRR.Logic
                 }
 
                 string nodeId = parent+node;
-
+                if (parent == "")
+                {
+                    graph.AddNode(nodeId + state.ToString()).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Ellipse;
+                    graph.FindNode(nodeId + state.ToString()).Attr.FillColor = Microsoft.Msagl.Drawing.Color.LightSkyBlue;
+                }
                 if (parent != "")
                 {
                     graph.AddEdge(parent + parentState.ToString(), nodeId + state.ToString()).LabelText= Queries[queryNumber-1].ToString();
                     graph.FindNode(nodeId + state.ToString()).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Ellipse;
+                }
+                if (queryNumber == Queries.Count)
+                {
+                    //check for goal always/ever/never
+                    if (Goal != null && queryNumber != 0)
+                    {
+
+                        if (state.checkList(Goal))
+                        {
+                            goalNever = false;
+                            graph.FindNode(nodeId + state.ToString()).Attr.FillColor = Microsoft.Msagl.Drawing.Color.LightPink;
+                        }
+                        else
+                        {
+                            goalAlways = false;
+                        }
+                    }
                 }
 
                 tree += "parent : " + parent + " , node : " + nodeId + " ; \n";
