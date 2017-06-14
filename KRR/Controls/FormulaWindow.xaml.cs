@@ -71,11 +71,12 @@ namespace KRR.Controls
                     break;
                 case "if_list":
                     MainWindow.ifListEval = this.evaluator;
+                    MainWindow.statement2 = Query.Text;
                     break;
                 case "always":
                     MainWindow.AlwaysHeader = this.evaluator.Original;
                     MainWindow.alwaysEvaluator = this.evaluator;
-                    
+
                     break;
                 default:
                     break;
