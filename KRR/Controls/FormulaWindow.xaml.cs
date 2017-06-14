@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using KRR.Logic.TruthTable;
+using System.Text.RegularExpressions;
 
 
 namespace KRR.Controls
@@ -89,12 +90,24 @@ namespace KRR.Controls
         public String ReplaceFluentsWithChar(Dictionary<string, char> dict, string query)
         {
 
+            //foreach (KeyValuePair<string, char> pair in dict)
+            //{
+            //    query = query.Replace(pair.Key.ToString(), pair.Value.ToString());
+            //}
+
+            //return query;
+
+
+            string result = query;
             foreach (KeyValuePair<string, char> pair in dict)
             {
-                query = query.Replace(pair.Key.ToString(), pair.Value.ToString());
+                string replace = pair.Value.ToString();
+                result = Regex.Replace(result, string.Format(@"\b{0}\b", pair.Key.ToString()), replace);
             }
 
-            return query;
+            return result;
+
+
         }
    
         public Dictionary<string, char> ConvertFluentsToChar(string inputText)
