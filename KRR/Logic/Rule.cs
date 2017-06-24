@@ -3,6 +3,7 @@ using KRR.Logic.Rules;
 using KRR.Logic.TruthTable;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System;
 
 namespace KRR.Logic
 {
@@ -19,7 +20,7 @@ namespace KRR.Logic
         public static List<Observable> observableRules;
         public static bool agentActionOrList = false;
 
-        public static List<string> queriesList = new List<string>();
+        //public static List<string> queriesList = new List<string>();
         public Rule()
         {
             //for result
@@ -82,6 +83,7 @@ namespace KRR.Logic
 
         public List<State> checkRules(Agent_Action agentAction, State currentState)
         {
+            List<string> queriesList = new List<string>();
             agentActionOrList = false;
             //Console.WriteLine("CURRENT STATE______________________________________________");
 
@@ -165,41 +167,41 @@ namespace KRR.Logic
                     {
                         if (MainWindow.alwaysEvaluator != null)
                         {
-                            bool[] formulaResult = MainWindow.alwaysEvaluator.GetResultData();
+                            //bool[] formulaResult = MainWindow.alwaysEvaluator.GetResultData();
 
-                            State changedStateReleases = new State(currentState);
-                            State chengendFluentToTrue = changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, true));
-                            State chengendFluentToFalse = changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false));
+                            //State changedStateReleases = new State(currentState);
+                            //State chengendFluentToTrue = changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, true));
+                            //State chengendFluentToFalse = changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false));
 
-                            bool trueAdded = false;
-                            bool falseAdded = false;
+                            //bool trueAdded = false;
+                            //bool falseAdded = false;
 
-                            for (int i = 0; i < formulaResult.Length; i++)
-                            {
-                                if (formulaResult[i])
-                                {
-                                    if (MainWindow.alwaysEvaluator.EvalPlan.ContainsKey(releasesIfRule.change[0].Name))
-                                    {
+                            //for (int i = 0; i < formulaResult.Length; i++)
+                            //{
+                            //    if (formulaResult[i])
+                            //    {
+                            //        if (MainWindow.alwaysEvaluator.EvalPlan.ContainsKey(releasesIfRule.change[0].Name))
+                            //        {
 
-                                        if (MainWindow.alwaysEvaluator.EvalPlan[releasesIfRule.change[0].Name].fieldResult[i])
-                                        {
-                                            if (!trueAdded)
-                                            {
-                                                states.Add(chengendFluentToTrue);
-                                                trueAdded = true;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (!falseAdded)
-                                            {
-                                                states.Add(chengendFluentToFalse);
-                                                falseAdded = true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            //            if (MainWindow.alwaysEvaluator.EvalPlan[releasesIfRule.change[0].Name].fieldResult[i])
+                            //            {
+                            //                if (!trueAdded)
+                            //                {
+                            //                    states.Add(chengendFluentToTrue);
+                            //                    trueAdded = true;
+                            //                }
+                            //            }
+                            //            else
+                            //            {
+                            //                if (!falseAdded)
+                            //                {
+                            //                    states.Add(chengendFluentToFalse);
+                            //                    falseAdded = true;
+                            //                }
+                            //            }
+                            //        }
+                            //    }
+                            //}
                         }
                         else {
 
@@ -213,7 +215,6 @@ namespace KRR.Logic
                             //Console.WriteLine("Next STATE______________________________________________");
                             //Console.WriteLine(changedStateReleases);
                             queriesList.Add("(" + releasesIfRule.change[0].Name + "∨¬" + releasesIfRule.change[0].Name+")");
-                            
                         }
                     }
                     else
@@ -248,89 +249,259 @@ namespace KRR.Logic
             }
             mainQuery = mainQuery.Substring(0, mainQuery.Length - 1);
 
+            Dictionary<string, char> dict = ConvertFluentsToChar(mainQuery);
+            String convertedText = ReplaceFluentsWithChar(dict, mainQuery);
+
+            Evaluator mainEvaluator = new Evaluator(convertedText, mainQuery);
+            mainEvaluator.FindEvalPlan();
+            mainEvaluator.EvaluateQuery(dict);
+
+            //State changedStateReleases = new State(currentState);
+            //states.Add(changedStateReleases.changeList(causesIfRule.change));
+
+            bool[] formulaResult = mainEvaluator.GetResultData();
+
+            // check if causes ever executable
+            neverBool = true;
+            for (int i = 0; i < formulaResult.Length; i++)
+            {
+                if (formulaResult[i])
+                {
+                    neverBool = false;
+                }
+            }
+          
+            //-------
+
+            for (int i = 0; i < formulaResult.Length; i++)
+            {
+                if (formulaResult[i])
+                {
+                    State changed = new State(currentState);
+                    List<Fluent> toChange = new List<Fluent>();
+                    foreach (Fluent fluent in currentState.Fluents)
+                    {
+                        if (mainEvaluator.EvalPlan.ContainsKey(fluent.Name))
+                        {
+                            toChange.Add(new Fluent(fluent.Name, mainEvaluator.EvalPlan[fluent.Name].fieldResult[i]));
+                        }
+                    }
+                    changed.changeList(toChange);
+                    states.Add(changed);
+                }
+            }
+
+            //changedStateCauses.changeList(causesIfRule.change);
+
+
             //output should be list of states coz of releasescan produce more than 1 state
             return states;
         }
 
+        public String ReplaceFluentsWithChar(Dictionary<string, char> dict, string query)
+        {
 
+            //foreach (KeyValuePair<string, char> pair in dict)
+            //{
+            //    query = query.Replace(pair.Key.ToString(), pair.Value.ToString());
+            //}
+
+            //return query;
+
+
+            string result = query;
+            foreach (KeyValuePair<string, char> pair in dict)
+            {
+                string replace = pair.Value.ToString();
+                result = Regex.Replace(result, string.Format(@"\b{0}\b", pair.Key.ToString()), replace);
+            }
+
+            return result;
+
+
+        }
+
+        public Dictionary<string, char> ConvertFluentsToChar(string inputText)
+        {
+
+            Dictionary<string, char> dict = new Dictionary<string, char>();
+
+            List<char> lstChar = new List<char>()
+                        //{'a','b','c','d','e','f', 'g','h', 'i','j','k','l','m','n','o'};
+            { 'α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ', 'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω'};
+
+
+            string fluent = "";
+
+            for (int i = 0; i < inputText.Length; i++)
+            {
+                if (Char.IsLetter(inputText[i]) == true && i != inputText.Length - 1)
+                {
+                    fluent += inputText[i];
+                }
+                else if (fluent != "" && (Evaluator.prec.Contains(inputText[i]) == true || inputText[i] == ' '))
+                {
+                    if (!dict.ContainsKey(fluent))
+                    {
+                        dict.Add(fluent, lstChar[0]);
+                        fluent = "";
+                        lstChar.RemoveAt(0);
+                    }
+                    else
+                    {
+                        fluent = "";
+                    }
+
+                }
+
+                else if (Char.IsLetter(inputText[i]) == true && i == inputText.Length - 1)
+                {
+                    fluent += inputText[i];
+                    if (!dict.ContainsKey(fluent))
+                    {
+                        dict.Add(fluent, lstChar[0]);
+                    }
+                }
+
+                else if (i == inputText.Length - 1)
+                {
+                    if (!dict.ContainsKey(fluent))
+                    {
+                        fluent += inputText[i];
+                        dict.Add(fluent, lstChar[0]);
+                    }
+                }
+            }
+
+            return dict;
+
+        }
         //------------------------------drawing initial graph----------------------------------------------------
 
 
         public List<State> drawGraph(State currentState)
         {
-            agentActionOrList = false;
-
-            bool causes = false;
+          
+            bool checkEmptyEffect = false;
             List<State> states = new List<State>();
-            State changedStateCauses = new State(currentState);
-            foreach (CausesIf causesIfRule in causesIfRules)
+
+            List<Agent_Action> action_agent_list = new List<Agent_Action>();
+            foreach (Agent agent in MainWindow.agents)
             {
-                    if (currentState.checkOrList(causesIfRule._if))
+                foreach (Action action in MainWindow.actions)
+                {
+                    action_agent_list.Add(new Agent_Action(agent, action));
+                }
+            }
+            foreach (Agent_Action agent_action in action_agent_list)
+            {
+                List<string> queriesList = new List<string>();
+
+
+                foreach (CausesIf causesIfRule in causesIfRules)
+                {
+                    if (agent_action.isEqual(causesIfRule.agent_action))
                     {
-
-                        bool[] formulaResult = causesIfRule.evaluator.GetResultData();
-
-           
-                        for (int i = 0; i < formulaResult.Length; i++)
+                        if (currentState.checkOrList(causesIfRule._if))
                         {
-                            if (formulaResult[i])
+                            queriesList.Add(causesIfRule.evaluator.Original);
+                        }
+                        //empty effect
+                        else
+                        {
+                            if (!states.Contains(currentState))
                             {
-                                State changed = new State(currentState);
-                                List<Fluent> toChange = new List<Fluent>();
-                                foreach (Fluent fluent in currentState.Fluents)
-                                {
-                                    if (causesIfRule.evaluator.EvalPlan.ContainsKey(fluent.Name))
-                                    {
-                                        toChange.Add(new Fluent(fluent.Name, causesIfRule.evaluator.EvalPlan[fluent.Name].fieldResult[i]));
-                                    }
-                                }
-                                changed.changeList(toChange);
-                            changed.agentAction = causesIfRule.agent_action;
-                                states.Add(changed);
+                                State tempState = new State(currentState);
+                                tempState.agentAction = agent_action;
+                                states.Add(tempState);
                             }
                         }
-                        causes = true;
                     }
-                    else
+
+                }
+
+
+                foreach (ReleasesIf releasesIfRule in releasesIfRules)
+                {
+                    if (agent_action.isEqual(releasesIfRule.agent_action))
                     {
-                        //State changed = new State(currentState);
-                        //changed.agentAction = causesIfRule.agent_action;
-                        //states.Add(changed);
-                    }
-            }
-            if (causes)
-            {
-                return states;
-            }
+                        if (currentState.checkOrList(releasesIfRule._if))
+                        {
+                            queriesList.Add("(" + releasesIfRule.change[0].Name + "∨¬" + releasesIfRule.change[0].Name + ")");
 
-            foreach (ReleasesIf releasesIfRule in releasesIfRules)
-            {
-               
-                    if (currentState.checkOrList(releasesIfRule._if))
+                        }
+                        //empty effect
+                        else
+                        {
+                            if (!states.Contains(currentState))
+                            {
+                                State tempState = new State(currentState);
+                                tempState.agentAction = agent_action;
+                                states.Add(tempState);
+                            }
+                        }
+                    }
+
+                }
+
+                if (queriesList.Count > 0)
+                {
+                    string mainQuery = "";
+                    foreach (string item in queriesList)
                     {
-                        State changed = new State(currentState);
+                        string temp = "";
+                        if (!Regex.IsMatch(item, @"^[a-zA-Z]+$"))
+                        {
+                            if (item[0] != '(')
+                            {
+                                temp = '(' + item + ')';
+                            }
+                            else
+                            {
+                                temp = item;
+                            }
 
-                    changed.agentAction = releasesIfRule.agent_action;
-                    changed.changeFluent(new Fluent(releasesIfRule.change[0].Name, true));
-                    states.Add(changed);
+                        }
+                        else
+                        {
+                            temp = item;
+                        }
 
-                        changed = new State(currentState);
-                    changed.changeFluent(new Fluent(releasesIfRule.change[0].Name, false));
-                    changed.agentAction = releasesIfRule.agent_action;
-                    states.Add(changed);
-
+                        mainQuery += temp + "∧";
                     }
-                    else
+                    mainQuery = mainQuery.Substring(0, mainQuery.Length - 1);
+
+                    Dictionary<string, char> dict = ConvertFluentsToChar(mainQuery);
+                    String convertedText = ReplaceFluentsWithChar(dict, mainQuery);
+
+                    Evaluator mainEvaluator = new Evaluator(convertedText, mainQuery);
+                    mainEvaluator.FindEvalPlan();
+                    mainEvaluator.EvaluateQuery(dict);
+
+                    bool[] formulaResult = mainEvaluator.GetResultData();
+
+                    for (int i = 0; i < formulaResult.Length; i++)
                     {
-                        //State changed = new State(currentState);
-                        //changed.agentAction = releasesIfRule.agent_action;
-                        //states.Add(changed);
+                        if (formulaResult[i])
+                        {
+                            State changed = new State(currentState);
+                            changed.agentAction = agent_action;
+                            List<Fluent> toChange = new List<Fluent>();
+                            foreach (Fluent fluent in currentState.Fluents)
+                            {
+                                if (mainEvaluator.EvalPlan.ContainsKey(fluent.Name))
+                                {
+                                    toChange.Add(new Fluent(fluent.Name, mainEvaluator.EvalPlan[fluent.Name].fieldResult[i]));
+                                }
+                            }
+                            changed.changeList(toChange);
+                            states.Add(changed);
+                        }
                     }
-                
+                }
             }
-            
             //output should be list of states coz of releasescan produce more than 1 state
-            return states;
+            return this.checkDelete(states);
         }
     }
 }
