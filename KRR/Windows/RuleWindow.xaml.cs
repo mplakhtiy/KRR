@@ -112,6 +112,7 @@ namespace KRR.Windows
                     }
                     break;
                 case 2: //initilly
+                    MainWindow.statement = "initially ";
                     break;
                 //case 2:
                 //    if(MainWindow.alwaysEvaluator!=null)
