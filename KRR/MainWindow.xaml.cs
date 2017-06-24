@@ -47,8 +47,6 @@ namespace KRR
 
         public void Init()
         {
-            
-
             Controls.Add add = new Controls.Add();
             add2 = new Controls.Add();
             Controls.Add add3 = new Controls.Add();
@@ -155,7 +153,6 @@ namespace KRR
             Logic.Main.form1.ShowDialog();
             Logic.Main.form.ShowDialog();
           
-
         }
 
         private void ClearQuery_Click(object sender, RoutedEventArgs e)

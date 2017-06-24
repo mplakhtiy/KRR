@@ -2,6 +2,7 @@
 using KRR.Logic.Rules;
 using KRR.Logic.TruthTable;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace KRR.Logic
 {
@@ -18,6 +19,7 @@ namespace KRR.Logic
         public static List<Observable> observableRules;
         public static bool agentActionOrList = false;
 
+        public static List<string> queriesList = new List<string>();
         public Rule()
         {
             //for result
@@ -71,8 +73,6 @@ namespace KRR.Logic
                 return obj.Fluents.GetHashCode();
             }
         }
-     
-
         private List<State> checkDelete(List<State> input)
         {
             //var distinctItems = input.Distinct();
@@ -98,46 +98,47 @@ namespace KRR.Logic
                 {
                      if (currentState.checkOrList(causesIfRule._if))
                     {
+                        queriesList.Add(causesIfRule.evaluator.Original);
                         // State changedStateReleases = new State(currentState);
                         // states.Add(changedStateReleases.changeList(causesIfRule.change));
 
-                        bool[] formulaResult = causesIfRule.evaluator.GetResultData();
+                        //bool[] formulaResult = causesIfRule.evaluator.GetResultData();
 
-                        // check if causes ever executable
-                        neverBool = true;
-                        for (int i = 0; i < formulaResult.Length; i++)
-                        {
-                            if (formulaResult[i])
-                            {
-                                neverBool = false;
-                            }
-                        }
-                        if (neverBool)
-                        {
-                            never = causesIfRule;
-                        }
-                        //-------
+                        //// check if causes ever executable
+                        //neverBool = true;
+                        //for (int i = 0; i < formulaResult.Length; i++)
+                        //{
+                        //    if (formulaResult[i])
+                        //    {
+                        //        neverBool = false;
+                        //    }
+                        //}
+                        //if (neverBool)
+                        //{
+                        //    never = causesIfRule;
+                        //}
+                        ////-------
                         
-                         for (int i = 0; i < formulaResult.Length; i++)
-                        {
-                            if (formulaResult[i])
-                            {
-                                State changed = new State(currentState);
-                                List<Fluent> toChange = new List<Fluent>();
-                                foreach (Fluent fluent in currentState.Fluents)
-                                {
-                                    if (causesIfRule.evaluator.EvalPlan.ContainsKey(fluent.Name))
-                                    {
-                                        toChange.Add(new Fluent(fluent.Name,causesIfRule.evaluator.EvalPlan[fluent.Name].fieldResult[i]));
-                                    }
-                                }
-                                changed.changeList(toChange);
-                                states.Add(changed);
-                            }
-                        }
+                        // for (int i = 0; i < formulaResult.Length; i++)
+                        //{
+                        //    if (formulaResult[i])
+                        //    {
+                        //        State changed = new State(currentState);
+                        //        List<Fluent> toChange = new List<Fluent>();
+                        //        foreach (Fluent fluent in currentState.Fluents)
+                        //        {
+                        //            if (causesIfRule.evaluator.EvalPlan.ContainsKey(fluent.Name))
+                        //            {
+                        //                toChange.Add(new Fluent(fluent.Name,causesIfRule.evaluator.EvalPlan[fluent.Name].fieldResult[i]));
+                        //            }
+                        //        }
+                        //        changed.changeList(toChange);
+                        //        states.Add(changed);
+                        //    }
+                        //}
 
                         //changedStateCauses.changeList(causesIfRule.change);
-                        causes = true;
+                     
                     }
                     else
                     {
@@ -146,17 +147,7 @@ namespace KRR.Logic
                     }
                 }
             }
-            if (causes)
-            {
-                //Console.WriteLine("CAUSES____________________________");
-                //Console.WriteLine("Next STATE______________________________________________");
-                //Console.WriteLine(changedStateCauses);
-                //states.Add(changedStateCauses);
-
-                
-
-                return checkDelete( states);
-            }
+        
             foreach (Always alwaysRule in alwaysRules)
             {
 
@@ -212,15 +203,17 @@ namespace KRR.Logic
                         }
                         else {
 
-                            State changedStateReleases = new State(currentState);
+                            //State changedStateReleases = new State(currentState);
 
-                            states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, true)));
+                            //states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, true)));
 
-                            changedStateReleases = new State(currentState);
+                            //changedStateReleases = new State(currentState);
 
-                            states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false)));
+                            //states.Add(changedStateReleases.changeFluent(new Fluent(releasesIfRule.change[0].Name, false)));
                             //Console.WriteLine("Next STATE______________________________________________");
                             //Console.WriteLine(changedStateReleases);
+                            queriesList.Add("(" + releasesIfRule.change[0].Name + "∨¬" + releasesIfRule.change[0].Name+")");
+                            
                         }
                     }
                     else
@@ -230,8 +223,30 @@ namespace KRR.Logic
                     }
                 }
             }
+            string mainQuery = "";
+            foreach (string  item in queriesList)
+            {
+                string temp = "";
+                if(!Regex.IsMatch(item, @"^[a-zA-Z]+$"))
+                {
+                    if (item[0] != '(')
+                    {
+                        temp = '(' + item + ')';
+                    }
+                    else
+                    {
+                        temp = item;
+                    }
 
-
+                }
+                else
+                {
+                    temp = item;
+                }
+              
+                mainQuery += temp + "∧";
+            }
+            mainQuery = mainQuery.Substring(0, mainQuery.Length - 1);
 
             //output should be list of states coz of releasescan produce more than 1 state
             return states;

@@ -135,7 +135,6 @@ namespace KRR.Logic.Rules
                 this.evaluator.FindEvalPlan();
                 this.evaluator.EvaluateQuery(dict);
             }
-           
         }
         public override string ToString()
         {
