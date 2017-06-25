@@ -41,6 +41,9 @@ namespace KRR.Controls
                 String original = Query.Text;
 
                 Dictionary<string, char> dict = ConvertFluentsToChar(Query.Text);
+
+
+
                 String convertedText = ReplaceFluentsWithChar(dict, Query.Text);
 
                 //Create an instance of the evaluator class
@@ -83,7 +86,7 @@ namespace KRR.Controls
                     MainWindow.goalEvaluator = this.evaluator;
                     break;
                 case "initially":
-                    MainWindow.initallyEvaluator = this.evaluator;
+                    MainWindow.initiallyEvaluator = this.evaluator;
                     break;
                 default:
                     break;

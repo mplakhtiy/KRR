@@ -41,7 +41,7 @@ namespace KRR.Logic
         //create a viewer object
         public static Microsoft.Msagl.GraphViewerGdi.GViewer viewer1;
         public static Microsoft.Msagl.Drawing.Graph graph1;
-
+        public static List<List<Fluent>> goalOrList;
 
 
         public static void drawGraph(List<Fluent> init, List<Fluent> goal, List<Fluent> allFluents, Rule rules)
@@ -165,18 +165,57 @@ namespace KRR.Logic
 
 
         }
+        public static List<List<Fluent>> getOrList(Evaluator evaluator)
+        {
+            List<List<Logic.Fluent>> orList = new List<List<Logic.Fluent>>();
 
+            if (evaluator != null)
+            {
+                bool[] formulaResult = evaluator.GetResultData();
+                bool neverBool = true;
+                for (int i = 0; i < formulaResult.Length; i++)
+                {
+                    if (formulaResult[i])
+                    {
+                        neverBool = false;
+                    }
+                }
+                if (neverBool)
+                {
+                    orList.Add(new List<Fluent> { new Fluent("-", false) });
 
-        public static void TheMostImportantMethod(Agent agent,List<Fluent> _goal,Rule rules, List<Fluent> intializedFluents, List<Fluent> allFluents,
+                }
+                else
+                {
+
+                    for (int i = 0; i < formulaResult.Length; i++)
+                    {
+                        if (formulaResult[i])
+                        {
+
+                            List<Fluent> andList = new List<Fluent>();
+                            foreach (Fluent fluent in MainWindow.allFluents)
+                            {
+                                if (evaluator.EvalPlan.ContainsKey(fluent.Name))
+                                {
+                                    andList.Add(new Fluent(fluent.Name, evaluator.EvalPlan[fluent.Name].fieldResult[i]));
+                                }
+                            }
+
+                            orList.Add(andList);
+                        }
+                    }
+                }
+            }
+            return orList;
+        }
+
+        public static void TheMostImportantMethod(Agent agent,Evaluator goalEvaluator,Rule rules, Evaluator initiallyEvaluator, List<Fluent> allFluents,
             List<Agent_Action> queries)
         {
-
-
-
-
-
-
-
+           
+            List<List<Fluent>> initiallyOrLıst = getOrList(initiallyEvaluator);
+            goalOrList = getOrList(goalEvaluator);
 
             if (MainWindow.alwaysEvaluator != null)
             {
@@ -201,7 +240,7 @@ namespace KRR.Logic
 
             goalNever = true;
             goalAlways = true;
-            Goal = _goal;
+           // Goal = _goal;
 
             lastQuery = -1;
             always = true;
@@ -212,29 +251,76 @@ namespace KRR.Logic
             
 
             List<State> possibleInitialStates = new List<State>();
-            List<Fluent> temp = new List<Fluent>();
-            foreach (Fluent fluent in allFluents)
-            {
-                temp.Add(fluent);
-            }
-                //Create temp list with not setted Fluents
-            foreach (Fluent fluent in temp)
-            {
-                foreach (Fluent intializedFluent in intializedFluents)
-                {
-                    if (intializedFluent.Name == fluent.Name)
-                    {
-                        allFluents.Remove(fluent);
-                        break;
-                    }
-                }
-            }
+
+            //List<Fluent> temp = new List<Fluent>();
+            //foreach (Fluent fluent in allFluents)
+            //{
+            //    temp.Add(fluent);
+            //}
+            //    //Create temp list with not setted Fluents
+            //foreach (Fluent fluent in temp)
+            //{
+            //    foreach (Fluent intializedFluent in intializedFluents)
+            //    {
+            //        if (intializedFluent.Name == fluent.Name)
+            //        {
+            //            allFluents.Remove(fluent);
+            //            break;
+            //        }
+            //    }
+            //}
             //if (intializedFluents.Count > 0)
             //{
             //allFluents = temp;
             //}
 
 
+
+            //int n = allFluents.Count;
+            ////Create all possible combinations
+            //List<bool[]> matrix = new List<bool[]>();
+            //double count = Math.Pow(2, n);
+            ////if all fluents.count == 0 then matrix also should be 0 elemetns but not 2^0=1
+            //if (n == 0)
+            //{
+            //    count = 0;
+            //}
+
+            //for (int i = 0; i < count; i++)
+            //{
+            //    string str = Convert.ToString(i, 2).PadLeft(n, '0');
+            //    bool[] boolArr = str.Select((x) => x == '1').ToArray();
+
+            //    matrix.Add(boolArr);
+            //}
+            ////if all fluents were initiallized then just add initially fluents
+            //if (matrix.Count == 0)
+            //{
+            //    var a = new State();
+            //    foreach (Fluent intializedFluent in intializedFluents)
+            //    {
+            //        a.addFluent(intializedFluent);
+            //    }
+            //    possibleInitialStates.Add(a);
+            //}
+            //else {
+            //    for (int i = 0; i < matrix.Count; i++)
+            //    {
+            //        var a = new State();
+            //        foreach (Fluent intializedFluent in intializedFluents)
+            //        {
+            //            a.addFluent(intializedFluent);
+            //        }
+
+            //        //if all fluents size > 
+            //        for (int j = 0; j < matrix[0].Length; j++)
+            //        {
+            //            a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
+            //        }
+            //        possibleInitialStates.Add(a);
+
+            //    }
+            //}
 
             int n = allFluents.Count;
             //Create all possible combinations
@@ -245,7 +331,7 @@ namespace KRR.Logic
             {
                 count = 0;
             }
-            
+
             for (int i = 0; i < count; i++)
             {
                 string str = Convert.ToString(i, 2).PadLeft(n, '0');
@@ -254,36 +340,30 @@ namespace KRR.Logic
                 matrix.Add(boolArr);
             }
             //if all fluents were initiallized then just add initially fluents
-            if (matrix.Count == 0)
+
+            for (int i = 0; i < matrix.Count; i++)
             {
                 var a = new State();
-                foreach (Fluent intializedFluent in intializedFluents)
+                //if all fluents size > 
+                for (int j = 0; j < matrix[0].Length; j++)
                 {
-                    a.addFluent(intializedFluent);
+                    a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
                 }
                 possibleInitialStates.Add(a);
-            }
-            else {
-                for (int i = 0; i < matrix.Count; i++)
-                {
-                    var a = new State();
-                    foreach (Fluent intializedFluent in intializedFluents)
-                    {
-                        a.addFluent(intializedFluent);
-                    }
 
-                    //if all fluents size > 
-                    for (int j = 0; j < matrix[0].Length; j++)
-                    {
-                        a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
-                    }
-                    possibleInitialStates.Add(a);
-
-                }
             }
+
+            List<State> tempStates = new List<State>();
             foreach (State possibleInitialState in possibleInitialStates)
             {
-                Console.WriteLine(possibleInitialState);
+                if(possibleInitialState.checkOrList(initiallyOrLıst))
+                     tempStates.Add(possibleInitialState);
+            }
+
+            possibleInitialStates = tempStates;
+            foreach (State item in possibleInitialStates)
+            {
+                Console.WriteLine(item);
             }
 
             Logic.Main.Queries = queries;
@@ -445,7 +525,7 @@ namespace KRR.Logic
                     if (Goal != null && queryNumber != 0)
                     {
 
-                        if (state.checkList(Goal))
+                        if (state.checkOrList(goalOrList))
                         {
                             goalNever = false;
                             graph.FindNode(nodeId + state.ToString()).Attr.FillColor = Microsoft.Msagl.Drawing.Color.LightPink;
