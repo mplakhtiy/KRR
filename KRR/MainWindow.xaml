@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="KRR Project" Height="550" Width="825"
         Background="Black" ResizeMode="NoResize">
-   
+
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*" />
@@ -23,7 +23,7 @@
         <Label x:Name="Actions" Content="Actions" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center"  Foreground="White" Grid.Row="1"/>
         <Label x:Name="Fluents" Content="Fluents" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center"  Foreground="White" Grid.Row="2"/>
         <Label x:Name="Statements" Content="Statements" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center"  Foreground="White" Grid.Row="0" Grid.Column="1"/>
-        <Label x:Name="Query" Content="Query" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="1" Grid.Column="1"/>
+        <Label x:Name="Sequence" Content="Sequence" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="1" Grid.Column="1"/>
         <Label x:Name="Result" Content="Result" FontFamily="Impact" FontSize="20" HorizontalAlignment="Center" Foreground="White" Grid.Row="2" Grid.Column="1"/>
 
         <Rectangle Stroke="Gray" StrokeThickness="2" Grid.RowSpan="3"></Rectangle>
@@ -55,11 +55,9 @@
         <Button Name="ClearStatementButton" Content="CLEAR" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="0,0,80,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="ClearStatement_Click"></Button>
 
         <Button Name="PerformButton" Content="PERFORM" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Perform_Click"></Button>
-        <Button Name="AddGoalButton" Content="ADD GOAL" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="10,0,0,105"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="AddGoal_Click"></Button>
-        <TextBlock Name="Goal" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="80,0,0,100"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="30" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
-        <TextBlock Name="AgentResult" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="15,0,0,70"  FontFamily="Impact" Background="Transparent" FontSize="16" Height="30" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left">Agent</TextBlock>
-        <ComboBox Name="AgentComboBox" Grid.Row="2" Grid.Column="1" Height="20" Width="80"  Foreground="Black"  Margin="75,73,0,81" FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Center"  SelectionChanged="AgentComboBox_SelectionChanged" />
-        <TextBlock Name="Output" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,40,0,0"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="100" Width="260" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
+        <Button Name="AddGoalButton" Content="ADD QUERY" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="10,0,0,108"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="AddGoal_Click"></Button>
+        <TextBlock Name="Goal" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="95,0,0,103"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="30" Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Name="Output" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,75,0,0"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="95" Width="184" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
 
     </Grid>
 </Window>

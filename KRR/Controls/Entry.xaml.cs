@@ -35,7 +35,7 @@ namespace KRR.Controls
                 if (AgentName.Content.ToString().Equals(ag.Name))
                 {
                     MainWindow.agents.Remove(ag);
-                    ((MainWindow)System.Windows.Application.Current.MainWindow).AgentComboBox.Items.Remove(AgentName.Content.ToString());
+                   // ((MainWindow)System.Windows.Application.Current.MainWindow).AgentComboBox.Items.Remove(AgentName.Content.ToString());
                    grid = "AgentsGrid";
                     break;
                 }

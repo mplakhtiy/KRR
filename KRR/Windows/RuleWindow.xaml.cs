@@ -177,7 +177,8 @@ namespace KRR.Windows
                     if (Rule.Children.Count != 0)
                         Rule.Children.Clear();
                     FormulaWindow Initially = new FormulaWindow("initially");
-                    Rule.Children.Add(Initially);
+                    Initially.ShowDialog();
+                    //Rule.Children.Add(Initially);
                     break;
                 
             }

@@ -81,9 +81,12 @@ namespace KRR.Controls
                     break;
                 case "goal":
                     MainWindow.goalEvaluator = this.evaluator;
+                    Windows.QueryWindow.query += " " + Query.Text;
+                    Windows.QueryWindow.statement += " " + Query.Text;
                     break;
                 case "initially":
-                    MainWindow.initallyEvaluator = this.evaluator;
+                    MainWindow.initiallyEvaluator = this.evaluator;
+                    MainWindow.statement3 = Query.Text;
                     break;
                 default:
                     break;

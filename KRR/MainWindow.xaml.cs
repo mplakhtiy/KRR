@@ -32,8 +32,10 @@ namespace KRR
         public static string AlwaysHeader;
         public static Evaluator alwaysEvaluator;
         public static Evaluator goalEvaluator;
-        public static Evaluator initallyEvaluator;
+        public static Evaluator initiallyEvaluator;
         public static Evaluator evaluator;
+        public static int choosenPossibly = 0;
+        public static int choosenType = 0;
 
         int row = 0;
         public static Controls.Add add2;
@@ -176,19 +178,11 @@ namespace KRR
         }
         private void AddGoal_Click(object sender, RoutedEventArgs e)
         {
-            Controls.FormulaWindow window = new Controls.FormulaWindow("goal");
+            Windows.QueryWindow window = new Windows.QueryWindow();
             window.ShowDialog();
         }
 
-        private void AgentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            foreach (var a in MainWindow.agents)
-            {
-                if (AgentComboBox.SelectedItem.ToString().Equals(a.Name.ToString()))
-                    agentPerform = a;
-            }
-            
-        }
+        
 
         private void ClearStatement_Click(object sender, RoutedEventArgs e)
         {
