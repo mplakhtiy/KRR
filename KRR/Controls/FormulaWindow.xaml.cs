@@ -79,6 +79,12 @@ namespace KRR.Controls
                     MainWindow.alwaysEvaluator = this.evaluator;
 
                     break;
+                case "goal":
+                    MainWindow.goalEvaluator = this.evaluator;
+                    break;
+                case "initially":
+                    MainWindow.initallyEvaluator = this.evaluator;
+                    break;
                 default:
                     break;
             }

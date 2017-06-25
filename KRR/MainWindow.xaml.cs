@@ -31,7 +31,8 @@ namespace KRR
         public static String statement3 = null;
         public static string AlwaysHeader;
         public static Evaluator alwaysEvaluator;
-
+        public static Evaluator goalEvaluator;
+        public static Evaluator initallyEvaluator;
         public static Evaluator evaluator;
 
         int row = 0;
@@ -175,7 +176,7 @@ namespace KRR
         }
         private void AddGoal_Click(object sender, RoutedEventArgs e)
         {
-            Windows.InitiallyWindow window = new Windows.InitiallyWindow("goal");
+            Controls.FormulaWindow window = new Controls.FormulaWindow("goal");
             window.ShowDialog();
         }
 

@@ -224,73 +224,75 @@ namespace KRR.Logic
                     }
                 }
             }
-            string mainQuery = "";
-            foreach (string  item in queriesList)
+            if (queriesList.Count > 0)
             {
-                string temp = "";
-                if(!Regex.IsMatch(item, @"^[a-zA-Z]+$"))
+                string mainQuery = "";
+                foreach (string item in queriesList)
                 {
-                    if (item[0] != '(')
+                    string temp = "";
+                    if (!Regex.IsMatch(item, @"^[a-zA-Z]+$"))
                     {
-                        temp = '(' + item + ')';
+                        if (item[0] != '(')
+                        {
+                            temp = '(' + item + ')';
+                        }
+                        else
+                        {
+                            temp = item;
+                        }
+
                     }
                     else
                     {
                         temp = item;
                     }
 
+                    mainQuery += temp + "∧";
                 }
-                else
+                mainQuery = mainQuery.Substring(0, mainQuery.Length - 1);
+
+                Dictionary<string, char> dict = ConvertFluentsToChar(mainQuery);
+                String convertedText = ReplaceFluentsWithChar(dict, mainQuery);
+
+                Evaluator mainEvaluator = new Evaluator(convertedText, mainQuery);
+                mainEvaluator.FindEvalPlan();
+                mainEvaluator.EvaluateQuery(dict);
+
+                //State changedStateReleases = new State(currentState);
+                //states.Add(changedStateReleases.changeList(causesIfRule.change));
+
+                bool[] formulaResult = mainEvaluator.GetResultData();
+
+                // check if causes ever executable
+                neverBool = true;
+                for (int i = 0; i < formulaResult.Length; i++)
                 {
-                    temp = item;
-                }
-              
-                mainQuery += temp + "∧";
-            }
-            mainQuery = mainQuery.Substring(0, mainQuery.Length - 1);
-
-            Dictionary<string, char> dict = ConvertFluentsToChar(mainQuery);
-            String convertedText = ReplaceFluentsWithChar(dict, mainQuery);
-
-            Evaluator mainEvaluator = new Evaluator(convertedText, mainQuery);
-            mainEvaluator.FindEvalPlan();
-            mainEvaluator.EvaluateQuery(dict);
-
-            //State changedStateReleases = new State(currentState);
-            //states.Add(changedStateReleases.changeList(causesIfRule.change));
-
-            bool[] formulaResult = mainEvaluator.GetResultData();
-
-            // check if causes ever executable
-            neverBool = true;
-            for (int i = 0; i < formulaResult.Length; i++)
-            {
-                if (formulaResult[i])
-                {
-                    neverBool = false;
-                }
-            }
-          
-            //-------
-
-            for (int i = 0; i < formulaResult.Length; i++)
-            {
-                if (formulaResult[i])
-                {
-                    State changed = new State(currentState);
-                    List<Fluent> toChange = new List<Fluent>();
-                    foreach (Fluent fluent in currentState.Fluents)
+                    if (formulaResult[i])
                     {
-                        if (mainEvaluator.EvalPlan.ContainsKey(fluent.Name))
-                        {
-                            toChange.Add(new Fluent(fluent.Name, mainEvaluator.EvalPlan[fluent.Name].fieldResult[i]));
-                        }
+                        neverBool = false;
                     }
-                    changed.changeList(toChange);
-                    states.Add(changed);
+                }
+
+                //-------
+
+                for (int i = 0; i < formulaResult.Length; i++)
+                {
+                    if (formulaResult[i])
+                    {
+                        State changed = new State(currentState);
+                        List<Fluent> toChange = new List<Fluent>();
+                        foreach (Fluent fluent in currentState.Fluents)
+                        {
+                            if (mainEvaluator.EvalPlan.ContainsKey(fluent.Name))
+                            {
+                                toChange.Add(new Fluent(fluent.Name, mainEvaluator.EvalPlan[fluent.Name].fieldResult[i]));
+                            }
+                        }
+                        changed.changeList(toChange);
+                        states.Add(changed);
+                    }
                 }
             }
-
             //changedStateCauses.changeList(causesIfRule.change);
 
 

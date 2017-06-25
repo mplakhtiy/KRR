@@ -176,7 +176,7 @@ namespace KRR.Windows
                 case 2:
                     if (Rule.Children.Count != 0)
                         Rule.Children.Clear();
-                    Controls.RuleControls.Initially Initially = new Controls.RuleControls.Initially();
+                    FormulaWindow Initially = new FormulaWindow("initially");
                     Rule.Children.Add(Initially);
                     break;
                 
