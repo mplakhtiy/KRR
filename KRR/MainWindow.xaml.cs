@@ -150,7 +150,7 @@ namespace KRR
 
         {
             Logic.Main.drawGraph(initialliazed, goal, allFluents, rules);
-            Logic.Main.TheMostImportantMethod(agentPerform,goal,rules, initialliazed, allFluents, queries);
+            Logic.Main.TheMostImportantMethod(agentPerform,goalEvaluator,rules, initiallyEvaluator, allFluents, queries);
 
             Output.Text = Logic.Main.result.ToString();
             Logic.Main.form1.ShowDialog();
