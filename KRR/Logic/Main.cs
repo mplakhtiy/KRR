@@ -349,7 +349,7 @@ namespace KRR.Logic
                     a.addFluent(new Fluent(allFluents[j].Name, matrix[i][j]));
                 }
                 possibleInitialStates.Add(a);
-
+                /*--------------------               possibleInitialStates contains  all possible states   -             ---------------------*/
             }
 
             List<State> tempStates = new List<State>();

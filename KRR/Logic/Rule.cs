@@ -299,7 +299,7 @@ namespace KRR.Logic
             //output should be list of states coz of releasescan produce more than 1 state
 
 
-
+          // return checkAlways(allPossibleStates, states, alwaysCheckOrList);
             return states;
         }
         public List<State> checkAlways(List<State> allPossibleStates, List<State> outputStates, List<List<Fluent>> alwaysCheckOrList)
