@@ -297,9 +297,52 @@ namespace KRR.Logic
 
 
             //output should be list of states coz of releasescan produce more than 1 state
+
+
+
             return states;
         }
+        public List<State> checkAlways(List<State> allPossibleStates, List<State> outputStates, List<List<Fluent>> alwaysCheckOrList)
+        {
+            List<State> clearStates = new List<State>();
+            foreach (State output in outputStates)
+            {
+                if (!output.checkOrList(alwaysCheckOrList))
+                {
+                    State minChangesState = null;
+                    int countMinChanges = 1000;
+                    //check for minimum changes
+                    foreach (State possibleState in allPossibleStates)
+                    {
+                        if (minChangesState == null)
+                        {
+                            minChangesState = possibleState;
+                        }
 
+                        int changes = 0;
+                        foreach (Fluent tempFluent in output.Fluents)
+                        {
+                            if (!possibleState.check(tempFluent))
+                            {
+                                changes++;
+                            }
+                        }
+                        if (changes < countMinChanges)
+                        {
+                            countMinChanges = changes;
+                            minChangesState = possibleState;
+                        }
+                    }
+                    clearStates.Add(minChangesState);
+                }
+                else
+                {
+                    clearStates.Add(output);
+                }
+            }
+            return clearStates;
+        }
+        
         public String ReplaceFluentsWithChar(Dictionary<string, char> dict, string query)
         {
 

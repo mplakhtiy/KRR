@@ -248,7 +248,6 @@ namespace KRR.Logic
             Rule.never = null;
             Rule.always = true;
             
-            
 
             List<State> possibleInitialStates = new List<State>();
 
@@ -371,71 +370,105 @@ namespace KRR.Logic
             doRecursion(possibleInitialStates, 0,"",null);
 
             //result output
-            if (Logic.Main.Queries.Count != lastQuery)
+            //program
+            if (MainWindow.choosenType == 2)
             {
-                result += "Program is never executable!!! \n";
+                if (Logic.Main.Queries.Count != lastQuery)
+                {
+                    result += "false";
 
-                for(int i= 0;i<Logic.Main.Queries.Count;i++)
-                {
-                    if (i > lastQuery-1)
-                    {
-                        result+="Q"+(i+1)+" "+ Logic.Main.Queries[i].ToString()+" - not executable \n";
-                    }
-                }
-            }
-            else
-            {
-                if (always)
-                {
-                    result += "Program is always executable \n";
+                    //for (int i = 0; i < Logic.Main.Queries.Count; i++)
+                    //{
+                    //    if (i > lastQuery - 1)
+                    //    {
+                    //        result += "Q" + (i + 1) + " " + Logic.Main.Queries[i].ToString() + " - not executable \n";
+                    //    }
+                    //}
                 }
                 else
                 {
-                    result += "Program is not alsways executable , only sometimes \n";
-                }
-            }
-            if (Goal != null)
-            {
-                if (Goal.Count > 0)
-                {
-
-                    if (goalNever)
+                    if (MainWindow.choosenPossibly == 1)
                     {
-                        result += "Goal is never satisfied! \n";
-                    }
-                    else
-                    {
-                        if (!goalAlways)
+                        if (always)
                         {
-                            result += "Goal is sometimes satisfied! \n";
+                            result += "true";
                         }
                         else
                         {
-                            result += "Goal is always satisfied \n";
+                            result += "false";
+                        }
+                    }
+                    else
+                    {
+                        result += "true";
+                    }
+
+                }
+            }
+            //goal
+            if (MainWindow.choosenType == 0)
+            {
+                if (goalEvaluator != null)
+                {
+                    if (goalEvaluator.EvalPlan.Count > 0)
+                    {
+
+                        if (goalNever)
+                        {
+                            result += "False";
+                        }
+                        else
+                        {
+                            if (MainWindow.choosenPossibly == 1)
+                            {
+                                if (goalAlways)
+                                {
+                                    result += "True";
+                                }
+                                else
+                                {
+                                    result += "False";
+                                }
+                            }
+                            else
+                            {
+                                result += "True";
+                            }
                         }
                     }
                 }
             }
-            if (agentToCheck.Name != null)
+            //agent
+            if (MainWindow.choosenType == 1)
             {
+                if (agentToCheck != null)
+                {
 
-                if (neverAgent)
-                {
-                    result += " Agent " + agentToCheck.Name + " is never involved to Program! \n";
-                }
-                else
-                {
-                    if (!alwaysAgent)
+                    if (neverAgent)
                     {
-                        result += " Agent " + agentToCheck.Name + " is sometimes involved to Program! \n";
+                        result += "False";
                     }
                     else
                     {
-                        result += " Agent " + agentToCheck.Name + " is always involved to Program! \n";
+                        if (MainWindow.choosenPossibly == 1)
+                        {
+                            if (alwaysAgent)
+                            {
+                                result += "True";
+                            }
+                            else
+                            {
+                                result += "False";
+                            }
+                        }
+                        else
+                        {
+                            result += "True";
+                        }
                     }
                 }
             }
-            Console.WriteLine(result);
+            Console.WriteLine("Result -----------  " +result);
 
             //bind the graph to the viewer 
             viewer.Graph =
