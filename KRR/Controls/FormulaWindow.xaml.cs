@@ -41,10 +41,32 @@ namespace KRR.Controls
                 String original = Query.Text;
 
                 Dictionary<string, char> dict = ConvertFluentsToChar(Query.Text);
+
+                foreach (KeyValuePair<string, char> b in dict)
+                {
+                    bool flag = false;
+                    foreach (var flnt in MainWindow.allFluents)
+                    {
+                        if (b.Key.Equals(flnt.Name))
+                        {
+                           flag = true;
+                           break;
+                        }
+                    }
+                    if (!flag)
+                    {
+                        MessageBox.Show("Warning: Unrecognized Fluent", "Error in Query");
+                        return;
+                    }
+                }
+
                 String convertedText = ReplaceFluentsWithChar(dict, Query.Text);
 
                 //Create an instance of the evaluator class
                 evaluator = new Evaluator(convertedText, original);
+                
+
+
 
                 //Update the truth Table, tree view and the plan textbox
                 TruthTable.ItemsSource = evaluator.EvaluateQuery(dict);
