@@ -42,7 +42,8 @@ namespace KRR.Logic
         public static Microsoft.Msagl.GraphViewerGdi.GViewer viewer1;
         public static Microsoft.Msagl.Drawing.Graph graph1;
         public static List<List<Fluent>> goalOrList;
-
+        public static List<List<Fluent>> alwaysOrList;
+        public static List<State> allPossibleStates;
 
         public static void drawGraph(List<Fluent> init, List<Fluent> goal, List<Fluent> allFluents, Rule rules)
         {
@@ -216,15 +217,8 @@ namespace KRR.Logic
            
             List<List<Fluent>> initiallyOrLıst = getOrList(initiallyEvaluator);
             goalOrList = getOrList(goalEvaluator);
-
-            if (MainWindow.alwaysEvaluator != null)
-            {
-                foreach (CausesIf causesEvaluator in Rule.causesIfRules)
-                {
-                    causesEvaluator.checngeCauses(MainWindow.AlwaysHeader);
-                }
-            }
-            MainWindow.AlwaysHeader = "";
+            alwaysOrList = getOrList(MainWindow.alwaysEvaluator);
+    
 
             //create a form
             form = new System.Windows.Forms.Form();
@@ -351,9 +345,16 @@ namespace KRR.Logic
                 possibleInitialStates.Add(a);
                 /*--------------------               possibleInitialStates contains  all possible states   -             ---------------------*/
             }
+            allPossibleStates = new List<State>();
+           
+            foreach (State possibleInitialState in possibleInitialStates)
+            {
+                if (possibleInitialState.checkOrList(alwaysOrList))
+                    allPossibleStates.Add(possibleInitialState);
+            }
 
             List<State> tempStates = new List<State>();
-            foreach (State possibleInitialState in possibleInitialStates)
+            foreach (State possibleInitialState in allPossibleStates)
             {
                 if(possibleInitialState.checkOrList(initiallyOrLıst))
                      tempStates.Add(possibleInitialState);

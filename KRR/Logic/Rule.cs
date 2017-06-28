@@ -100,6 +100,7 @@ namespace KRR.Logic
                 {
                      if (currentState.checkOrList(causesIfRule._if))
                     {
+
                         queriesList.Add(causesIfRule.evaluator.Original);
                         // State changedStateReleases = new State(currentState);
                         // states.Add(changedStateReleases.changeList(causesIfRule.change));
@@ -220,7 +221,7 @@ namespace KRR.Logic
                     else
                     {
                         always = false;
-                        agentActionOrList = false;
+                        agentActionOrList = true;
                     }
                 }
             }
@@ -249,6 +250,45 @@ namespace KRR.Logic
 
                     mainQuery += temp + "∧";
                 }
+                neverBool = true;
+
+                if (MainWindow.alwaysEvaluator != null)
+                {
+                    string alwaysQuery = MainWindow.alwaysEvaluator.Original;
+                    if (!Regex.IsMatch(alwaysQuery, @"^[a-zA-Z]+$"))
+                    {
+                        if (alwaysQuery[0] != '(')
+                        {
+                            alwaysQuery = '(' + alwaysQuery + ')';
+                        }
+                    }
+
+                    string queryWithAlways = mainQuery + alwaysQuery;
+
+                    Dictionary<string, char> dictAlways = ConvertFluentsToChar(queryWithAlways);
+                    String convertedTextAlways = ReplaceFluentsWithChar(dictAlways, queryWithAlways);
+
+                    Evaluator mainEvaluatorAlways = new Evaluator(convertedTextAlways, queryWithAlways);
+                    mainEvaluatorAlways.FindEvalPlan();
+                    mainEvaluatorAlways.EvaluateQuery(dictAlways);
+
+                    bool[] formulaResultAlways = mainEvaluatorAlways.GetResultData();
+
+                    for (int i = 0; i < formulaResultAlways.Length; i++)
+                    {
+                        if (formulaResultAlways[i])
+                        {
+                            neverBool = false;
+                        }
+                    }
+
+                    if (neverBool)
+                    {
+                        agentActionOrList = false;
+                        return new List<State>();
+                    }
+
+                }
                 mainQuery = mainQuery.Substring(0, mainQuery.Length - 1);
 
                 Dictionary<string, char> dict = ConvertFluentsToChar(mainQuery);
@@ -264,7 +304,7 @@ namespace KRR.Logic
                 bool[] formulaResult = mainEvaluator.GetResultData();
 
                 // check if causes ever executable
-                neverBool = true;
+                
                 for (int i = 0; i < formulaResult.Length; i++)
                 {
                     if (formulaResult[i])
@@ -299,8 +339,8 @@ namespace KRR.Logic
             //output should be list of states coz of releasescan produce more than 1 state
 
 
-          // return checkAlways(allPossibleStates, states, alwaysCheckOrList);
-            return states;
+          return checkAlways(Main.allPossibleStates, states, Main.alwaysOrList);
+            //return states;
         }
         public List<State> checkAlways(List<State> allPossibleStates, List<State> outputStates, List<List<Fluent>> alwaysCheckOrList)
         {

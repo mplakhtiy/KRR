@@ -153,7 +153,7 @@ namespace KRR
             Logic.Main.TheMostImportantMethod(agentPerform,goalEvaluator,rules, initiallyEvaluator, allFluents, queries);
 
             Output.Text = Logic.Main.result.ToString();
-            Logic.Main.form1.ShowDialog();
+           // Logic.Main.form1.ShowDialog();
             Logic.Main.form.ShowDialog();
           
         }
@@ -163,8 +163,8 @@ namespace KRR
             QueryGrid.Children.Clear();
             QueryGrid.ColumnDefinitions.Clear();
             queries.Clear();
-            MainWindow.AlwaysHeader = "";
-            MainWindow.alwaysEvaluator = null;
+           
+       
             row = 0;
 
             ColumnDefinition rowDefinition = new ColumnDefinition();
@@ -188,6 +188,8 @@ namespace KRR
         {
             StatementsGrid.Children.Clear();
             StatementsGrid.ColumnDefinitions.Clear();
+            MainWindow.alwaysEvaluator = null;
+            MainWindow.initiallyEvaluator = null;
             temp.Clear();
             initialliazed.Clear();
             rules = null;

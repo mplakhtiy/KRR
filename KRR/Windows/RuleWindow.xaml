@@ -16,7 +16,7 @@
         <ComboBox Name="ruleComboBox" Height="20" Width="100" VerticalAlignment="Top" Margin="30,30,0,0" HorizontalAlignment="Left" FontFamily="Arial Black" SelectionChanged="ComboBox_SelectionChanged">
             <ComboBoxItem>CausesIF</ComboBoxItem>
             <ComboBoxItem>ReleasesIF</ComboBoxItem>
-            <!--<ComboBoxItem>Always</ComboBoxItem>-->
+            <ComboBoxItem>Always</ComboBoxItem>
             <ComboBoxItem>Initially</ComboBoxItem>
         </ComboBox>
         <Grid Name="Rule" Margin="40,80,40,40">
