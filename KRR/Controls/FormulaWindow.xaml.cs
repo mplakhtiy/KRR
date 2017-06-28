@@ -1,19 +1,10 @@
-﻿using System;
+﻿using KRR.Logic.TruthTable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using KRR.Logic.TruthTable;
-using System.Text.RegularExpressions;
-
 
 namespace KRR.Controls
 {
@@ -24,6 +15,7 @@ namespace KRR.Controls
     {
         public string checkIfOrCauses;
         public Evaluator evaluator;
+        public bool allowSave;
         public FormulaWindow(string check)
         {
             checkIfOrCauses = check;
@@ -71,13 +63,14 @@ namespace KRR.Controls
                 //Update the truth Table, tree view and the plan textbox
                 TruthTable.ItemsSource = evaluator.EvaluateQuery(dict);
 
-
+                allowSave = true;
             }
             catch
             {
                 //If, at all anything goes wrong
                 //The only possible case is when the symbols are unbalanced
                 //Or, there is no input in the text-box
+                allowSave = false;
                 if (Query.Text.Length == 0) { MessageBox.Show("No Query in the Text Box", "No Query"); }
                 else { MessageBox.Show("Warning: Unbalanced Symbols found in the Stack", "Error in Query"); }
             }
@@ -85,37 +78,47 @@ namespace KRR.Controls
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-           
-            switch (checkIfOrCauses)
+            if (allowSave)
             {
-                case "causes":
-                    MainWindow.evaluator = this.evaluator;
-                    MainWindow.statement3 = Query.Text;
-                    break;
-                case "if_list":
-                    MainWindow.ifListEval = this.evaluator;
-                    MainWindow.statement2 = Query.Text;
-                    break;
-                case "always":
-                    MainWindow.AlwaysHeader = this.evaluator.Original;
-                    MainWindow.alwaysEvaluator = this.evaluator;
+                switch (checkIfOrCauses)
+                {
+                    case "causes":
+                        MainWindow.evaluator = this.evaluator;
+                        MainWindow.statement3 = Query.Text;
+                        break;
+                    case "if_list":
+                        MainWindow.ifListEval = this.evaluator;
+                        MainWindow.statement2 = Query.Text;
+                        break;
+                    case "always":
+                        MainWindow.AlwaysHeader = this.evaluator.Original;
+                        MainWindow.alwaysEvaluator = this.evaluator;
 
-                    break;
-                case "goal":
-                    MainWindow.goalEvaluator = this.evaluator;
-                    Windows.QueryWindow.query += " " + Query.Text;
-                    Windows.QueryWindow.statement += " " + Query.Text;
-                    break;
-                case "initially":
-                    MainWindow.initiallyEvaluator = this.evaluator;
-                    MainWindow.statement3 = Query.Text;
-                    break;
-                default:
-                    break;
+                        break;
+                    case "goal":
+                        MainWindow.goalEvaluator = this.evaluator;
+                        Windows.QueryWindow.query += " " + Query.Text;
+                        Windows.QueryWindow.statement += " " + Query.Text;
+                        break;
+                    case "initially":
+                        MainWindow.initiallyEvaluator = this.evaluator;
+                        MainWindow.statement3 = Query.Text;
+                        break;
+                    default:
+                        break;
+                }
+                this.Close();
+            }
+            else
+            {
+
+                MessageBoxResult result = System.Windows.MessageBox.Show("Statement has an error. If you close, statement will not be saved.\nDo you want to proceed ?", "Close Without Save ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    this.Close();
+                }
             }
             
-
-            this.Close();
         }
 
         public String ReplaceFluentsWithChar(Dictionary<string, char> dict, string query)
