@@ -149,7 +149,7 @@ namespace KRR
         private void Perform_Click(object sender, RoutedEventArgs e)
 
         {
-            Logic.Main.drawGraph(initialliazed, goal, allFluents, rules);
+            //Logic.Main.drawGraph(initialliazed, goal, allFluents, rules);
             Logic.Main.TheMostImportantMethod(agentPerform,goalEvaluator,rules, initiallyEvaluator, allFluents, queries);
 
             Output.Text = Logic.Main.result.ToString();

@@ -555,7 +555,7 @@ namespace KRR.Logic
                 if (queryNumber == Queries.Count)
                 {
                     //check for goal always/ever/never
-                    if (Goal != null && queryNumber != 0)
+                    if (goalOrList.Count()>0 && queryNumber != 0)
                     {
 
                         if (state.checkOrList(goalOrList))
