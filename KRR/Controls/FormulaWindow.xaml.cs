@@ -97,7 +97,11 @@ namespace KRR.Controls
                         break;
                     case "goal":
                         MainWindow.goalEvaluator = this.evaluator;
-                        Windows.QueryWindow.query += " " + Query.Text;
+                    if (Windows.QueryWindow.query.Contains("possibly"))
+                        Windows.QueryWindow.query = Windows.QueryWindow.query.Insert(9, Query.Text + " ");
+                    else
+                        Windows.QueryWindow.query = Windows.QueryWindow.query.Insert(10, Query.Text + " ");
+                    //Windows.QueryWindow.query += " " + Query.Text;
                         Windows.QueryWindow.statement += " " + Query.Text;
                         break;
                     case "initially":

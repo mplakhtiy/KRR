@@ -56,7 +56,14 @@ namespace KRR.Windows
             Controls.FormulaWindow window = new Controls.FormulaWindow("goal");
             window.ShowDialog();
 
-            queryTextBlock.Text += statement;
+            if(PossiblyComboBox.SelectedIndex==0)
+                queryTextBlock.Text = queryTextBlock.Text.Insert(9, statement + " ");
+            else
+                queryTextBlock.Text = queryTextBlock.Text.Insert(10, statement + " ");
+
+
+           // queryTextBlock.Text.Insert(1, statement);
+           // queryTextBlock.Text += statement;
         }
 
 
@@ -68,8 +75,12 @@ namespace KRR.Windows
                 if (AgentComboBox.SelectedItem.ToString().Equals(a.Name.ToString()))
                     MainWindow.agentPerform = a;
             }
-            query += " ";
-            query += MainWindow.agentPerform.Name.ToString();
+            // query += " ";
+            if (PossiblyComboBox.SelectedIndex == 0)
+                query = query.Insert(14, " " +  MainWindow.agentPerform.Name.ToString() + " ");
+            else
+                query = query.Insert(15, " " + MainWindow.agentPerform.Name.ToString() + " ");
+           // query += MainWindow.agentPerform.Name.ToString();
 
             queryTextBlock.Text = query;
 

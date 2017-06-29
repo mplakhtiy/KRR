@@ -56,7 +56,7 @@
 
         <Button Name="PerformButton" Content="PERFORM" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Perform_Click"></Button>
         <Button Name="AddGoalButton" Content="ADD QUERY" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="10,0,0,108"  FontFamily="Impact" Background="Transparent" BorderThickness="0" FontSize="15" Height="25" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="AddGoal_Click"></Button>
-        <TextBlock Name="Goal" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="95,0,0,103"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="30" Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Name="Goal" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="95,0,0,100"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="30" Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
         <TextBlock Name="Output" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,75,0,0"  FontFamily="Impact" Background="Transparent" FontSize="15" Height="95" Width="184" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
 
     </Grid>
