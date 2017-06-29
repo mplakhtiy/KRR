@@ -166,8 +166,8 @@ namespace KRR.Logic
                 {
                     if (currentState.checkOrList(releasesIfRule._if))
                     {
-                        if (MainWindow.alwaysEvaluator != null)
-                        {
+                        //if (MainWindow.alwaysEvaluator != null)
+                        //{
                             //bool[] formulaResult = MainWindow.alwaysEvaluator.GetResultData();
 
                             //State changedStateReleases = new State(currentState);
@@ -203,8 +203,8 @@ namespace KRR.Logic
                             //        }
                             //    }
                             //}
-                        }
-                        else {
+                        //}
+                        //else {
 
                             //State changedStateReleases = new State(currentState);
 
@@ -216,7 +216,7 @@ namespace KRR.Logic
                             //Console.WriteLine("Next STATE______________________________________________");
                             //Console.WriteLine(changedStateReleases);
                             queriesList.Add("(" + releasesIfRule.change[0].Name + "∨¬" + releasesIfRule.change[0].Name+")");
-                        }
+                        //}
                     }
                     else
                     {
