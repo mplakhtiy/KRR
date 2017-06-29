@@ -15,7 +15,7 @@ namespace KRR.Controls
     {
         public string checkIfOrCauses;
         public Evaluator evaluator;
-        public bool allowSave;
+        //public bool allowSave;
         public FormulaWindow(string check)
         {
             checkIfOrCauses = check;
@@ -63,14 +63,14 @@ namespace KRR.Controls
                 //Update the truth Table, tree view and the plan textbox
                 TruthTable.ItemsSource = evaluator.EvaluateQuery(dict);
 
-                allowSave = true;
+                //allowSave = true;
             }
             catch
             {
                 //If, at all anything goes wrong
                 //The only possible case is when the symbols are unbalanced
                 //Or, there is no input in the text-box
-                allowSave = false;
+               // allowSave = false;
                 if (Query.Text.Length == 0) { MessageBox.Show("No Query in the Text Box", "No Query"); }
                 else { MessageBox.Show("Warning: Unbalanced Symbols found in the Stack", "Error in Query"); }
             }
@@ -78,8 +78,8 @@ namespace KRR.Controls
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (allowSave)
-            {
+            //if (allowSave)
+            //{
                 switch (checkIfOrCauses)
                 {
                     case "causes":
@@ -108,16 +108,16 @@ namespace KRR.Controls
                         break;
                 }
                 this.Close();
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-                MessageBoxResult result = System.Windows.MessageBox.Show("Statement has an error. If you close, statement will not be saved.\nDo you want to proceed ?", "Close Without Save ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    this.Close();
-                }
-            }
+            //    MessageBoxResult result = System.Windows.MessageBox.Show("Statement has an error. If you close, statement will not be saved.\nDo you want to proceed ?", "Close Without Save ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //    if (result == MessageBoxResult.Yes)
+            //    {
+            //        this.Close();
+            //    }
+            //}
             
         }
 
